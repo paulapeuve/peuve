@@ -478,7 +478,7 @@ document.addEventListener("DOMContentLoaded", function () {
         4: "32vh",
         5: "39vh",
         6: "46vh",
-        7: "72vh"
+        7: "76vh"
     };
 
     let currentScene = 0;
