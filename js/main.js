@@ -5,61 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {
         fotografia: [
             {
                 carpeta: "conciertos",
-                portada: "foto (3).JPG",
+                portada: "foto (7).JPG",
                 titulo: "Conciertos",
                 descripcion: "Fotografía de música en vivo.",
                 herramientas: ["Lightroom", "Photoshop"],
                 imagenes: ["foto (3).JPG", "foto (6).JPG", "foto (7).JPG", "foto (8).JPG", "foto (10).JPG", "foto (11).JPG", "foto (14).JPG"]
             },
-            {
-                carpeta: "dia a dia",
-                portada: "foto (1).JPG",
-                titulo: "Día a Día",
-                descripcion: "Fotografía cotidiana y documental.",
-                herramientas: ["Lightroom"],
-                imagenes: ["foto (1).JPG", "foto (2).JPG", "foto (22).JPG", "foto (23).JPG", "foto (24).JPG"]
-            },
-            {
-                carpeta: "diego",
-                portada: "2026PabloESTUDIO_IMG_1720.jpg",
-                titulo: "Diego",
-                descripcion: "Sesión fotográfica en estudio.",
-                herramientas: ["Lightroom", "Photoshop"],
-                imagenes: ["2026PabloESTUDIO_IMG_1720.jpg", "2026PabloESTUDIO_IMG_1721.jpg", "2026PabloESTUDIO_IMG_1728.jpg", "2026PabloESTUDIO_IMG_9846.jpg", "2026PabloESTUDIO_IMG_9848.jpg", "2026PabloESTUDIO_IMG_9850.jpg"]
-            },
-            {
-                carpeta: "fiesta",
-                portada: "foto (9).JPG",
-                titulo: "Fiesta",
-                descripcion: "Fotografía de ambiente y eventos.",
-                herramientas: ["Lightroom"],
-                imagenes: ["foto (9).JPG", "foto (12).JPG", "foto (13).JPG", "foto (21).JPG"]
-            },
-            {
-                carpeta: "partido de futbol laura",
-                portada: "foto (15).JPG",
-                titulo: "Partido de Fútbol",
-                descripcion: "Cobertura fotográfica deportiva.",
-                herramientas: ["Lightroom"],
-                imagenes: ["foto (15).JPG", "foto (16).JPG", "foto (17).JPG"]
-            },
-            {
-                carpeta: "retratos clase",
-                portada: "ESTUDIO_Edit_2_13.jpg",
-                titulo: "Retratos de Clase",
-                descripcion: "Serie de retratos en estudio realizados en clase.",
-                herramientas: ["Lightroom", "Photoshop"],
-                imagenes: ["ESTUDIO_Edit_2_13.jpg", "ESTUDIO_Edit_2_14.jpg", "ESTUDIO_Edit_2_15.jpg", "ESTUDIO_Edit_2_17.jpg", "ESTUDIO_Edit_2_18.jpg", "ESTUDIO_Edit_2_20.jpg", "ESTUDIO_Edit_2_21.jpg"]
-            },
-            {
-                carpeta: "sevilla",
-                portada: "foto (4).JPG",
-                titulo: "Sevilla",
-                descripcion: "Fotografía de viaje y ciudad.",
-                herramientas: ["Lightroom"],
-                imagenes: ["foto (4).JPG", "foto (5).JPG", "foto (18).JPG", "foto (19).JPG", "foto (20).JPG"]
-            },
-            {
+                        {
                 carpeta: "cianotipias",
                 portada: "final1ciano.jpg",
                 titulo: "Cianotipias",
@@ -82,6 +34,54 @@ document.addEventListener("DOMContentLoaded", function () {
                 descripcion: "Cobertura fotográfica en los Teatros Canal.",
                 herramientas: ["Lightroom", "Photoshop"],
                 imagenes: ["TODOS_indexado_COLOR.png", "AZULEJA_color_llora.png", "DESI_indexado_EJEJEJEJE.png", "DRAMA_indexado_COLOR.png", "FLAUTA_indexado_COLOR.png", "gemelas_COLOR.png", "HENAR_indexado_COLOR.png", "PEUVE_indexado_COLOR.png", "ROBERTA_indexado_COLOR.png"]
+            },
+            {
+                carpeta: "dia a dia",
+                portada: "foto (2).JPG",
+                titulo: "Día a Día",
+                descripcion: "Fotografía cotidiana y documental.",
+                herramientas: ["Lightroom"],
+                imagenes: ["foto (1).JPG", "foto (2).JPG", "foto (22).JPG", "foto (23).JPG", "foto (24).JPG"]
+            },
+            {
+                carpeta: "diego",
+                portada: "2026PabloESTUDIO_IMG_1728.jpg",
+                titulo: "Diego",
+                descripcion: "Sesión fotográfica en estudio.",
+                herramientas: ["Lightroom", "Photoshop"],
+                imagenes: ["2026PabloESTUDIO_IMG_1720.jpg", "2026PabloESTUDIO_IMG_1721.jpg", "2026PabloESTUDIO_IMG_1728.jpg", "2026PabloESTUDIO_IMG_9846.jpg", "2026PabloESTUDIO_IMG_9848.jpg", "2026PabloESTUDIO_IMG_9850.jpg"]
+            },
+            {
+                carpeta: "fiesta",
+                portada: "foto (9).JPG",
+                titulo: "Fiesta",
+                descripcion: "Fotografía de ambiente y eventos.",
+                herramientas: ["Lightroom"],
+                imagenes: ["foto (9).JPG", "foto (12).JPG", "foto (13).JPG", "foto (21).JPG"]
+            },
+            {
+                carpeta: "partido de futbol laura",
+                portada: "foto (16).JPG",
+                titulo: "Partido de Fútbol",
+                descripcion: "Cobertura fotográfica deportiva.",
+                herramientas: ["Lightroom"],
+                imagenes: ["foto (15).JPG", "foto (16).JPG", "foto (17).JPG"]
+            },
+            {
+                carpeta: "retratos clase",
+                portada: "ESTUDIO_Edit_2_14.jpg",
+                titulo: "Retratos de Clase",
+                descripcion: "Serie de retratos en estudio realizados en clase.",
+                herramientas: ["Lightroom", "Photoshop"],
+                imagenes: ["ESTUDIO_Edit_2_13.jpg", "ESTUDIO_Edit_2_14.jpg", "ESTUDIO_Edit_2_15.jpg", "ESTUDIO_Edit_2_17.jpg", "ESTUDIO_Edit_2_18.jpg", "ESTUDIO_Edit_2_20.jpg", "ESTUDIO_Edit_2_21.jpg"]
+            },
+            {
+                carpeta: "sevilla",
+                portada: "foto (4).JPG",
+                titulo: "Sevilla",
+                descripcion: "Fotografía de viaje y ciudad.",
+                herramientas: ["Lightroom"],
+                imagenes: ["foto (4).JPG", "foto (5).JPG", "foto (18).JPG", "foto (19).JPG", "foto (20).JPG"]
             },
             {
                 carpeta: "vinateros",
@@ -137,6 +137,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 herramientas: ["Procreate", "Illustrator"],
                 imagenes: ["ilustracion (8).jpg"]
             },
+                        {
+                carpeta: "nubi",
+                portada: "NUBI.mp4",
+                titulo: "Nubi",
+                descripcion: "Proyecto de ilustración para Nubi.",
+                herramientas: ["Procreate", "Illustrator"],
+                imagenes: ["dibujos_nubi.png", "dibujos_nubi2.png", "NUBI.mp4"]
+            },
             {
                 carpeta: "infografia",
                 portada: "ilustracion (4).jpg",
@@ -170,14 +178,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["ilustracion (3).jpg"]
             },
             {
-                carpeta: "nubi",
-                portada: "NUBI.mp4",
-                titulo: "Nubi",
-                descripcion: "Proyecto de ilustración para Nubi.",
-                herramientas: ["Procreate", "Illustrator"],
-                imagenes: ["dibujos_nubi.png", "dibujos_nubi2.png", "NUBI.mp4"]
-            },
-            {
                 carpeta: "dibujo y otros",
                 portada: "henar_scaner.jpg",
                 titulo: "Dibujo y Otros",
@@ -207,6 +207,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 herramientas: ["Blender"],
                 imagenes: ["3d (3).jpg", "3d (4).jpg", "3d (6).jpg"]
             },
+                        {
+                carpeta: "chupachups",
+                portada: "3d (9).jpg",
+                titulo: "Chupa Chups",
+                descripcion: "Modelado y render de producto Chupa Chups en Blender.",
+                herramientas: ["Blender"],
+                imagenes: ["3d (9).jpg", "3d (10).jpg", "3d (11).jpg"]
+            },
             {
                 carpeta: "cartapokemon",
                 portada: "3d (5).jpg",
@@ -214,14 +222,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 descripcion: "Render 3D de carta Pokémon con materiales y iluminación.",
                 herramientas: ["Blender"],
                 imagenes: ["3d (5).jpg"]
-            },
-            {
-                carpeta: "chupachups",
-                portada: "3d (9).jpg",
-                titulo: "Chupa Chups",
-                descripcion: "Modelado y render de producto Chupa Chups en Blender.",
-                herramientas: ["Blender"],
-                imagenes: ["3d (9).jpg", "3d (10).jpg", "3d (11).jpg"]
             },
             {
                 carpeta: "trabajos de clase",
@@ -339,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 carpeta: "cesida",
-                portada: "identidad (4).jpg",
+                portada: "identidad (17).jpg",
                 titulo: "CESIDA",
                 descripcion: "Identidad visual para CESIDA.",
                 herramientas: ["Illustrator", "InDesign"],
