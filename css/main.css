@@ -875,7 +875,9 @@ body.view-sobre-mi .main-menu {
         transition: transform 1s ease-in-out;
         padding-top: 26vh;
     }
+
 }
+
 
 @media (max-width: 605px) {
 
@@ -1201,6 +1203,12 @@ body.view-sobre-mi .main-menu {
 
     .popup-tag {
         font-size: 11px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-center {
+        text-align: right !important;
     }
 }
 
