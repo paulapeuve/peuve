@@ -7,9 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=General+Sans:wght@600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
-    <link rel="stylesheet" href="css/main.css"> <!-- ← tiene que ir LA ÚLTIMA -->
+    <link rel="stylesheet" href="css/main.css"> 
 </head>
-</head>
+
 
 <body>
     <header>
@@ -25,6 +25,7 @@
         <a data-categoria="fotografia">Fotografía</a>
         <a data-categoria="ux_ui">UX/UI</a>
         <a data-categoria="ilustracion">Ilustración</a>
+        <a data-categoria="ilustracion_tipografia">Tipografía</a>
         <a data-categoria="edicion_imagen">Edición de Imagen</a>
         <a data-categoria="diseno_web">Diseño Web</a>
         <a data-categoria="editorial">Diseño Editorial</a>
@@ -32,7 +33,7 @@
         <a data-categoria="identidad_marca">Identidad de Marca</a>
     </nav>
 
-    <!-- Fondo blanco que tapa la galería mientras dura la animación -->
+    <!-- Fondo blanco que tapa la galería durante la animación de intro -->
     <div id="intro-white-cover"></div>
 
     <div id="intro-animation">
@@ -50,79 +51,53 @@
         </div>
     </div>
 
-    <!-- SOBRE MÍ - Slider horizontal con drag -->
-    <div id="sobre-mi-section" style="display: none;">
-        <div id="sobre-mi-slider" class="sobre-mi-slider">
-
-            <!-- Slide 1: Presentación -->
+    <!-- SECCIÓN SOBRE MÍ -->
+    <div id="sobre-mi-section" style="display:none;">
+        <div class="sobre-mi-slider" id="sobre-mi-slider">
             <div class="sobre-mi-slide">
                 <div class="sobre-mi-image-box">
-                    <img src="assets/sobre_mi/YP_1.jpg" alt="Sobre Mí" class="sobre-mi-img">
+                    <img class="sobre-mi-img" src="assets/sobre_mi/YP_1.jpg" alt="Paula Pavía">
                 </div>
                 <div class="sobre-mi-text">
                     <h2>Sobre Mí</h2>
-                    <p class="sobre-mi-desc">Aquí puedes agregar tu descripción personal, datos y información de contacto. Usa este espacio para contar quién eres, qué haces y qué te inspira.</p>
-                    <p class="sobre-mi-contact">
-                        Email: jpeuveg@gmail.com<br>
-                        Instagram: @jpeuveg
-                    </p>
-                </div>
-            </div>
-
-            <!-- Slide 2: Sobre Mi -->
-            <div class="sobre-mi-slide">
-                <div class="sobre-mi-image-box">
-                    <img src="assets/sobre_mi/YP_1.jpg" alt="Sobre Mí" class="sobre-mi-img">
-                </div>
-                <div class="sobre-mi-text">
-                    <h2>Sobre Mí</h2>
-                    <p class="sobre-mi-desc">Aquí puedes agregar tu descripción personal, datos y información de contacto. Usa este espacio para contar quién eres, qué haces y qué te inspira.</p>
-                    <p class="sobre-mi-contact">
-                        Email: jpeuveg@gmail.com<br>
-                        Instagram: @jpeuveg
-                    </p>
-                </div>
-            </div>
-
-            <!-- Slide 3: Más datos -->
-            <div class="sobre-mi-slide sobre-mi-slide--wide">
-                <div class="sobre-mi-text sobre-mi-text--centered">
-                    <h2>Formación & Skills</h2>
-                    <p class="sobre-mi-desc">Aquí puedes listar tu formación académica, tus herramientas y habilidades. Todo lo que te define como diseñadora.</p>
+                    <p class="sobre-mi-desc">Hola, soy Paula Pavía, diseñadora gráfica con formación en comunicación visual, fotografía e ilustración. Me apasiona crear proyectos que combinen concepto y forma, desde la identidad de marca hasta el diseño editorial.</p>
                     <ul class="sobre-mi-skills">
-                        <li>Diseño Gráfico</li>
-                        <li>Fotografía</li>
-                        <li>Ilustración</li>
-                        <li>UX/UI</li>
-                        <li>Diseño Editorial</li>
-                        <li>3D / Blender</li>
+                        <li>Illustrator</li>
+                        <li>Photoshop</li>
+                        <li>InDesign</li>
+                        <li>Figma</li>
+                        <li>Procreate</li>
+                        <li>Blender</li>
+                        <li>Lightroom</li>
+                        <li>After Effects</li>
                     </ul>
                 </div>
             </div>
-
-            <!-- Slide 4: Formulario de contacto -->
             <div class="sobre-mi-slide sobre-mi-slide--form">
                 <div class="sobre-mi-text sobre-mi-text--centered">
                     <h2>Contacto</h2>
                     <p class="sobre-mi-desc">¿Tienes un proyecto en mente? Escríbeme.</p>
                     <div class="contact-form">
-                        <input type="text" class="contact-input" placeholder="Tu nombre">
-                        <input type="email" class="contact-input" placeholder="Tu email">
-                        <textarea class="contact-input contact-textarea" placeholder="Cuéntame tu proyecto..."></textarea>
-                        <button type="button" class="contact-btn">Enviar</button>
+                        <input class="contact-input" type="text" placeholder="Tu nombre">
+                        <input class="contact-input" type="email" placeholder="Tu email">
+                        <textarea class="contact-input contact-textarea" placeholder="Tu mensaje"></textarea>
+                        <button class="contact-btn">Enviar</button>
                     </div>
+                    <p class="sobre-mi-contact" style="margin-top:1.5rem;">
+                        Instagram: <a href="https://www.instagram.com/jpeuveg" target="_blank">@jpeuveg</a>
+                    </p>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- POPUP VERTICAL DESLIZANTE -->
+    <!-- POPUP -->
     <div class="popup-overlay" id="popup-overlay">
         <div class="popup-box">
             <button class="popup-close" id="popup-close">✕</button>
+            <!-- CORRECCIÓN: id="popup-inner" para que el JS pueda encontrarlo -->
             <div class="popup-inner" id="popup-inner">
-                <!-- El contenido se genera dinámicamente -->
+                <!-- El contenido se inyecta dinámicamente desde JS -->
             </div>
         </div>
     </div>
@@ -140,5 +115,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script src="js/main.js"></script>
+
 
 </html>
