@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
             {
                 carpeta: "fanzine1_LaMirada",
                 portada: "editorial (10).jpg",
-                titulo: "Ciudades Invisibles",
+                titulo: "La Mirada",
                 descripcion: "Fanzine artesanal con encuadernación japonesa que narra visualmente Eufemia, de Italo Calvino.",
                 herramientas: ["Técnicas de impresión", "Collage", "Serigrafía"],
                 imagenes: ["editorial (10).jpg", "editorial (11).jpg", "editorial (12).jpg", "editorial (13).jpg", "editorial (14).jpg", "editorial (15).jpg"]

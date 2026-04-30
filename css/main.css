@@ -351,7 +351,7 @@ header,
 #sobre-mi-section {
     width: 100vw;
     min-height: auto;
-    padding: 9.8rem 0.7vw 6.3rem;
+    padding: 4rem 0.7vw 6.3rem;
     overflow-y: auto;
 }
 
@@ -504,7 +504,7 @@ header,
     border: 3px solid #000;
     border-radius: 18px;
     object-fit: cover;
-    height: 550px;
+    height: 700px;
 }
 
 /* Ajuste del texto */
