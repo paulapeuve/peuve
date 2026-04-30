@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 herramientas: ["Lightroom", "Photoshop"],
                 imagenes: ["foto (3).JPG", "foto (6).JPG", "foto (7).JPG", "foto (8).JPG", "foto (10).JPG", "foto (11).JPG", "foto (14).JPG"]
             },
-                        {
+            {
                 carpeta: "cianotipias",
                 portada: "final1ciano.jpg",
                 titulo: "Cianotipias",
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 herramientas: ["Procreate", "Illustrator"],
                 imagenes: ["ilustracion (8).jpg"]
             },
-                        {
+            {
                 carpeta: "nubi",
                 portada: "NUBI.mp4",
                 titulo: "Nubi",
@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 herramientas: ["Blender"],
                 imagenes: ["3d (3).jpg", "3d (4).jpg", "3d (6).jpg"]
             },
-                        {
+            {
                 carpeta: "chupachups",
                 portada: "3d (9).jpg",
                 titulo: "Chupa Chups",
@@ -362,7 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 carpeta: "MARIHUANA_rediseño",
-                portada: "Sin título-2.jpg",
+                portada: "Sin título-2_Mesa de trabajo 1 copia.jpg",
                 titulo: "Rediseño Marihuana",
                 descripcion: "Proyecto de rediseño de identidad.",
                 herramientas: ["Illustrator"],
@@ -610,7 +610,18 @@ document.addEventListener("DOMContentLoaded", function () {
             const media = normalizarMedia(item);
             if (!media.src) return;
             const subcarpeta = proyecto.carpeta ? `${proyecto.carpeta}/` : "";
-            const mediaSrc = `assets/${categoria}/${subcarpeta}${media.src}`;
+            let basePath = `assets/${categoria}/`;
+
+            if (categoria === "carteles") {
+                basePath = "assets/diseño grafico/";
+            }
+
+            if (categoria === "ilustracion_tipografia") {
+                basePath = "assets/tipografia/galaktype/";
+            }
+
+            const mediaSrc = `${basePath}${subcarpeta}${media.src}`;
+
 
             if (media.type === "video") {
                 const video = document.createElement("video");
