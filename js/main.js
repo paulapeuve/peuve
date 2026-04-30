@@ -373,6 +373,32 @@ document.addEventListener("DOMContentLoaded", function () {
     const popupInner = document.getElementById("popup-inner");
     const closeBtn = document.getElementById("popup-close");
 
+    // ── VISOR AMPLIADO DE IMÁGENES (dentro del popup) ───────────────────────
+    const imageZoomOverlay = document.createElement("div");
+    imageZoomOverlay.id = "image-zoom-overlay";
+    imageZoomOverlay.className = "image-zoom-overlay";
+    imageZoomOverlay.innerHTML = `
+        <div class="image-zoom-box">
+            <button class="image-zoom-close" id="image-zoom-close" aria-label="Cerrar imagen ampliada">✕</button>
+            <img id="image-zoom-img" class="image-zoom-img" alt="">
+        </div>
+    `;
+    document.body.appendChild(imageZoomOverlay);
+
+    const zoomImg = document.getElementById("image-zoom-img");
+    const zoomCloseBtn = document.getElementById("image-zoom-close");
+
+    function abrirVisorImagen(src, alt) {
+        zoomImg.src = src;
+        zoomImg.alt = alt || "Imagen ampliada del proyecto";
+        imageZoomOverlay.classList.add("open");
+    }
+
+    function cerrarVisorImagen() {
+        imageZoomOverlay.classList.remove("open");
+        zoomImg.src = "";
+    }
+
     function abrirPopup(proyecto, categoria) {
         popupInner.innerHTML = "";
 
@@ -409,6 +435,9 @@ document.addEventListener("DOMContentLoaded", function () {
             img.src = `assets/${categoria}/${subcarpeta}${src}`;
             img.alt = proyecto.titulo;
             img.className = "popup-project-img";
+            img.addEventListener("click", function () {
+                abrirVisorImagen(img.src, img.alt);
+            });
             imageGrid.appendChild(img);
         });
 
@@ -426,8 +455,18 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.addEventListener("click", function (e) {
         if (e.target === overlay) cerrarPopup();
     });
+    zoomCloseBtn.addEventListener("click", cerrarVisorImagen);
+    imageZoomOverlay.addEventListener("click", function (e) {
+        if (e.target === imageZoomOverlay) cerrarVisorImagen();
+    });
     document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") cerrarPopup();
+        if (e.key === "Escape") {
+            if (imageZoomOverlay.classList.contains("open")) {
+                cerrarVisorImagen();
+            } else {
+                cerrarPopup();
+            }
+        }
     });
 
     // ── CARGAR GALERÍA ───────────────────────────────────────────────────────
@@ -438,11 +477,13 @@ document.addEventListener("DOMContentLoaded", function () {
         if (categoria === "sobre_mi") {
             galeria.style.display = "none";
             if (sobreMiSection) sobreMiSection.style.display = "flex";
+            document.body.classList.add("view-sobre-mi");
             return;
         }
 
         galeria.style.display = "block";
         if (sobreMiSection) sobreMiSection.style.display = "none";
+        document.body.classList.remove("view-sobre-mi");
 
         const proyectos = galleries[categoria];
         if (!proyectos) return;
@@ -466,11 +507,38 @@ document.addEventListener("DOMContentLoaded", function () {
             slide.appendChild(img);
             slide.appendChild(label);
 
+            // Detecta click/tap real sin confundirlo con arrastre del swiper.
+            let isPointerDown = false;
             let dragging = false;
-            slide.addEventListener("mousedown", () => { dragging = false; });
-            slide.addEventListener("mousemove", () => { dragging = true; });
-            slide.addEventListener("mouseup", () => {
+            let startX = 0;
+            let startY = 0;
+
+            slide.addEventListener("pointerdown", function (e) {
+                if (e.pointerType === "mouse" && e.button !== 0) return;
+                isPointerDown = true;
+                dragging = false;
+                startX = e.clientX;
+                startY = e.clientY;
+            });
+
+            slide.addEventListener("pointermove", function (e) {
+                if (!isPointerDown) return;
+                const distanceX = Math.abs(e.clientX - startX);
+                const distanceY = Math.abs(e.clientY - startY);
+                if (distanceX > 8 || distanceY > 8) {
+                    dragging = true;
+                }
+            });
+
+            slide.addEventListener("pointerup", function (e) {
+                if (!isPointerDown) return;
+                isPointerDown = false;
+                if (e.pointerType === "mouse" && e.button !== 0) return;
                 if (!dragging) abrirPopup(proyecto, categoria);
+            });
+
+            slide.addEventListener("pointercancel", function () {
+                isPointerDown = false;
             });
 
             wrapper.appendChild(slide);

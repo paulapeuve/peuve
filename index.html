@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PEUVE PORTFOLIO</title>
     <link href="https://fonts.googleapis.com/css2?family=General+Sans:wght@600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,18 +20,18 @@
     </header>
     <div class="spacer"></div>
 
-    <nav class="main-menu">
-        <a data-categoria="sobre_mi">Sobre Mí</a>
-        <a data-categoria="carteles">Cartelería</a>
-        <a data-categoria="fotografia">Fotografía</a>
-        <a data-categoria="ux_ui">UX/UI</a>
-        <a data-categoria="ilustracion">Ilustración</a>
-        <a data-categoria="ilustracion_tipografia">Tipografía</a>
-        <a data-categoria="edicion_imagen">Edición de Imagen</a>
-        <a data-categoria="diseno_web">Diseño Web</a>
-        <a data-categoria="editorial">Diseño Editorial</a>
-        <a data-categoria="3D">3D</a>
-        <a data-categoria="identidad_marca">Identidad de Marca</a>
+    <nav class="main-menu" aria-label="Categorías del portfolio">
+        <a href="#" data-categoria="sobre_mi">Sobre Mí</a>
+        <a href="#" data-categoria="carteles">Cartelería</a>
+        <a href="#" data-categoria="fotografia">Fotografía</a>
+        <a href="#" data-categoria="ux_ui">UX/UI</a>
+        <a href="#" data-categoria="ilustracion">Ilustración</a>
+        <a href="#" data-categoria="ilustracion_tipografia">Tipografía</a>
+        <a href="#" data-categoria="edicion_imagen">Edición de Imagen</a>
+        <a href="#" data-categoria="diseno_web">Diseño Web</a>
+        <a href="#" data-categoria="editorial">Diseño Editorial</a>
+        <a href="#" data-categoria="3D">3D</a>
+        <a href="#" data-categoria="identidad_marca">Identidad de Marca</a>
     </nav>
 
     <!-- Fondo blanco que tapa la galería durante la animación de intro -->
@@ -53,42 +54,60 @@
 
     <!-- SECCIÓN SOBRE MÍ -->
     <div id="sobre-mi-section" style="display:none;">
-        <div class="sobre-mi-slider" id="sobre-mi-slider">
-            <div class="sobre-mi-slide">
+        <section class="sobre-mi-layout">
+            <article class="sobre-card sobre-card--profile">
                 <div class="sobre-mi-image-box">
-                    <img class="sobre-mi-img" src="assets/sobre_mi/YP_1.jpg" alt="Paula Pavía">
+                    <img class="sobre-mi-img" src="assets/sobre_mi/YP_1.jpg" alt="Retrato de Paula Pavía">
                 </div>
                 <div class="sobre-mi-text">
                     <h2>Sobre Mí</h2>
                     <p class="sobre-mi-desc">Hola, soy Paula Pavía, diseñadora gráfica con formación en comunicación visual, fotografía e ilustración. Me apasiona crear proyectos que combinen concepto y forma, desde la identidad de marca hasta el diseño editorial.</p>
-                    <ul class="sobre-mi-skills">
-                        <li>Illustrator</li>
-                        <li>Photoshop</li>
-                        <li>InDesign</li>
-                        <li>Figma</li>
-                        <li>Procreate</li>
-                        <li>Blender</li>
-                        <li>Lightroom</li>
-                        <li>After Effects</li>
-                    </ul>
                 </div>
-            </div>
-            <div class="sobre-mi-slide sobre-mi-slide--form">
-                <div class="sobre-mi-text sobre-mi-text--centered">
-                    <h2>Contacto</h2>
-                    <p class="sobre-mi-desc">¿Tienes un proyecto en mente? Escríbeme.</p>
-                    <div class="contact-form">
-                        <input class="contact-input" type="text" placeholder="Tu nombre">
-                        <input class="contact-input" type="email" placeholder="Tu email">
-                        <textarea class="contact-input contact-textarea" placeholder="Tu mensaje"></textarea>
-                        <button class="contact-btn">Enviar</button>
-                    </div>
-                    <p class="sobre-mi-contact" style="margin-top:1.5rem;">
-                        Instagram: <a href="https://www.instagram.com/jpeuveg" target="_blank">@jpeuveg</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+            </article>
+
+            <article class="sobre-card sobre-card--programs">
+                <h3 class="sobre-card-title">Programas Controlados</h3>
+                <ul class="sobre-pill-list">
+                    <li>Adobe Illustrator</li>
+                    <li>Adobe Photoshop</li>
+                    <li>Adobe InDesign</li>
+                    <li>Figma</li>
+                    <li>Procreate</li>
+                    <li>Blender</li>
+                    <li>Lightroom</li>
+                    <li>After Effects</li>
+                </ul>
+            </article>
+
+            <article class="sobre-card sobre-card--qualities-detail">
+                <h3 class="sobre-card-title">Cualidades</h3>
+                <ul class="sobre-pill-list">
+                    <li>Dirección de arte</li>
+                    <li>Pensamiento conceptual</li>
+                    <li>Narrativa visual</li>
+                    <li>Atención al detalle</li>
+                    <li>Adaptabilidad de estilo</li>
+                    <li>Trabajo en equipo</li>
+                    <li>Comunicación visual</li>
+                    <li>Organización de proyectos</li>
+                </ul>
+            </article>
+
+            <article class="sobre-card sobre-card--contact">
+                <h3 class="sobre-card-title">Contacto</h3>
+                <p class="sobre-mi-desc">¿Tienes un proyecto en mente? Escríbeme y lo hacemos realidad.</p>
+                <form class="contact-form" action="mailto:paulapavia@gmail.com" method="post" enctype="text/plain">
+                    <input class="contact-input" type="text" name="nombre" placeholder="Tu nombre" required>
+                    <input class="contact-input" type="email" name="email" placeholder="Tu email" required>
+                    <textarea class="contact-input contact-textarea" name="mensaje" placeholder="Tu mensaje" required></textarea>
+                    <button class="contact-btn" type="submit">Enviar</button>
+                </form>
+                <p class="sobre-mi-contact">
+                    Instagram:
+                    <a href="https://www.instagram.com/jpeuveg" target="_blank" rel="noopener noreferrer">@jpeuveg</a>
+                </p>
+            </article>
+        </section>
     </div>
 
     <!-- POPUP -->
@@ -102,19 +121,17 @@
         </div>
     </div>
 
+    <div class="bot-bar">
+        <div class="bot-left">
+            <a href="https://www.instagram.com/jpeuveg" target="_blank" rel="noopener noreferrer">@jpeuveg</a>
+        </div>
+        <div class="bot-right">
+            disfruta.
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
-
-<div class="bot-bar">
-    <div class="bot-left">
-        <a href="https://www.instagram.com/jpeuveg">@jpeuveg</a>
-    </div>
-    <div class="bot-right">
-        disfruta.
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script src="js/main.js"></script>
-
 
 </html>
