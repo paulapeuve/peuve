@@ -55,19 +55,31 @@
 
     <!-- SECCIÓN SOBRE MÍ -->
     <div id="sobre-mi-section" style="display:none;">
-        <section class="sobre-mi-layout">
-            <article class="sobre-card sobre-card--profile">
-                <div class="sobre-mi-image-box">
-                    <img class="sobre-mi-img" src="assets/sobre_mi/YP_1.jpg" alt="Retrato de Paula Pavía">
-                </div>
-                <div class="sobre-mi-text">
-                    <h2>Sobre Mí</h2>
-                    <p class="sobre-mi-desc">Hola, soy Paula Pavía, diseñadora gráfica con formación en comunicación
-                        visual, fotografía e ilustración. Me apasiona crear proyectos que combinen concepto y forma,
-                        desde la identidad de marca hasta el diseño editorial.</p>
-                </div>
+        <section class="sobre-mi-layout sobre-mi-big">
+
+            <!-- FOTO GRANDE A LA IZQUIERDA -->
+            <div class="sobre-mi-foto-grande">
+                <img class="sobre-mi-img-grande" src="assets/sobre_mi/YP_1.jpg">
+            </div>
+
+
+            <!-- TEXTO SOBRE MÍ -->
+            <article class="sobre-card sobre-card--profile2">
+                <h2>Sobre Mí</h2>
+                <p class="sobre-mi-desc">
+                    Hola, soy Paula Pavía, diseñadora gráfica con formación en comunicación visual, fotografía e
+                    ilustración.
+                    Me apasiona crear proyectos que combinen concepto y forma, desde la identidad de marca hasta el
+                    diseño editorial.
+                </p>
+
+                <!-- BOTÓN PARA ABRIR CONTACTO EN POPUP -->
+                <button id="open-contacto" class="contact-btn" style="margin-top:12px;">
+                    Contacto
+                </button>
             </article>
 
+            <!-- PROGRAMAS -->
             <article class="sobre-card sobre-card--programs">
                 <h3 class="sobre-card-title">Programas Controlados</h3>
                 <ul class="sobre-pill-list">
@@ -82,6 +94,7 @@
                 </ul>
             </article>
 
+            <!-- CUALIDADES -->
             <article class="sobre-card sobre-card--qualities-detail">
                 <h3 class="sobre-card-title">Cualidades</h3>
                 <ul class="sobre-pill-list">
@@ -96,23 +109,9 @@
                 </ul>
             </article>
 
-            <article class="sobre-card sobre-card--contact">
-                <h3 class="sobre-card-title">Contacto</h3>
-                <p class="sobre-mi-desc">¿Tienes un proyecto en mente? Escríbeme y lo hacemos realidad.</p>
-                <form class="contact-form" action="mailto:paulapavia@gmail.com" method="post" enctype="text/plain">
-                    <input class="contact-input" type="text" name="nombre" placeholder="Tu nombre" required>
-                    <input class="contact-input" type="email" name="email" placeholder="Tu email" required>
-                    <textarea class="contact-input contact-textarea" name="mensaje" placeholder="Tu mensaje"
-                        required></textarea>
-                    <button class="contact-btn" type="submit">Enviar</button>
-                </form>
-                <p class="sobre-mi-contact">
-                    Instagram:
-                    <a href="https://www.instagram.com/jpeuveg" target="_blank" rel="noopener noreferrer">@jpeuveg</a>
-                </p>
-            </article>
         </section>
     </div>
+
 
     <!-- POPUP -->
     <div class="popup-overlay" id="popup-overlay">

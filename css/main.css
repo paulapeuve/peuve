@@ -381,6 +381,11 @@ header,
     align-items: center;
 }
 
+.sobre-card--profile2 h2 {
+    font-weight: 700;
+}
+
+
 .sobre-card--contact {
     grid-area: contact;
 }
@@ -471,6 +476,44 @@ header,
     color: #222;
     background: #fff;
 }
+
+/* NUEVO LAYOUT SOBRE MÍ CON FOTO GRANDE */
+.sobre-mi-big {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas:
+        "foto foto foto foto profile profile profile profile profile profile profile profile"
+        "foto foto foto foto programs programs programs programs programs programs programs programs"
+        "foto foto foto foto qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail";
+}
+
+.sobre-mi-foto-grande {
+    grid-area: foto;
+}
+
+
+/* FOTO GRANDE */
+.sobre-card--foto-grande {
+    grid-area: foto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sobre-mi-img-grande {
+    width: 100%;
+    border: 3px solid #000;
+    border-radius: 18px;
+    object-fit: cover;
+    height: 550px;
+}
+
+/* Ajuste del texto */
+.sobre-card--profile2 {
+    grid-area: profile;
+}
+
+
+
 
 /* Formulario de contacto */
 .contact-form {
@@ -909,6 +952,7 @@ body.view-sobre-mi .main-menu {
 
 /* MOBILE OVERHAUL */
 @media (max-width: 768px) {
+
     html,
     body {
         overflow: auto;

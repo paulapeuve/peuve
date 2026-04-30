@@ -911,3 +911,30 @@ document.addEventListener("DOMContentLoaded", function () {
         slider.scrollLeft = touchScrollLeft - walk;
     }, { passive: true });
 });
+
+// ABRIR CONTACTO EN POPUP
+document.getElementById("open-contacto").addEventListener("click", function () {
+
+    const popupInner = document.getElementById("popup-inner");
+    const overlay = document.getElementById("popup-overlay");
+
+    popupInner.innerHTML = `
+        <h2 class="popup-title">Contacto</h2>
+        <p class="popup-desc">¿Tienes un proyecto en mente? Escríbeme y lo hacemos realidad.</p>
+
+        <form class="contact-form" action="mailto:paulapavia@gmail.com" method="post" enctype="text/plain">
+            <input class="contact-input" type="text" name="nombre" placeholder="Tu nombre" required>
+            <input class="contact-input" type="email" name="email" placeholder="Tu email" required>
+            <textarea class="contact-input contact-textarea" name="mensaje" placeholder="Tu mensaje" required></textarea>
+            <button class="contact-btn" type="submit">Enviar</button>
+        </form>
+
+        <p class="popup-desc" style="margin-top:20px;">
+            Instagram:
+            <a href="https://www.instagram.com/jpeuveg" target="_blank" rel="noopener noreferrer">@jpeuveg</a>
+        </p>
+    `;
+
+    overlay.classList.add("open");
+    popupInner.scrollTop = 0;
+});
