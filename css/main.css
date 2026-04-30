@@ -706,6 +706,13 @@ header,
         flex-direction: column;
         width: min(600px, 90vw);
     }
+
+    #animation-img {
+        width: 150vw;
+        max-height: 200vh;
+        transition: transform 1s ease-in-out;
+        padding-top: 26vh;
+    }
 }
 
 @media (max-width: 605px) {
