@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // DATOS DE LA GALERÍA 
+    // ── DATOS DE LA GALERÍA ──────────────────────────────────────────────────
     const galleries = {
         fotografia: [
             {
@@ -285,22 +285,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 descripcion: "Identidad visual para BIT.",
                 herramientas: ["Illustrator", "InDesign"],
                 imagenes: [
-                    "identidad (3).jpg",
-                    "identidad (22).jpg",
-                    "botellas_GENERALES.png",
-                    "CAMISETAS_BIT.png",
-                    "CANTIMPLORA_2025.png",
-                    "ENTRADAS_SEPARADOS.png",
-                    "HORARIO.png",
-                    "MOCK_3POSTER.png",
-                    "Mupimetro_Jugadores.jpg",
-                    "MUPI_mock.png",
-                    "PULSERAS_total.png",
-                    "TOTE_BIT.png",
-                    "streetfight.jpg",
-                    "Ident_01_PaulaPavia_BIT.mp4",
-                    "Ident_02_PaulaPavia_BIT.mp4",
-                    "Ident_03_PaulaPavia_BIT.mp4"
+                    "identidad (3).jpg", "identidad (22).jpg", "botellas_GENERALES.png",
+                    "CAMISETAS_BIT.png", "CANTIMPLORA_2025.png", "ENTRADAS_SEPARADOS.png",
+                    "HORARIO.png", "MOCK_3POSTER.png", "Mupimetro_Jugadores.jpg",
+                    "MUPI_mock.png", "PULSERAS_total.png", "TOTE_BIT.png", "streetfight.jpg",
+                    "Ident_01_PaulaPavia_BIT.mp4", "Ident_02_PaulaPavia_BIT.mp4", "Ident_03_PaulaPavia_BIT.mp4"
                 ]
             },
             {
@@ -310,31 +299,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 descripcion: "Proyecto centrado en la creación de una identidad visual dinámica.",
                 herramientas: ["Illustrator", "InDesign", "After Effects"],
                 imagenes: [
-                    "identidad (1).jpg",
-                    "identidad (2).jpg",
-                    "identidad (18).jpg",
-                    "identidad (19).jpg",
-                    "identidad (20).jpg",
-                    "identidad (21).jpg",
-                    "identidad (23).jpg",
-                    "1_canal.jpg",
-                    "2_canal.png",
-                    "3_canal.png",
-                    "4_canal.png",
-                    "5_canal.png",
-                    "6_canal.png",
-                    "7_canal.png",
-                    "8_canal.png",
-                    "9_canal.png",
-                    "Azuleja_CanalOBRA.png",
-                    "gemelas_mupi_v3.png",
-                    "LaPaz_Cartel.png",
-                    "Mesa de trabajo 4.png",
-                    "metro2.png",
-                    "metro3.png",
-                    "Metro_ROBERTA.png",
-                    "Ticket2.png",
-                    "CANAL_Publi.mp4"
+                    "identidad (1).jpg", "identidad (2).jpg", "identidad (18).jpg",
+                    "identidad (19).jpg", "identidad (20).jpg", "identidad (21).jpg", "identidad (23).jpg",
+                    "1_canal.jpg", "2_canal.png", "3_canal.png", "4_canal.png", "5_canal.png",
+                    "6_canal.png", "7_canal.png", "8_canal.png", "9_canal.png",
+                    "Azuleja_CanalOBRA.png", "gemelas_mupi_v3.png", "LaPaz_Cartel.png",
+                    "Mesa de trabajo 4.png", "metro2.png", "metro3.png", "Metro_ROBERTA.png",
+                    "Ticket2.png", "CANAL_Publi.mp4"
                 ]
             },
             {
@@ -344,20 +315,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 descripcion: "Identidad visual para CESIDA.",
                 herramientas: ["Illustrator", "InDesign"],
                 imagenes: [
-                    "identidad (4).jpg",
-                    "identidad (5).jpg",
-                    "identidad (6).jpg",
-                    "identidad (7).jpg",
-                    "identidad (8).jpg",
-                    "identidad (9).jpg",
-                    "identidad (10).jpg",
-                    "identidad (11).jpg",
-                    "identidad (12).jpg",
-                    "identidad (13).jpg",
-                    "identidad (14).jpg",
-                    "identidad (15).jpg",
-                    "identidad (16).jpg",
-                    "identidad (17).jpg"
+                    "identidad (4).jpg", "identidad (5).jpg", "identidad (6).jpg", "identidad (7).jpg",
+                    "identidad (8).jpg", "identidad (9).jpg", "identidad (10).jpg", "identidad (11).jpg",
+                    "identidad (12).jpg", "identidad (13).jpg", "identidad (14).jpg", "identidad (15).jpg",
+                    "identidad (16).jpg", "identidad (17).jpg"
                 ]
             },
             {
@@ -367,12 +328,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 descripcion: "Proyecto de rediseño de identidad.",
                 herramientas: ["Illustrator"],
                 imagenes: [
-                    "Sin título-2.jpg",
-                    "Sin título-2-06.jpg",
-                    "Sin título-2-07.jpg",
-                    "Sin título-2-08.jpg",
-                    "Sin título-2-09.jpg",
-                    "Sin título-2_Mesa de trabajo 1 copia.jpg"
+                    "Sin título-2.jpg", "Sin título-2-06.jpg", "Sin título-2-07.jpg",
+                    "Sin título-2-08.jpg", "Sin título-2-09.jpg", "Sin título-2_Mesa de trabajo 1 copia.jpg"
                 ]
             }
         ],
@@ -396,18 +353,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 descripcion: "Proyecto personal de retrato y edición fotográfica.",
                 herramientas: ["Photoshop", "Lightroom"],
                 imagenes: [
-                    "ClaudiaJon.jpg",
-                    "ClaudiaJon2.jpg",
-                    "ClaudiaJon3.jpg",
-                    "ClaudiaJon4.jpg",
-                    "ClaudiaJon5.jpg",
-                    "ClaudiaJon6.jpg",
-                    "ClaudiaJon7.jpg",
-                    "ClaudiaJon8.jpg",
-                    "ClaudiaJon9.jpg",
-                    "ClaudiaJon10.jpg",
-                    "ClaudiaJon11.jpg",
-                    "ClaudiaJon12.jpg"
+                    "ClaudiaJon.jpg", "ClaudiaJon2.jpg", "ClaudiaJon3.jpg", "ClaudiaJon4.jpg",
+                    "ClaudiaJon5.jpg", "ClaudiaJon6.jpg", "ClaudiaJon7.jpg", "ClaudiaJon8.jpg",
+                    "ClaudiaJon9.jpg", "ClaudiaJon10.jpg", "ClaudiaJon11.jpg", "ClaudiaJon12.jpg"
                 ]
             },
             {
@@ -417,15 +365,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 descripcion: "Edición y retoque fotográfico de serie de retratos.",
                 herramientas: ["Photoshop", "Lightroom"],
                 imagenes: [
-                    "LeireEdit_image0000108.jpg",
-                    "LeireEdit_image0000209.jpg",
-                    "LeireEdit_image0000303.jpg",
-                    "LeireEdit_image0000402.jpg",
-                    "LeireEdit_image0000501.jpg",
-                    "LeireEdit_image0000604.jpg",
-                    "LeireEdit_image0000705.jpg",
-                    "LeireEdit_image0000806.jpg",
-                    "LeireEdit_image0000907.jpg"
+                    "LeireEdit_image0000108.jpg", "LeireEdit_image0000209.jpg", "LeireEdit_image0000303.jpg",
+                    "LeireEdit_image0000402.jpg", "LeireEdit_image0000501.jpg", "LeireEdit_image0000604.jpg",
+                    "LeireEdit_image0000705.jpg", "LeireEdit_image0000806.jpg", "LeireEdit_image0000907.jpg"
                 ]
             },
             {
@@ -435,12 +377,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 descripcion: "Edición fotográfica de sesión de estudio realizada en clase.",
                 herramientas: ["Photoshop", "Lightroom"],
                 imagenes: [
-                    "2026PabloESTUDIO_IMG_1720.jpg",
-                    "2026PabloESTUDIO_IMG_1721.jpg",
-                    "2026PabloESTUDIO_IMG_1728.jpg",
-                    "2026PabloESTUDIO_IMG_9846.jpg",
-                    "2026PabloESTUDIO_IMG_9848.jpg",
-                    "2026PabloESTUDIO_IMG_9850.jpg"
+                    "2026PabloESTUDIO_IMG_1720.jpg", "2026PabloESTUDIO_IMG_1721.jpg",
+                    "2026PabloESTUDIO_IMG_1728.jpg", "2026PabloESTUDIO_IMG_9846.jpg",
+                    "2026PabloESTUDIO_IMG_9848.jpg", "2026PabloESTUDIO_IMG_9850.jpg"
                 ]
             },
             {
@@ -450,13 +389,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 descripcion: "Serie de retratos editados en clase.",
                 herramientas: ["Photoshop", "Lightroom"],
                 imagenes: [
-                    "Estudio__DSC002402.jpg",
-                    "Estudio__DSC009004.jpg",
-                    "Estudio_MMS_510901.jpg",
-                    "Estudio_MMS_511803.jpg",
-                    "Estudio_MMS_514105.jpg",
-                    "2026PabloESTUDIO__MG_1681-3.jpg",
-                    "2026PabloESTUDIO__MG_1681.jpg"
+                    "Estudio__DSC002402.jpg", "Estudio__DSC009004.jpg", "Estudio_MMS_510901.jpg",
+                    "Estudio_MMS_511803.jpg", "Estudio_MMS_514105.jpg",
+                    "2026PabloESTUDIO__MG_1681-3.jpg", "2026PabloESTUDIO__MG_1681.jpg"
                 ]
             }
         ],
@@ -498,153 +433,121 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["CANAL_Publi.mp4"]
             }
         ]
-
     };
 
 
-    // ── SWIPER GALERÍA PRINCIPAL ─────────────────────────────────────────────
+    // ── HELPERS ──────────────────────────────────────────────────────────────
+    const VIDEO_EXTENSIONS = [".mp4", ".webm", ".ogg", ".mov", ".m4v"];
+
+    function esVideo(archivo) {
+        return VIDEO_EXTENSIONS.some(ext => String(archivo || "").toLowerCase().endsWith(ext));
+    }
+
+    function normalizarMedia(media) {
+        if (typeof media === "string") {
+            return { src: media, type: esVideo(media) ? "video" : "image" };
+        }
+        if (media && typeof media === "object") {
+            const src = media.src || "";
+            return { src, type: media.type || (esVideo(src) ? "video" : "image") };
+        }
+        return { src: "", type: "image" };
+    }
+
+    function optimizarImagen(img, prioridad = false) {
+        img.decoding = "async";
+        img.loading = prioridad ? "eager" : "lazy";
+        img.fetchPriority = prioridad ? "high" : "low";
+    }
+
+    function basePath(categoria) {
+        if (categoria === "carteles") return "assets/diseño grafico/";
+        if (categoria === "ilustracion_tipografia") return "assets/tipografia/galaktype/";
+        return `assets/${categoria}/`;
+    }
+
+
+    // ── SWIPER ───────────────────────────────────────────────────────────────
     const swiper = new Swiper(".mySwiper", {
         slidesPerView: "auto",
         freeMode: true,
         spaceBetween: 12,
         grabCursor: true,
-        scrollbar: {
-            el: '.swiper-scrollbar',
-            draggable: true,
-        },
+        scrollbar: { el: ".swiper-scrollbar", draggable: true }
     });
 
-    // ── POPUP VERTICAL ───────────────────────────────────────────────────────
-    const overlay = document.getElementById("popup-overlay");
-    // CORRECCIÓN: el div en el HTML tiene id="popup-inner" (añadido en index.html)
-    const popupInner = document.getElementById("popup-inner");
-    const closeBtn = document.getElementById("popup-close");
-    const VIDEO_EXTENSIONS = [".mp4", ".webm", ".ogg", ".mov", ".m4v"];
 
-    function esVideo(archivo) {
-        const nombre = String(archivo || "").toLowerCase();
-        return VIDEO_EXTENSIONS.some(ext => nombre.endsWith(ext));
-    }
-
-    function normalizarMedia(media) {
-        if (typeof media === "string") {
-            return {
-                src: media,
-                type: esVideo(media) ? "video" : "image",
-            };
-        }
-
-        if (media && typeof media === "object") {
-            const src = media.src || "";
-            const type = media.type || (esVideo(src) ? "video" : "image");
-            return { src, type };
-        }
-
-        return { src: "", type: "image" };
-    }
-
-    function optimizarImagen(img, opciones = {}) {
-        const { aboveTheFold = false } = opciones;
-        img.decoding = "async";
-        img.loading = aboveTheFold ? "eager" : "lazy";
-        img.fetchPriority = aboveTheFold ? "high" : "low";
-    }
-
-    // ── VISOR AMPLIADO DE IMÁGENES (dentro del popup) ───────────────────────
+    // ── VISOR DE IMAGEN (zoom desde popup) ───────────────────────────────────
     const imageZoomOverlay = document.createElement("div");
-    imageZoomOverlay.id = "image-zoom-overlay";
     imageZoomOverlay.className = "image-zoom-overlay";
     imageZoomOverlay.innerHTML = `
         <div class="image-zoom-box">
-            <button class="image-zoom-close" id="image-zoom-close" aria-label="Cerrar imagen ampliada">✕</button>
-            <img id="image-zoom-img" class="image-zoom-img" alt="">
+            <button class="image-zoom-close" aria-label="Cerrar imagen ampliada">✕</button>
+            <img class="image-zoom-img" alt="">
         </div>
     `;
     document.body.appendChild(imageZoomOverlay);
 
-    const zoomImg = document.getElementById("image-zoom-img");
-    const zoomCloseBtn = document.getElementById("image-zoom-close");
+    const zoomImg = imageZoomOverlay.querySelector(".image-zoom-img");
+    const zoomCloseBtn = imageZoomOverlay.querySelector(".image-zoom-close");
 
-    function abrirVisorImagen(src, alt) {
+    function abrirVisor(src, alt) {
         zoomImg.src = src;
-        zoomImg.alt = alt || "Imagen ampliada del proyecto";
+        zoomImg.alt = alt || "";
         imageZoomOverlay.classList.add("open");
     }
 
-    function cerrarVisorImagen() {
+    function cerrarVisor() {
         imageZoomOverlay.classList.remove("open");
         zoomImg.src = "";
     }
 
+    zoomCloseBtn.addEventListener("click", cerrarVisor);
+    imageZoomOverlay.addEventListener("click", e => { if (e.target === imageZoomOverlay) cerrarVisor(); });
+
+
+    // ── POPUP ────────────────────────────────────────────────────────────────
+    const overlay = document.getElementById("popup-overlay");
+    const popupInner = document.getElementById("popup-inner");
+    const closeBtn = document.getElementById("popup-close");
+
     function abrirPopup(proyecto, categoria) {
-        popupInner.innerHTML = "";
+        const base = basePath(categoria);
+        const subcarpeta = proyecto.carpeta ? `${proyecto.carpeta}/` : "";
 
-        // Título
-        const titulo = document.createElement("h2");
-        titulo.className = "popup-title";
-        titulo.textContent = proyecto.titulo;
-        popupInner.appendChild(titulo);
+        popupInner.innerHTML = `
+            <h2 class="popup-title">${proyecto.titulo}</h2>
+            <p class="popup-desc">${proyecto.descripcion}</p>
+            <p class="popup-tools-label">Herramientas</p>
+            <div class="popup-tools">${proyecto.herramientas.map(h => `<span class="popup-tag">${h}</span>`).join("")}</div>
+            <div class="popup-images-grid"></div>
+        `;
 
-        // Descripción
-        const desc = document.createElement("p");
-        desc.className = "popup-desc";
-        desc.textContent = proyecto.descripcion;
-        popupInner.appendChild(desc);
+        const grid = popupInner.querySelector(".popup-images-grid");
 
-        // Herramientas
-        const toolsLabel = document.createElement("p");
-        toolsLabel.className = "popup-tools-label";
-        toolsLabel.textContent = "Herramientas";
-        popupInner.appendChild(toolsLabel);
-
-        const tools = document.createElement("div");
-        tools.className = "popup-tools";
-        tools.innerHTML = proyecto.herramientas.map(h => `<span class="popup-tag">${h}</span>`).join("");
-        popupInner.appendChild(tools);
-
-        // Contenedor de imágenes en cuadrícula
-        const imageGrid = document.createElement("div");
-        imageGrid.className = "popup-images-grid";
-
-        proyecto.imagenes.forEach(function (item) {
+        proyecto.imagenes.forEach(item => {
             const media = normalizarMedia(item);
             if (!media.src) return;
-            const subcarpeta = proyecto.carpeta ? `${proyecto.carpeta}/` : "";
-            let basePath = `assets/${categoria}/`;
-
-            if (categoria === "carteles") {
-                basePath = "assets/diseño grafico/";
-            }
-
-            if (categoria === "ilustracion_tipografia") {
-                basePath = "assets/tipografia/galaktype/";
-            }
-
-            const mediaSrc = `${basePath}${subcarpeta}${media.src}`;
-
+            const src = `${base}${subcarpeta}${media.src}`;
 
             if (media.type === "video") {
-                const video = document.createElement("video");
-                video.src = mediaSrc;
-                video.className = "popup-project-video";
-                video.controls = true;
-                video.preload = "metadata";
-                video.playsInline = true;
-                imageGrid.appendChild(video);
+                const v = document.createElement("video");
+                v.src = src;
+                v.className = "popup-project-video";
+                v.controls = true;
+                v.preload = "metadata";
+                v.playsInline = true;
+                grid.appendChild(v);
             } else {
                 const img = document.createElement("img");
-                img.src = mediaSrc;
+                img.src = src;
                 img.alt = proyecto.titulo;
                 img.className = "popup-project-img";
-                optimizarImagen(img, { aboveTheFold: false });
-                img.addEventListener("click", function () {
-                    abrirVisorImagen(img.src, img.alt);
-                });
-                imageGrid.appendChild(img);
+                optimizarImagen(img);
+                img.addEventListener("click", () => abrirVisor(img.src, img.alt));
+                grid.appendChild(img);
             }
         });
-
-        popupInner.appendChild(imageGrid);
 
         overlay.classList.add("open");
         popupInner.scrollTop = 0;
@@ -655,37 +558,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     closeBtn.addEventListener("click", cerrarPopup);
-    overlay.addEventListener("click", function (e) {
-        if (e.target === overlay) cerrarPopup();
-    });
-    zoomCloseBtn.addEventListener("click", cerrarVisorImagen);
-    imageZoomOverlay.addEventListener("click", function (e) {
-        if (e.target === imageZoomOverlay) cerrarVisorImagen();
-    });
-    document.addEventListener("keydown", function (e) {
+    overlay.addEventListener("click", e => { if (e.target === overlay) cerrarPopup(); });
+    document.addEventListener("keydown", e => {
         if (e.key === "Escape") {
-            if (imageZoomOverlay.classList.contains("open")) {
-                cerrarVisorImagen();
-            } else {
-                cerrarPopup();
-            }
+            if (imageZoomOverlay.classList.contains("open")) cerrarVisor();
+            else cerrarPopup();
         }
     });
 
-    // ── CARGAR GALERÍA ───────────────────────────────────────────────────────
+
+    // ── GALERÍA ──────────────────────────────────────────────────────────────
     function cargarGaleria(categoria) {
         const galeria = document.getElementById("galeria");
         const sobreMiSection = document.getElementById("sobre-mi-section");
 
         if (categoria === "sobre_mi") {
             galeria.style.display = "none";
-            if (sobreMiSection) sobreMiSection.style.display = "flex";
+            sobreMiSection.style.display = "flex";
             document.body.classList.add("view-sobre-mi");
             return;
         }
 
         galeria.style.display = "block";
-        if (sobreMiSection) sobreMiSection.style.display = "none";
+        sobreMiSection.style.display = "none";
         document.body.classList.remove("view-sobre-mi");
 
         const proyectos = galleries[categoria];
@@ -694,31 +589,30 @@ document.addEventListener("DOMContentLoaded", function () {
         const wrapper = document.querySelector(".swiper-wrapper");
         wrapper.innerHTML = "";
 
-        proyectos.forEach(function (proyecto, index) {
+        proyectos.forEach((proyecto, index) => {
             const slide = document.createElement("div");
             slide.className = "swiper-slide";
 
             const portada = normalizarMedia(proyecto.portada);
-            const subcarpetaPortada = proyecto.carpeta ? `${proyecto.carpeta}/` : "";
-            const portadaSrc = `assets/${categoria}/${subcarpetaPortada}${portada.src}`;
+            const subcarpeta = proyecto.carpeta ? `${proyecto.carpeta}/` : "";
+            const src = `assets/${categoria}/${subcarpeta}${portada.src}`;
 
             let mediaEl;
             if (portada.type === "video") {
-                const video = document.createElement("video");
-                video.src = portadaSrc;
-                video.className = "slide-video";
-                video.muted = true;
-                video.loop = true;
-                video.autoplay = true;
-                video.playsInline = true;
-                video.preload = "metadata";
-                mediaEl = video;
+                const v = document.createElement("video");
+                v.src = src;
+                v.className = "slide-video";
+                v.muted = true;
+                v.loop = true;
+                v.autoplay = true;
+                v.playsInline = true;
+                v.preload = "metadata";
+                mediaEl = v;
             } else {
                 const img = document.createElement("img");
-                img.src = portadaSrc;
+                img.src = src;
                 img.alt = proyecto.titulo;
-                // Priorizamos solo las primeras miniaturas visibles.
-                optimizarImagen(img, { aboveTheFold: index < 3 });
+                optimizarImagen(img, index < 3);
                 mediaEl = img;
             }
 
@@ -729,39 +623,24 @@ document.addEventListener("DOMContentLoaded", function () {
             slide.appendChild(mediaEl);
             slide.appendChild(label);
 
-            // Detecta click/tap real sin confundirlo con arrastre del swiper.
-            let isPointerDown = false;
-            let dragging = false;
-            let startX = 0;
-            let startY = 0;
-
-            slide.addEventListener("pointerdown", function (e) {
+            // Distinguir click real de arrastre
+            let pointerDown = false, dragging = false, startX = 0, startY = 0;
+            slide.addEventListener("pointerdown", e => {
                 if (e.pointerType === "mouse" && e.button !== 0) return;
-                isPointerDown = true;
-                dragging = false;
-                startX = e.clientX;
-                startY = e.clientY;
+                pointerDown = true; dragging = false;
+                startX = e.clientX; startY = e.clientY;
             });
-
-            slide.addEventListener("pointermove", function (e) {
-                if (!isPointerDown) return;
-                const distanceX = Math.abs(e.clientX - startX);
-                const distanceY = Math.abs(e.clientY - startY);
-                if (distanceX > 8 || distanceY > 8) {
-                    dragging = true;
-                }
+            slide.addEventListener("pointermove", e => {
+                if (!pointerDown) return;
+                if (Math.abs(e.clientX - startX) > 8 || Math.abs(e.clientY - startY) > 8) dragging = true;
             });
-
-            slide.addEventListener("pointerup", function (e) {
-                if (!isPointerDown) return;
-                isPointerDown = false;
+            slide.addEventListener("pointerup", e => {
+                if (!pointerDown) return;
+                pointerDown = false;
                 if (e.pointerType === "mouse" && e.button !== 0) return;
                 if (!dragging) abrirPopup(proyecto, categoria);
             });
-
-            slide.addEventListener("pointercancel", function () {
-                isPointerDown = false;
-            });
+            slide.addEventListener("pointercancel", () => { pointerDown = false; });
 
             wrapper.appendChild(slide);
         });
@@ -769,183 +648,142 @@ document.addEventListener("DOMContentLoaded", function () {
         swiper.update();
     }
 
-    document.querySelectorAll(".main-menu a").forEach(function (link) {
-        link.addEventListener("click", function (e) {
+    document.querySelectorAll(".main-menu a").forEach(link => {
+        link.addEventListener("click", e => {
             e.preventDefault();
-            const categoria = this.getAttribute("data-categoria");
-            cargarGaleria(categoria);
+            cargarGaleria(link.getAttribute("data-categoria"));
         });
     });
 
     cargarGaleria("fotografia");
+
+
+    // ── CONTACTO (popup desde Sobre Mí) ─────────────────────────────────────
+    const btnContacto = document.getElementById("open-contacto");
+    if (btnContacto) {
+        btnContacto.addEventListener("click", () => {
+            popupInner.innerHTML = `
+                <h2 class="popup-title">Contacto</h2>
+                <p class="popup-desc">¿Tienes un proyecto en mente? Escríbeme y lo hacemos realidad.</p>
+                <form class="contact-form" action="mailto:paulapavia@gmail.com" method="post" enctype="text/plain">
+                    <input class="contact-input" type="text" name="nombre" placeholder="Tu nombre" required>
+                    <input class="contact-input" type="email" name="email" placeholder="Tu email" required>
+                    <textarea class="contact-input contact-textarea" name="mensaje" placeholder="Tu mensaje" required></textarea>
+                    <button class="contact-btn" type="submit">Enviar</button>
+                </form>
+                <p class="popup-desc" style="margin-top:20px;">
+                    Instagram: <a href="https://www.instagram.com/jpeuveg" target="_blank" rel="noopener noreferrer">@jpeuveg</a>
+                </p>
+            `;
+            overlay.classList.add("open");
+            popupInner.scrollTop = 0;
+        });
+    }
 });
 
 
-// ── ANIMACIÓN ────────────────────────────────────────────────────────────────
+// ── ANIMACIÓN DE INTRO ───────────────────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", function () {
-    const images = [
-        "Ilustracion_1.png",
-        "Ilustracion_2.png",
-        "Ilustracion_3.png",
-        "Ilustracion_4.png",
-        "Ilustracion_5.png",
-        "Ilustracion_6.png",
-        "Ilustracion_7.png",
-        "Ilustracion_8.png"
-    ];
+    const images = ["Ilustracion_1.png","Ilustracion_2.png","Ilustracion_3.png","Ilustracion_4.png","Ilustracion_5.png","Ilustracion_6.png","Ilustracion_7.png","Ilustracion_8.png"];
+    const text1  = ["Haz click en la pantalla","otra vez","otra vez!","Ayúdame a bajar esto...","Gracias...","Gracias...","Gracias...",""];
+    const text2  = ["","","Oyes...","otra vez!!!!","","","",""];
 
-    const text1 = [
-        "Haz click en la pantalla",
-        "otra vez",
-        "otra vez!",
-        "Ayúdame a bajar esto...",
-        "Gracias...",
-        "Gracias...",
-        "Gracias...",
-        ""
-    ];
+    // Desktop: posiciones con `top` en vh
+    const posicionesDesktop = { 0:"24vh", 1:"24vh", 2:"24vh", 3:"26vh", 4:"32vh", 5:"39vh", 6:"46vh", 7:"76vh" };
 
-    const text2 = [
-        "",
-        "",
-        "Oyes...",
-        "otra vez!!!!",
-        "",
-        "",
-        "",
-        ""
-    ];
-
-    const posicionesMenu = {
-        0: "24vh",
-        1: "24vh",
-        2: "24vh",
-        3: "26vh",
-        4: "32vh",
-        5: "39vh",
-        6: "46vh",
-        7: "76vh"
-    };
+    // ── AJUSTA ESTOS VALORES PARA MÓVIL (píxeles desde arriba de pantalla) ──
+    const posicionesMobile = { 0:364, 1:364, 2:364, 3:375, 4:420, 5:470, 6:500, 7:700 };
+    // ─────────────────────────────────────────────────────────────────────────
 
     let currentScene = 0;
     let autoChangeActive = false;
 
-    const introEl = document.getElementById("intro-animation");
-    const imgElement = document.getElementById("animation-img");
-    const textElement1 = document.getElementById("instruction-text1");
-    const textElement2 = document.getElementById("instruction-text2");
-    const menuElement = document.querySelector(".main-menu");
+    const introEl    = document.getElementById("intro-animation");
+    const imgEl      = document.getElementById("animation-img");
+    const text1El    = document.getElementById("instruction-text1");
+    const text2El    = document.getElementById("instruction-text2");
+    const menuEl     = document.querySelector(".main-menu");
+    const botBar     = document.querySelector(".bot-bar");
     const whiteCover = document.getElementById("intro-white-cover");
 
-    function avanzarEscena() {
-        if (currentScene < images.length - 1) {
-            currentScene++;
-            menuElement.style.top = posicionesMenu[currentScene];
-            imgElement.src = `assets/ilustraciones/${images[currentScene]}`;
-            textElement1.innerText = text1[currentScene];
-            textElement2.innerText = text2[currentScene];
+    const esMobile = () => window.innerWidth <= 768;
 
-            if (currentScene === 7) {
-                setTimeout(() => {
-                    menuElement.classList.add("rebote");
-                }, 600);
-            }
-
-            if (currentScene === 4 && !autoChangeActive) {
-                autoChangeActive = true;
-                iniciarCambioAutomatico();
-            }
+    if (esMobile()) {
+        menuEl.style.position   = "fixed";
+        menuEl.style.bottom     = "auto";
+        menuEl.style.top        = posicionesMobile[0] + "px";
+        menuEl.style.transition = "top 0.5s ease-in-out";
+        if (botBar) {
+            botBar.style.transform  = "translateY(120px)";
+            botBar.style.transition = "transform 0.5s ease-in-out";
         }
     }
 
-    function iniciarCambioAutomatico() {
-        let interval = setInterval(() => {
+    function moverMenu(scene) {
+        if (esMobile()) {
+            menuEl.style.top = posicionesMobile[scene] + "px";
+        } else {
+            menuEl.style.top = posicionesDesktop[scene];
+        }
+    }
+
+    function finalizarAnimacion() {
+        introEl.style.display = "none";
+        if (whiteCover) whiteCover.style.display = "none";
+
+        if (esMobile()) {
+            // Animar el menú hasta su posición real (bottom: 44px expresado como top)
+            const topFinal = window.innerHeight - menuEl.offsetHeight - 44;
+            menuEl.style.transition = "top 0.4s ease-in-out";
+            menuEl.style.top = topFinal + "px";
+
+            // Al terminar la transición, quitar todo inline y dejar que el CSS tome el control
+            menuEl.addEventListener("transitionend", function handler() {
+                menuEl.removeEventListener("transitionend", handler);
+                menuEl.style.transition = "";
+                menuEl.style.top        = "";
+                menuEl.style.bottom     = "";
+                menuEl.style.position   = "";
+            });
+
+            if (botBar) botBar.style.transform = "";
+        } else {
+            menuEl.style.transform = "translateY(0)";
+        }
+    }
+
+    function avanzarEscena() {
+        if (currentScene >= images.length - 1) return;
+        currentScene++;
+        moverMenu(currentScene);
+        imgEl.src = `assets/ilustraciones/${images[currentScene]}`;
+        text1El.innerText = text1[currentScene];
+        text2El.innerText = text2[currentScene];
+
+        if (currentScene === 7) {
+            setTimeout(() => menuEl.classList.add("rebote"), 600);
+        }
+        if (currentScene === 4 && !autoChangeActive) {
+            autoChangeActive = true;
+            iniciarAuto();
+        }
+    }
+
+    function iniciarAuto() {
+        const interval = setInterval(() => {
             if (currentScene < images.length - 1) {
                 avanzarEscena();
             } else {
                 clearInterval(interval);
-                setTimeout(() => {
-                    introEl.style.display = "none";
-                    if (whiteCover) whiteCover.style.display = "none";
-                    menuElement.style.transform = "translateY(0)";
-                }, 500);
+                setTimeout(finalizarAnimacion, 500);
             }
         }, 300);
     }
 
     introEl.addEventListener("click", avanzarEscena);
-});
-
-
-// ── SOBRE MÍ - DRAG HORIZONTAL ───────────────────────────────────────────────
-
-document.addEventListener("DOMContentLoaded", function () {
-    const slider = document.getElementById("sobre-mi-slider");
-    if (!slider) return;
-
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    slider.addEventListener("mousedown", (e) => {
-        isDown = true;
-        slider.classList.add("dragging");
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-    });
-    slider.addEventListener("mouseleave", () => {
-        isDown = false;
-        slider.classList.remove("dragging");
-    });
-    slider.addEventListener("mouseup", () => {
-        isDown = false;
-        slider.classList.remove("dragging");
-    });
-    slider.addEventListener("mousemove", (e) => {
-        if (!isDown) return;
+    introEl.addEventListener("touchend", function(e) {
         e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 1.2;
-        slider.scrollLeft = scrollLeft - walk;
-    });
-
-    let touchStartX = 0;
-    let touchScrollLeft = 0;
-    slider.addEventListener("touchstart", (e) => {
-        touchStartX = e.touches[0].pageX;
-        touchScrollLeft = slider.scrollLeft;
-    }, { passive: true });
-    slider.addEventListener("touchmove", (e) => {
-        const x = e.touches[0].pageX;
-        const walk = (x - touchStartX) * 1.2;
-        slider.scrollLeft = touchScrollLeft - walk;
-    }, { passive: true });
-});
-
-// ABRIR CONTACTO EN POPUP
-document.getElementById("open-contacto").addEventListener("click", function () {
-
-    const popupInner = document.getElementById("popup-inner");
-    const overlay = document.getElementById("popup-overlay");
-
-    popupInner.innerHTML = `
-        <h2 class="popup-title">Contacto</h2>
-        <p class="popup-desc">¿Tienes un proyecto en mente? Escríbeme y lo hacemos realidad.</p>
-
-        <form class="contact-form" action="mailto:paulapavia@gmail.com" method="post" enctype="text/plain">
-            <input class="contact-input" type="text" name="nombre" placeholder="Tu nombre" required>
-            <input class="contact-input" type="email" name="email" placeholder="Tu email" required>
-            <textarea class="contact-input contact-textarea" name="mensaje" placeholder="Tu mensaje" required></textarea>
-            <button class="contact-btn" type="submit">Enviar</button>
-        </form>
-
-        <p class="popup-desc" style="margin-top:20px;">
-            Instagram:
-            <a href="https://www.instagram.com/jpeuveg" target="_blank" rel="noopener noreferrer">@jpeuveg</a>
-        </p>
-    `;
-
-    overlay.classList.add("open");
-    popupInner.scrollTop = 0;
+        avanzarEscena();
+    }, { passive: false });
 });

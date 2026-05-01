@@ -1,27 +1,27 @@
+/* ── FUENTES ─────────────────────────────────────────────────────────────── */
+
 @font-face {
     font-family: 'General Sans';
     src: url('../assets/fonts/Fonts/WEB/fonts/GeneralSans-Regular.woff2') format('woff2');
     font-weight: 400;
-    font-style: normal;
 }
 
 @font-face {
     font-family: 'General Sans';
     src: url('../assets/fonts/Fonts/WEB/fonts/GeneralSans-Semibold.woff2') format('woff2');
     font-weight: 700;
-    font-style: normal;
 }
 
-html {
-    overflow: hidden;
-}
 
+/* ── BASE ────────────────────────────────────────────────────────────────── */
+
+html,
 body {
     margin: 0;
+    overflow: hidden;
     background: #fff;
     font-family: 'General Sans', Arial, sans-serif;
     font-weight: 400;
-    overflow: hidden;
 }
 
 input,
@@ -31,6 +31,9 @@ button {
     font-weight: inherit;
 }
 
+
+/* ── HEADER ──────────────────────────────────────────────────────────────── */
+
 header {
     position: fixed;
     top: 0;
@@ -39,27 +42,18 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 64px;
+    min-height: 64px;
+    height: auto;
+    padding: 1.5vh 0;
     z-index: 100;
     font-weight: 700;
-    font-family: 'General Sans', Arial, sans-serif;
+    background: #fff;
 }
-
-.header-left,
-.header-center,
-.header-right,
-.bot-left,
-.bot-right {
-    font-size: clamp(18px, 4vw, 40px);
-}
-
-/* HEADER */
 
 .header-left,
 .header-center,
 .header-right {
     flex: 1;
-    text-align: center;
     font-size: 4vh;
     letter-spacing: 0.02em;
 }
@@ -83,15 +77,7 @@ header {
 }
 
 
-/* BOT */
-
-header,
-.bot-bar {
-    min-height: 64px;
-    height: auto;
-    padding-top: 1.5vh;
-    padding-bottom: 1.5vh;
-}
+/* ── BARRA INFERIOR ──────────────────────────────────────────────────────── */
 
 .bot-bar {
     position: fixed;
@@ -103,9 +89,11 @@ header,
     align-items: flex-end;
     min-height: 64px;
     height: auto;
+    padding: 1.5vh 0;
     z-index: 100;
     font-weight: 700;
-    font-family: 'General Sans', Arial, sans-serif;
+    background: #fff;
+    border-top: 5px solid #000;
 }
 
 .bot-left,
@@ -132,26 +120,21 @@ header,
 
 .bot-left a:hover {
     text-decoration: underline;
-    color: #222;
 }
 
 
-/* MAIN MENU */
+/* ── MENÚ PRINCIPAL ──────────────────────────────────────────────────────── */
 
 .main-menu {
     position: absolute;
     top: 24vh;
     left: 0;
     width: 100vw;
-    text-align: left;
-    font-family: 'General Sans', Arial, sans-serif;
     font-weight: 700;
     font-size: 4vh;
     color: #222;
     user-select: none;
     padding: 1%;
-    justify-content: space-between;
-    align-items: center;
     border-bottom: 5px solid #222;
     z-index: 50;
     transition: transform 1s ease-in-out;
@@ -174,46 +157,33 @@ header,
     content: " ·";
     margin-left: 1%;
     margin-right: 1%;
-    color: #222;
-    font-weight: 700;
-}
-
-.main-menu a:not(:last-child) {
-    margin-right: 0;
 }
 
 .main-menu a:hover {
     text-decoration: underline !important;
-    color: #222;
+}
+
+/* En Sobre Mí el menú se fija bajo el header */
+body.view-sobre-mi .main-menu {
+    position: fixed;
+    top: 64px;
+    transform: none !important;
 }
 
 
-/* FONDO BLANCO BAJO LA ANIMACIÓN
-   Cubre la galería desde el menú hacia abajo mientras dura la animación.
-   Se oculta al terminar la animación (en JS). */
+/* ── ANIMACIÓN DE INTRO ──────────────────────────────────────────────────── */
 
 #intro-white-cover {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
     background: #fff;
     z-index: 40;
-    /* encima de la galería, debajo del menú y la animación */
     pointer-events: none;
-    /* no bloquea clicks en la animación */
 }
-
-
-/* ANIMACIÓN */
 
 #intro-animation {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -234,12 +204,9 @@ header,
     bottom: 22vh;
     right: 15vw;
     font-size: 4vh;
-    font-family: 'General Sans', Arial, sans-serif;
     font-weight: 700;
     color: #222;
     padding: 10px;
-    border-radius: 5px;
-    text-align: center;
 }
 
 .anima-text2 {
@@ -247,16 +214,13 @@ header,
     bottom: 32vh;
     right: 65vw;
     font-size: 5vh;
-    font-family: 'General Sans', Arial, sans-serif;
     font-weight: 700;
     color: #222;
     padding: 10px;
-    border-radius: 5px;
-    text-align: center;
 }
 
 
-/* GALERÍA */
+/* ── GALERÍA (SWIPER) ────────────────────────────────────────────────────── */
 
 #galeria {
     width: calc(100vw - 1.7vw);
@@ -269,6 +233,7 @@ header,
     overflow: visible;
 }
 
+/* Scrollbar del swiper justo encima de las imágenes */
 .swiper-horizontal>.swiper-scrollbar,
 .swiper-scrollbar.swiper-scrollbar-horizontal {
     position: absolute !important;
@@ -300,7 +265,8 @@ header,
     opacity: 0.85;
 }
 
-.swiper-slide img {
+.swiper-slide img,
+.swiper-slide .slide-video {
     display: block;
     height: var(--slide-h, 38vh);
     width: auto;
@@ -310,47 +276,38 @@ header,
 }
 
 .swiper-slide .slide-video {
-    display: block;
-    height: var(--slide-h, 38vh);
-    width: auto;
-    object-fit: cover;
-    border-radius: 5px;
-    border: 3px solid #000;
     background: #000;
 }
 
-/* Etiqueta del proyecto sobre la imagen */
-.slide-label {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    color: #000000;
-    font-family: 'General Sans', Arial, sans-serif;
-    font-weight: 700;
-    font-size: 1.6vh;
-    pointer-events: none;
-    letter-spacing: 0.03em;
-}
-
-/* alturas variables */
-.swiper-slide:nth-child(3n+1) img {
+/* Alturas escalonadas */
+.swiper-slide:nth-child(3n+1) img,
+.swiper-slide:nth-child(3n+1) .slide-video {
     --slide-h: 56vh;
 }
 
-.swiper-slide:nth-child(3n+2) img {
+.swiper-slide:nth-child(3n+2) img,
+.swiper-slide:nth-child(3n+2) .slide-video {
     --slide-h: 44vh;
 }
 
-.swiper-slide:nth-child(3n+3) img {
+.swiper-slide:nth-child(3n+3) img,
+.swiper-slide:nth-child(3n+3) .slide-video {
     --slide-h: 50vh;
 }
 
+.slide-label {
+    font-size: 1.6vh;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: 0.03em;
+    pointer-events: none;
+}
 
-/* SOBRE MÍ */
+
+/* ── SECCIÓN SOBRE MÍ ────────────────────────────────────────────────────── */
 
 #sobre-mi-section {
     width: 100vw;
-    min-height: auto;
     padding: 4rem 0.7vw 6.3rem;
     overflow-y: auto;
 }
@@ -361,9 +318,13 @@ header,
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 0.75rem;
+}
+
+.sobre-mi-big {
     grid-template-areas:
-        "profile profile profile profile profile profile profile profile contact contact contact contact"
-        "programs programs programs programs qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail contact contact contact contact";
+        "foto foto foto foto profile profile profile profile profile profile profile profile"
+        "foto foto foto foto programs programs programs programs programs programs programs programs"
+        "foto foto foto foto qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail";
 }
 
 .sobre-card {
@@ -373,21 +334,12 @@ header,
     padding: 0.85rem 1rem;
 }
 
-.sobre-card--profile {
+.sobre-mi-foto-grande {
+    grid-area: foto;
+}
+
+.sobre-card--profile2 {
     grid-area: profile;
-    display: grid;
-    grid-template-columns: minmax(200px, 310px) 1fr;
-    gap: 1rem;
-    align-items: center;
-}
-
-.sobre-card--profile2 h2 {
-    font-weight: 700;
-}
-
-
-.sobre-card--contact {
-    grid-area: contact;
 }
 
 .sobre-card--programs {
@@ -398,8 +350,19 @@ header,
     grid-area: qualitiesDetail;
 }
 
+.sobre-card--profile2 h2 {
+    font-weight: 700;
+}
+
+.sobre-mi-img-grande {
+    width: 100%;
+    height: 700px;
+    border: 3px solid #000;
+    border-radius: 18px;
+    object-fit: cover;
+}
+
 .sobre-card-title {
-    font-family: 'General Sans', Arial, sans-serif;
     font-weight: 700;
     font-size: clamp(20px, 2.2vw, 34px);
     color: #222;
@@ -407,54 +370,11 @@ header,
     letter-spacing: 0.01em;
 }
 
-.sobre-mi-image-box {
-    min-width: 220px;
-    max-width: 320px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    flex-shrink: 0;
-}
-
-.sobre-mi-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 18px;
-    border: 3px solid #000;
-    display: block;
-}
-
-.sobre-mi-text {
-    max-width: 620px;
-    width: 100%;
-}
-
-.sobre-mi-text h2 {
-    font-family: 'General Sans', Arial, sans-serif;
-    font-weight: 700;
-    font-size: clamp(24px, 2.5vw, 42px);
-    color: #222;
-    margin-bottom: 1rem;
-    margin-top: 0;
-}
-
 .sobre-mi-desc {
-    font-family: 'General Sans', Arial, sans-serif;
     font-size: clamp(14px, 1.15vw, 19px);
     color: #444;
     line-height: 1.5;
     margin-bottom: 1rem;
-}
-
-.sobre-mi-contact {
-    font-family: 'General Sans', Arial, sans-serif;
-    font-size: clamp(13px, 1vw, 17px);
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 0;
 }
 
 .sobre-pill-list {
@@ -467,55 +387,17 @@ header,
 }
 
 .sobre-pill-list li {
-    font-family: 'General Sans', Arial, sans-serif;
     font-size: clamp(13px, 0.95vw, 16px);
     font-weight: 700;
     padding: 8px 14px;
     border: 2px solid #222;
     border-radius: 100px;
     color: #222;
-    background: #fff;
-}
-
-/* NUEVO LAYOUT SOBRE MÍ CON FOTO GRANDE */
-.sobre-mi-big {
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-areas:
-        "foto foto foto foto profile profile profile profile profile profile profile profile"
-        "foto foto foto foto programs programs programs programs programs programs programs programs"
-        "foto foto foto foto qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail";
-}
-
-.sobre-mi-foto-grande {
-    grid-area: foto;
 }
 
 
-/* FOTO GRANDE */
-.sobre-card--foto-grande {
-    grid-area: foto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+/* ── FORMULARIO DE CONTACTO ──────────────────────────────────────────────── */
 
-.sobre-mi-img-grande {
-    width: 100%;
-    border: 3px solid #000;
-    border-radius: 18px;
-    object-fit: cover;
-    height: 700px;
-}
-
-/* Ajuste del texto */
-.sobre-card--profile2 {
-    grid-area: profile;
-}
-
-
-
-
-/* Formulario de contacto */
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -524,7 +406,6 @@ header,
 }
 
 .contact-input {
-    font-family: 'General Sans', Arial, sans-serif;
     font-size: clamp(13px, 1vw, 16px);
     color: #222;
     background: transparent;
@@ -533,7 +414,6 @@ header,
     padding: 8px 0;
     outline: none;
     width: 100%;
-    border-radius: 0;
     resize: none;
 }
 
@@ -549,18 +429,8 @@ header,
     margin-top: 4px;
 }
 
-/* Cuando estamos en "Sobre mí", el menú no debe tapar contenido */
-body.view-sobre-mi .main-menu {
-    position: fixed;
-    top: 64px;
-    left: 0;
-    width: 100vw;
-    transform: none !important;
-}
-
 .contact-btn {
     align-self: flex-start;
-    font-family: 'General Sans', Arial, sans-serif;
     font-weight: 700;
     font-size: clamp(13px, 1vw, 16px);
     padding: 10px 28px;
@@ -580,7 +450,7 @@ body.view-sobre-mi .main-menu {
 }
 
 
-/* POPUP VERTICAL DESLIZANTE */
+/* ── POPUP ───────────────────────────────────────────────────────────────── */
 
 .popup-overlay {
     position: fixed;
@@ -601,7 +471,6 @@ body.view-sobre-mi .main-menu {
     pointer-events: all;
 }
 
-/* Panel vertical que ocupa casi toda la pantalla y hace scroll interno */
 .popup-box {
     background: #fff;
     border-radius: 10px;
@@ -630,7 +499,6 @@ body.view-sobre-mi .main-menu {
     border-radius: 4px;
 }
 
-/* Contenido del popup: título, desc, herramientas e imágenes apiladas */
 .popup-inner {
     padding: 48px 32px 40px;
     display: flex;
@@ -652,20 +520,16 @@ body.view-sobre-mi .main-menu {
     margin-left: auto;
     display: block;
     margin-bottom: -36px;
-    /* solapa con el contenido */
 }
 
 .popup-title {
-    font-family: 'General Sans', Arial, sans-serif;
     font-weight: 700;
     font-size: 3.5vh;
     color: #222;
-    margin-bottom: 12px;
-    margin-top: 0;
+    margin: 0 0 12px;
 }
 
 .popup-desc {
-    font-family: 'General Sans', Arial, sans-serif;
     font-size: 1.8vh;
     color: #444;
     line-height: 1.65;
@@ -673,7 +537,6 @@ body.view-sobre-mi .main-menu {
 }
 
 .popup-tools-label {
-    font-family: 'General Sans', Arial, sans-serif;
     font-size: 1.4vh;
     color: #888;
     text-transform: uppercase;
@@ -689,17 +552,14 @@ body.view-sobre-mi .main-menu {
 }
 
 .popup-tag {
-    font-family: 'General Sans', Arial, sans-serif;
     font-size: 1.5vh;
+    font-weight: 700;
     padding: 5px 12px;
     border-radius: 100px;
     border: 1.5px solid #222;
     color: #222;
-    background: transparent;
-    font-weight: 700;
 }
 
-/* Imágenes del proyecto — masonry con columns CSS */
 .popup-images-grid {
     columns: 3;
     column-gap: 16px;
@@ -708,16 +568,19 @@ body.view-sobre-mi .main-menu {
 .popup-project-img {
     width: 100%;
     height: auto;
-    /* respeta la proporción natural de cada foto */
     display: block;
     border-radius: 5px;
     border: 3px solid #000;
     object-fit: contain;
     margin-bottom: 16px;
     break-inside: avoid;
-    /* evita que una imagen se parta entre columnas */
     cursor: zoom-in;
     transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.popup-project-img:hover {
+    transform: scale(1.01);
+    opacity: 0.95;
 }
 
 .popup-project-video {
@@ -726,18 +589,14 @@ body.view-sobre-mi .main-menu {
     display: block;
     border-radius: 5px;
     border: 3px solid #000;
-    object-fit: contain;
     margin-bottom: 16px;
     break-inside: avoid;
     background: #000;
 }
 
-.popup-project-img:hover {
-    transform: scale(1.01);
-    opacity: 0.95;
-}
 
-/* VISOR AMPLIADO DE IMAGEN (desde popup) */
+/* ── VISOR IMAGEN AMPLIADA ───────────────────────────────────────────────── */
+
 .image-zoom-overlay {
     position: fixed;
     inset: 0;
@@ -789,50 +648,30 @@ body.view-sobre-mi .main-menu {
     background: #fff;
     color: #222;
     font-size: 20px;
+    font-weight: 700;
     line-height: 1;
     cursor: pointer;
-    font-weight: 700;
-}
-
-@media (max-width: 900px) {
-    .popup-images-grid {
-        columns: 2;
-    }
-}
-
-@media (max-width: 600px) {
-    .popup-images-grid {
-        columns: 1;
-    }
 }
 
 
-/* RESPONSIVE */
+/* ── RESPONSIVE: TABLET (≤ 1125px) ──────────────────────────────────────── */
 
 @media (max-width: 1125px) {
+
+    header {
+        position: static;
+    }
+
+    .spacer {
+        display: none;
+    }
 
     .header-left,
     .header-center,
     .header-right,
     .bot-left,
     .bot-right {
-        font-size: clamp(45px, 3vw, 16px);
-    }
-
-    header {
-        position: static;
-    }
-
-    .swiper-slide:nth-child(3n+1) img {
-        --slide-h: 48vh;
-    }
-
-    .swiper-slide:nth-child(3n+2) img {
-        --slide-h: 36vh;
-    }
-
-    .swiper-slide:nth-child(3n+3) img {
-        --slide-h: 42vh;
+        font-size: clamp(18px, 3vw, 36px);
     }
 
     .main-menu {
@@ -841,190 +680,59 @@ body.view-sobre-mi .main-menu {
     }
 
     .main-menu a {
-        font-size: clamp(40px, 3vw, 16px);
+        font-size: 2.5vh;
     }
 
-    .spacer {
-        display: none;
+    .swiper-slide:nth-child(3n+1) img,
+    .swiper-slide:nth-child(3n+1) .slide-video {
+        --slide-h: 48vh;
+    }
+
+    .swiper-slide:nth-child(3n+2) img,
+    .swiper-slide:nth-child(3n+2) .slide-video {
+        --slide-h: 36vh;
+    }
+
+    .swiper-slide:nth-child(3n+3) img,
+    .swiper-slide:nth-child(3n+3) .slide-video {
+        --slide-h: 42vh;
+    }
+
+    #animation-img {
+        width: 150vw;
+        padding-top: 40vh;
     }
 
     #sobre-mi-section {
         padding: 11rem 2vw 7.5rem;
     }
 
-    .sobre-mi-layout {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "profile"
-            "programs"
-            "qualitiesDetail"
-            "contact";
-    }
-
-    .sobre-card--profile {
-        grid-template-columns: 1fr;
-    }
-
-    .sobre-mi-image-box {
-        max-width: 360px;
-    }
-
-    #animation-img {
-        width: 150vw;
-        max-height: 200vh;
-        transition: transform 1s ease-in-out;
-        padding-top: 26vh;
-    }
-
-}
-
-
-@media (max-width: 605px) {
-
-    .header-left,
-    .header-center,
-    .header-right,
-    .bot-left,
-    .bot-right {
-        font-size: clamp(22px, 6vw, 32px) !important;
-    }
-
-    .bot-bar {
-        font-size: clamp(22px, 6vw, 32px) !important;
-    }
-
-    .main-menu,
-    .main-menu a {
-        font-size: clamp(22px, 6vw, 32px) !important;
-    }
-
-    header {
-        position: static;
-    }
-
-
-    .swiper-slide:nth-child(3n+1) img {
-        --slide-h: 34vh;
-    }
-
-    .swiper-slide:nth-child(3n+2) img {
-        --slide-h: 26vh;
-    }
-
-    .swiper-slide:nth-child(3n+3) img {
-        --slide-h: 30vh;
-    }
-
-    .main-menu {
-        padding: 2%;
-    }
-
-    .spacer {
-        display: none;
-    }
-
-    #animation-img {
-        padding: 0;
-        max-width: 100vw;
-        max-height: 250vh;
-        padding-top: 30vh;
-    }
-
-    .popup-box {
-        max-height: 92vh;
-    }
-
-    .popup-inner {
-        padding: 40px 18px 28px;
-    }
-
-    #sobre-mi-section {
-        padding: 10.8rem 2.4vw 8rem;
-    }
-
-    .sobre-card {
-        padding: 1rem;
-    }
-
-    .sobre-mi-text h2,
-    .sobre-card-title {
-        margin-bottom: 0.7rem;
-    }
-}
-
-/* MOBILE OVERHAUL */
-@media (max-width: 768px) {
-    
-
-    /* SOBRE MÍ — que ocupe TODO el ancho */
-    #sobre-mi-section {
-        width: 100vw !important;
-        padding: 58px 10px 106px !important;
-    }
-
     .sobre-mi-layout,
     .sobre-mi-big {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        display: grid;
-        grid-template-columns: 1fr !important;
-        gap: 0.75rem;
-    }
-
-    /* Orden correcto */
-    .sobre-mi-big {
+        grid-template-columns: 1fr;
         grid-template-areas:
             "foto"
             "profile"
-            "qualitiesDetail"
-            "programs";
-        text-align: center;
+            "programs"
+            "qualitiesDetail";
     }
 
-    /* Imagen primero */
-    .sobre-mi-foto-grande {
-        width: 100%;
-        border: 3px solid #000;
-        border-radius: 18px;
-        overflow: hidden;
-        margin-bottom: 1rem;
+    .popup-images-grid {
+        columns: 2;
     }
+}
 
-    .sobre-mi-img-grande {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        border: none;
-    }
 
-    /* Centrado del contenido */
-    .sobre-card--profile2,
-    .sobre-card--qualities-detail,
-    .sobre-card--programs {
-        text-align: center;
-        width: 100%;
-    }
+/* ── RESPONSIVE: MÓVIL (≤ 768px) ────────────────────────────────────────── */
 
-    .sobre-pill-list {
-        justify-content: center;
-    }
-
-    .contact-btn {
-        align-self: center;
-    }
-
+@media (max-width: 768px) {
 
     html,
     body {
         overflow: auto;
     }
 
-    body {
-        font-size: 14px;
-    }
-
+    /* Header fijo pequeño */
     header {
         position: fixed;
         top: 0;
@@ -1032,7 +740,6 @@ body.view-sobre-mi .main-menu {
         height: 46px;
         min-height: 46px;
         padding: 0 10px;
-        background: #fff;
         border-bottom: 2px solid #222;
     }
 
@@ -1059,23 +766,32 @@ body.view-sobre-mi .main-menu {
         display: none;
     }
 
+    /* Menú horizontal en la parte baja */
     .main-menu {
         position: fixed !important;
-        top: auto !important;
         left: 0;
         bottom: 44px;
+        /* ← ← ← POSICIÓN FINAL FIJA (CORRECCIÓN) */
         width: 100vw;
+        height: 10vw;
         display: flex;
         align-items: center;
         gap: 0.55rem;
         padding: 8px 10px !important;
         border-top: 2px solid #222;
-        border-bottom: none;
-        background: #fff;
+        border-bottom: 2px solid #222;
+        font-size: clamp(13px, 3.2vw, 16px);
         overflow-x: auto;
         overflow-y: hidden;
         white-space: nowrap;
         scrollbar-width: none;
+        transition: transform 0.6s cubic-bezier(.25, 1.5, .5, 1);
+    }
+
+    /* Rebote corregido */
+    .main-menu.rebote {
+        transform: translateY(496px) !important;
+        /* ← ← ← REBOTE REAL */
     }
 
     .main-menu::-webkit-scrollbar {
@@ -1092,14 +808,13 @@ body.view-sobre-mi .main-menu {
         margin-right: 0.1rem;
     }
 
+    /* Barra inferior */
     .bot-bar {
         min-height: 44px;
         padding: 0 10px 8px;
         align-items: flex-end;
-        background: #fff;
         border-top: 2px solid #222;
     }
-
 
     .bot-left,
     .bot-right,
@@ -1116,16 +831,23 @@ body.view-sobre-mi .main-menu {
         padding-right: 0;
     }
 
+    .anima-text {
+        bottom: 70vh !important;
+        right: 50vw !important;
+        padding: 27px !important;
+    }
+
+    .anima-text2 {
+        bottom: 60vh !important;
+        right: 5vw !important;
+    }
+
+    /* Galería en columnas (collage) */
     #galeria {
         padding: 58px 10px 106px;
         width: 100vw;
     }
 
-    .slide-label {
-        font-size: 11px;
-    }
-
-    /* En móvil: galería tipo collage */
     .swiper.mySwiper {
         overflow: visible;
     }
@@ -1146,37 +868,57 @@ body.view-sobre-mi .main-menu {
         display: inline-block;
     }
 
-    .swiper-scrollbar {
-        display: none !important;
-    }
-
-    .swiper-slide:nth-child(3n+1) img {
-        --slide-h: auto;
-    }
-
-    .swiper-slide:nth-child(3n+2) img {
-        --slide-h: auto;
-    }
-
-    .swiper-slide:nth-child(3n+3) img {
-        --slide-h: auto;
-    }
-
     .swiper-slide img,
     .swiper-slide .slide-video {
         width: 100%;
         height: auto;
-        object-fit: cover;
+        --slide-h: auto;
     }
 
+    .swiper-scrollbar {
+        display: none !important;
+    }
+
+    .slide-label {
+        font-size: 11px;
+    }
+
+    /* Sobre Mí */
     #sobre-mi-section {
         padding: 58px 10px 106px;
+        width: 100vw !important;
     }
 
-    .sobre-mi-layout {
+    .sobre-mi-layout,
+    .sobre-mi-big {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: grid;
+        grid-template-columns: 1fr !important;
+        grid-template-areas:
+            "foto"
+            "profile"
+            "qualitiesDetail"
+            "programs" !important;
+        gap: 0.75rem;
+        text-align: center;
+    }
+
+    .sobre-mi-foto-grande {
         width: 100%;
-        gap: 0.55rem;
-        grid-template-columns: 1fr;
+        border: 3px solid #000;
+        border-radius: 18px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+    }
+
+    .sobre-mi-img-grande {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border: none;
     }
 
     .sobre-card {
@@ -1185,39 +927,15 @@ body.view-sobre-mi .main-menu {
         padding: 0.7rem 0.75rem;
     }
 
-    .sobre-card--profile {
-        grid-template-columns: 1fr;
-        gap: 0.55rem;
-        align-items: start;
-    }
-
-    .sobre-mi-image-box {
-        min-width: 0;
-        max-width: none;
+    .sobre-card--profile2,
+    .sobre-card--qualities-detail,
+    .sobre-card--programs {
+        text-align: center;
         width: 100%;
-    }
-
-    .sobre-mi-img {
-        width: 100%;
-        aspect-ratio: 16 / 10;
-        object-fit: cover;
-        border-width: 2px;
-        border-radius: 12px;
-    }
-
-    .sobre-mi-text h2,
-    .sobre-card-title {
-        font-size: clamp(18px, 5vw, 24px);
-        margin-bottom: 0.45rem;
-    }
-
-    .sobre-mi-desc {
-        font-size: 13px;
-        line-height: 1.35;
-        margin-bottom: 0.6rem;
     }
 
     .sobre-pill-list {
+        justify-content: center;
         gap: 6px;
     }
 
@@ -1225,6 +943,11 @@ body.view-sobre-mi .main-menu {
         font-size: 11px;
         padding: 5px 9px;
         border-width: 1.5px;
+    }
+
+    .sobre-card-title,
+    .sobre-mi-desc {
+        font-size: clamp(13px, 3.5vw, 16px);
     }
 
     .contact-form {
@@ -1244,6 +967,12 @@ body.view-sobre-mi .main-menu {
     .contact-btn {
         font-size: 12px;
         padding: 8px 16px;
+        align-self: center;
+    }
+
+    /* Popup */
+    .popup-box {
+        max-height: 92vh;
     }
 
     .popup-inner {
@@ -1265,23 +994,26 @@ body.view-sobre-mi .main-menu {
     .popup-tag {
         font-size: 11px;
     }
+
+    .popup-images-grid {
+        columns: 1;
+    }
 }
+
+
+/* ── RESPONSIVE: MÓVIL MUY PEQUEÑO (≤ 450px) ────────────────────────────── */
 
 @media (max-width: 450px) {
     .header-right {
         display: none;
     }
 
-    .header-left,
-    .header-center {
-        flex: 1;
-    }
-
-    .sobre-mi-img {
-        aspect-ratio: 4 / 3;
-    }
-
     .swiper-wrapper {
         column-count: 1;
+    }
+
+    .sobre-mi-img-grande {
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
     }
 }
