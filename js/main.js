@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+
     // ── DATOS DE LA GALERÍA ──────────────────────────────────────────────────
     const galleries = {
         fotografia: [
@@ -632,7 +633,9 @@ document.addEventListener("DOMContentLoaded", function () {
             });
             slide.addEventListener("pointermove", e => {
                 if (!pointerDown) return;
-                if (Math.abs(e.clientX - startX) > 8 || Math.abs(e.clientY - startY) > 8) dragging = true;
+                if (Math.abs(e.clientX - startX) > 8 || Math.abs(e.clientY - startY) > 8) {
+                    dragging = true;
+                }
             });
             slide.addEventListener("pointerup", e => {
                 if (!pointerDown) return;
@@ -647,6 +650,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         swiper.update();
     }
+
+    
 
     document.querySelectorAll(".main-menu a").forEach(link => {
         link.addEventListener("click", e => {
@@ -685,37 +690,37 @@ document.addEventListener("DOMContentLoaded", function () {
 // ── ANIMACIÓN DE INTRO ───────────────────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", function () {
-    const images = ["Ilustracion_1.png","Ilustracion_2.png","Ilustracion_3.png","Ilustracion_4.png","Ilustracion_5.png","Ilustracion_6.png","Ilustracion_7.png","Ilustracion_8.png"];
-    const text1  = ["Haz click en la pantalla","otra vez","otra vez!","Ayúdame a bajar esto...","Gracias...","Gracias...","Gracias...",""];
-    const text2  = ["","","Oyes...","otra vez!!!!","","","",""];
+    const images = ["Ilustracion_1.png", "Ilustracion_2.png", "Ilustracion_3.png", "Ilustracion_4.png", "Ilustracion_5.png", "Ilustracion_6.png", "Ilustracion_7.png", "Ilustracion_8.png"];
+    const text1 = ["Haz click en la pantalla", "otra vez", "otra vez!", "Ayúdame a bajar esto...", "Gracias...", "Gracias...", "Gracias...", ""];
+    const text2 = ["", "", "Oyes...", "otra vez!!!!", "", "", "", ""];
 
     // Desktop: posiciones con `top` en vh
-    const posicionesDesktop = { 0:"24vh", 1:"24vh", 2:"24vh", 3:"26vh", 4:"32vh", 5:"39vh", 6:"46vh", 7:"76vh" };
+    const posicionesDesktop = { 0: "24vh", 1: "24vh", 2: "24vh", 3: "26vh", 4: "32vh", 5: "39vh", 6: "46vh", 7: "76vh" };
 
     // ── AJUSTA ESTOS VALORES PARA MÓVIL (píxeles desde arriba de pantalla) ──
-    const posicionesMobile = { 0:364, 1:364, 2:364, 3:375, 4:420, 5:470, 6:500, 7:700 };
+    const posicionesMobile = { 0: 364, 1: 364, 2: 364, 3: 375, 4: 420, 5: 470, 6: 500, 7: 700 };
     // ─────────────────────────────────────────────────────────────────────────
 
     let currentScene = 0;
     let autoChangeActive = false;
 
-    const introEl    = document.getElementById("intro-animation");
-    const imgEl      = document.getElementById("animation-img");
-    const text1El    = document.getElementById("instruction-text1");
-    const text2El    = document.getElementById("instruction-text2");
-    const menuEl     = document.querySelector(".main-menu");
-    const botBar     = document.querySelector(".bot-bar");
+    const introEl = document.getElementById("intro-animation");
+    const imgEl = document.getElementById("animation-img");
+    const text1El = document.getElementById("instruction-text1");
+    const text2El = document.getElementById("instruction-text2");
+    const menuEl = document.querySelector(".main-menu");
+    const botBar = document.querySelector(".bot-bar");
     const whiteCover = document.getElementById("intro-white-cover");
 
     const esMobile = () => window.innerWidth <= 768;
 
     if (esMobile()) {
-        menuEl.style.position   = "fixed";
-        menuEl.style.bottom     = "auto";
-        menuEl.style.top        = posicionesMobile[0] + "px";
+        menuEl.style.position = "fixed";
+        menuEl.style.bottom = "auto";
+        menuEl.style.top = posicionesMobile[0] + "px";
         menuEl.style.transition = "top 0.5s ease-in-out";
         if (botBar) {
-            botBar.style.transform  = "translateY(120px)";
+            botBar.style.transform = "translateY(120px)";
             botBar.style.transition = "transform 0.5s ease-in-out";
         }
     }
@@ -742,9 +747,9 @@ document.addEventListener("DOMContentLoaded", function () {
             menuEl.addEventListener("transitionend", function handler() {
                 menuEl.removeEventListener("transitionend", handler);
                 menuEl.style.transition = "";
-                menuEl.style.top        = "";
-                menuEl.style.bottom     = "";
-                menuEl.style.position   = "";
+                menuEl.style.top = "";
+                menuEl.style.bottom = "";
+                menuEl.style.position = "";
             });
 
             if (botBar) botBar.style.transform = "";
@@ -782,7 +787,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     introEl.addEventListener("click", avanzarEscena);
-    introEl.addEventListener("touchend", function(e) {
+    introEl.addEventListener("touchend", function (e) {
         e.preventDefault();
         avanzarEscena();
     }, { passive: false });
