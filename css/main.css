@@ -1001,6 +1001,38 @@ body.view-sobre-mi .main-menu {
     }
 }
 
+/* ── MODO MÓVIL FIJO 400×760 ────────────────CAMBIAR──────────────────── */
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100%;
+    }
+
+    /* Contenedor fijo */
+    body {
+        width: 400px;
+        height: 760px;
+        position: relative;
+        margin: 0 auto;
+        transform-origin: top center;
+        transform: scale(calc(100vw / 400));
+        /* Si quieres que también escale según altura, avísame */
+    }
+
+    /* Evita que el contenido se desborde visualmente */
+    #intro-animation,
+    #galeria,
+    #sobre-mi-section,
+    .main-menu,
+    .bot-bar {
+        width: 400px !important;
+    }
+}
 
 /* ── RESPONSIVE: MÓVIL MUY PEQUEÑO (≤ 450px) ────────────────────────────── */
 
