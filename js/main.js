@@ -787,3 +787,21 @@ document.addEventListener("DOMContentLoaded", function () {
         avanzarEscena();
     }, { passive: false });
 });
+
+// MENÚ MÓVIL DESPLEGABLE
+const mobileBtn = document.getElementById("mobile-menu-btn");
+const mobilePanel = document.getElementById("mobile-menu-panel");
+
+mobileBtn.addEventListener("click", () => {
+    mobilePanel.style.display =
+        mobilePanel.style.display === "flex" ? "none" : "flex";
+});
+
+// Enlaces del menú móvil → cargar galería
+document.querySelectorAll("#mobile-menu-panel a").forEach(a => {
+    a.addEventListener("click", () => {
+        const categoria = a.getAttribute("data-categoria");
+        cargarGaleria(categoria); // usa tu función original
+        mobilePanel.style.display = "none"; // cerrar menú
+    });
+});

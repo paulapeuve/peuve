@@ -726,279 +726,333 @@ body.view-sobre-mi .main-menu {
 
 /* ── RESPONSIVE: MÓVIL (≤ 768px) ────────────────────────────────────────── */
 
+/* BOTÓN MENÚ MÓVIL */
+.mobile-menu-btn {
+    display: none;
+}
+
 @media (max-width: 768px) {
 
-    html,
-    body {
-        overflow: auto;
+    /* Mostrar botón menú */
+    .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 24px;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 0 12px;
+        color: #222;
     }
 
-    /* Header fijo pequeño */
-    header {
+    /* Panel desplegable */
+    .mobile-menu-panel {
         position: fixed;
-        top: 0;
+        top: 46px;
+        /* debajo del header */
         left: 0;
-        height: 46px;
-        min-height: 46px;
-        padding: 0 10px;
+        width: 100vw;
+        background: #fff;
         border-bottom: 2px solid #222;
-    }
-
-    .header-left,
-    .header-center,
-    .header-right {
-        font-size: clamp(14px, 3.6vw, 18px) !important;
-        line-height: 1;
-    }
-
-    .header-center {
-        text-align: right !important;
-    }
-
-    .header-left {
-        padding-left: 0;
-    }
-
-    .header-right {
-        padding-right: 0;
-    }
-
-    .spacer {
         display: none;
+        flex-direction: column;
+        z-index: 9999;
     }
 
-    /* Menú horizontal en la parte baja */
+    .mobile-menu-panel a {
+        padding: 14px 18px;
+        font-size: 16px;
+        font-weight: 700;
+        border-bottom: 1px solid #eee;
+        color: #222;
+    }
+
+    .mobile-menu-panel a:last-child {
+        border-bottom: none;
+    }
+
+    /* OCULTAR SOLO EL MENÚ INFERIOR, NO LA BOT-BAR */
     .main-menu {
-        position: fixed !important;
-        left: 0;
-        bottom: 44px;
-        /* ← ← ← POSICIÓN FINAL FIJA (CORRECCIÓN) */
-        width: 100vw;
-        height: 10vw;
-        display: flex;
-        align-items: center;
-        gap: 0.55rem;
-        padding: 8px 10px !important;
-        border-top: 2px solid #222;
-        border-bottom: 2px solid #222;
-        font-size: clamp(13px, 3.2vw, 16px);
-        overflow-x: auto;
-        overflow-y: hidden;
-        white-space: nowrap;
-        scrollbar-width: none;
-        transition: transform 0.6s cubic-bezier(.25, 1.5, .5, 1);
-    }
-
-    /* Rebote corregido */
-    .main-menu.rebote {
-        transform: translateY(496px) !important;
-        /* ← ← ← REBOTE REAL */
-    }
-
-    .main-menu::-webkit-scrollbar {
-        display: none;
-    }
-
-    .main-menu a {
-        font-size: clamp(13px, 3.2vw, 16px) !important;
-        flex: 0 0 auto;
-    }
-
-    .main-menu a:not(:last-child)::after {
-        margin-left: 0.35rem;
-        margin-right: 0.1rem;
-    }
-
-    /* Barra inferior */
-    .bot-bar {
-        min-height: 44px;
-        padding: 0 10px 8px;
-        align-items: flex-end;
-        border-top: 2px solid #222;
-    }
-
-    .bot-left,
-    .bot-right,
-    .bot-bar {
-        font-size: clamp(14px, 4vw, 20px) !important;
-        line-height: 1;
-    }
-
-    .bot-left {
-        padding-left: 0;
-    }
-
-    .bot-right {
-        padding-right: 0;
-    }
-
-    .anima-text {
-        bottom: 70vh !important;
-        right: 50vw !important;
-        padding: 27px !important;
-    }
-
-    .anima-text2 {
-        bottom: 60vh !important;
-        right: 5vw !important;
-    }
-
-    /* Galería en columnas (collage) */
-    #galeria {
-        padding: 58px 10px 106px;
-        width: 100vw;
-    }
-
-    .swiper.mySwiper {
-        overflow: visible;
-    }
-
-    .swiper-wrapper {
-        display: block !important;
-        transform: none !important;
-        transition: none !important;
-        column-count: 2;
-        column-gap: 10px;
-    }
-
-    .swiper-slide {
-        width: 100% !important;
-        margin-right: 0 !important;
-        margin-bottom: 10px;
-        break-inside: avoid;
-        display: inline-block;
-    }
-
-    .swiper-slide img,
-    .swiper-slide .slide-video {
-        width: 100%;
-        height: auto;
-        --slide-h: auto;
-    }
-
-    .swiper-scrollbar {
         display: none !important;
     }
 
-    .slide-label {
-        font-size: 11px;
+    /* La bot-bar sigue visible */
+    .bot-bar {
+        display: flex !important;
     }
+}
 
-    /* Sobre Mí */
-    #sobre-mi-section {
-        padding: 58px 10px 106px;
-        width: 100vw !important;
-    }
 
-    .sobre-mi-layout,
-    .sobre-mi-big {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        display: grid;
-        grid-template-columns: 1fr !important;
-        grid-template-areas:
-            "foto"
-            "profile"
-            "qualitiesDetail"
-            "programs" !important;
-        gap: 0.75rem;
-        text-align: center;
-    }
+html,
+body {
+    overflow: auto;
+}
 
-    .sobre-mi-foto-grande {
-        width: 100%;
-        border: 3px solid #000;
-        border-radius: 18px;
-        overflow: hidden;
-        margin-bottom: 1rem;
-    }
+/* Header fijo pequeño */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 46px;
+    min-height: 46px;
+    padding: 0 10px;
+    border-bottom: 2px solid #222;
+}
 
-    .sobre-mi-img-grande {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        border: none;
-    }
+.header-left,
+.header-center,
+.header-right {
+    font-size: clamp(14px, 3.6vw, 18px) !important;
+    line-height: 1;
+}
 
-    .sobre-card {
-        border-width: 2px;
-        border-radius: 14px;
-        padding: 0.7rem 0.75rem;
-    }
+.header-center {
+    text-align: left !important;
+}
 
-    .sobre-card--profile2,
-    .sobre-card--qualities-detail,
-    .sobre-card--programs {
-        text-align: center;
-        width: 100%;
-    }
+.header-left {
+    padding-left: 0;
+}
 
-    .sobre-pill-list {
-        justify-content: center;
-        gap: 6px;
-    }
+.header-right {
+    padding-right: 0;
+}
 
-    .sobre-pill-list li {
-        font-size: 11px;
-        padding: 5px 9px;
-        border-width: 1.5px;
-    }
+.spacer {
+    display: none;
+}
 
-    .sobre-card-title,
-    .sobre-mi-desc {
-        font-size: clamp(13px, 3.5vw, 16px);
-    }
+/* Menú horizontal en la parte baja */
+.main-menu {
+    position: fixed !important;
+    left: 0;
+    bottom: 44px;
+    /* ← ← ← POSICIÓN FINAL FIJA (CORRECCIÓN) */
+    width: 100vw;
+    height: 10vw;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 8px 10px !important;
+    border-top: 2px solid #222;
+    border-bottom: 2px solid #222;
+    font-size: clamp(13px, 3.2vw, 16px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    transition: transform 0.6s cubic-bezier(.25, 1.5, .5, 1);
+}
 
-    .contact-form {
-        gap: 8px;
-        margin-top: 0.3rem;
-    }
+/* Rebote corregido */
+.main-menu.rebote {
+    transform: translateY(496px) !important;
+    /* ← ← ← REBOTE REAL */
+}
 
-    .contact-input {
-        font-size: 13px;
-        padding: 6px 0;
-    }
+.main-menu::-webkit-scrollbar {
+    display: none;
+}
 
-    .contact-textarea {
-        min-height: 58px;
-    }
+.main-menu a {
+    font-size: clamp(13px, 3.2vw, 16px) !important;
+    flex: 0 0 auto;
+}
 
-    .contact-btn {
-        font-size: 12px;
-        padding: 8px 16px;
-        align-self: center;
-    }
+.main-menu a:not(:last-child)::after {
+    margin-left: 0.35rem;
+    margin-right: 0.1rem;
+}
 
-    /* Popup */
-    .popup-box {
-        max-height: 92vh;
-    }
+/* Barra inferior */
+.bot-bar {
+    min-height: 44px;
+    padding: 0 10px 8px;
+    align-items: flex-end;
+    border-top: 2px solid #222;
+}
 
-    .popup-inner {
-        padding: 34px 14px 18px;
-    }
+.bot-left,
+.bot-right,
+.bot-bar {
+    font-size: clamp(14px, 4vw, 20px) !important;
+    line-height: 1;
+}
 
-    .popup-title {
-        font-size: clamp(18px, 5.4vw, 26px);
-    }
+.bot-left {
+    padding-left: 0;
+}
 
-    .popup-desc {
-        font-size: 13px;
-    }
+.bot-right {
+    padding-right: 0;
+}
 
-    .popup-tools-label {
-        font-size: 11px;
-    }
+.anima-text {
+    bottom: 70vh !important;
+    right: 50vw !important;
+    padding: 27px !important;
+}
 
-    .popup-tag {
-        font-size: 11px;
-    }
+.anima-text2 {
+    bottom: 60vh !important;
+    right: 5vw !important;
+}
 
-    .popup-images-grid {
-        columns: 1;
-    }
+/* Galería en columnas (collage) */
+#galeria {
+    padding: 58px 10px 106px;
+    width: 100vw;
+}
+
+.swiper.mySwiper {
+    overflow: visible;
+}
+
+.swiper-wrapper {
+    display: block !important;
+    transform: none !important;
+    transition: none !important;
+    column-count: 2;
+    column-gap: 10px;
+}
+
+.swiper-slide {
+    width: 100% !important;
+    margin-right: 0 !important;
+    margin-bottom: 10px;
+    break-inside: avoid;
+    display: inline-block;
+}
+
+.swiper-slide img,
+.swiper-slide .slide-video {
+    width: 100%;
+    height: auto;
+    --slide-h: auto;
+}
+
+.swiper-scrollbar {
+    display: none !important;
+}
+
+.slide-label {
+    font-size: 11px;
+}
+
+/* Sobre Mí */
+#sobre-mi-section {
+    padding: 58px 10px 106px;
+    width: 100vw !important;
+}
+
+.sobre-mi-layout,
+.sobre-mi-big {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: grid;
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+        "foto"
+        "profile"
+        "qualitiesDetail"
+        "programs" !important;
+    gap: 0.75rem;
+    text-align: center;
+}
+
+.sobre-mi-foto-grande {
+    width: 100%;
+    border: 3px solid #000;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.sobre-mi-img-grande {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border: none;
+}
+
+.sobre-card {
+    border-width: 2px;
+    border-radius: 14px;
+    padding: 0.7rem 0.75rem;
+}
+
+.sobre-card--profile2,
+.sobre-card--qualities-detail,
+.sobre-card--programs {
+    text-align: center;
+    width: 100%;
+}
+
+.sobre-pill-list {
+    justify-content: center;
+    gap: 6px;
+}
+
+.sobre-pill-list li {
+    font-size: 11px;
+    padding: 5px 9px;
+    border-width: 1.5px;
+}
+
+.sobre-card-title,
+.sobre-mi-desc {
+    font-size: clamp(13px, 3.5vw, 16px);
+}
+
+.contact-form {
+    gap: 8px;
+    margin-top: 0.3rem;
+}
+
+.contact-input {
+    font-size: 13px;
+    padding: 6px 0;
+}
+
+.contact-textarea {
+    min-height: 58px;
+}
+
+.contact-btn {
+    font-size: 12px;
+    padding: 8px 16px;
+    align-self: center;
+}
+
+/* Popup */
+.popup-box {
+    max-height: 92vh;
+}
+
+.popup-inner {
+    padding: 34px 14px 18px;
+}
+
+.popup-title {
+    font-size: clamp(18px, 5.4vw, 26px);
+}
+
+.popup-desc {
+    font-size: 13px;
+}
+
+.popup-tools-label {
+    font-size: 11px;
+}
+
+.popup-tag {
+    font-size: 11px;
+}
+
+.popup-images-grid {
+    columns: 1;
 }
 
 /* ── RESPONSIVE: MÓVIL MUY PEQUEÑO (≤ 450px) ────────────────────────────── */
