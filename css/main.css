@@ -142,7 +142,7 @@ header {
 }
 
 .main-menu.rebote {
-    transform: translateY(5px);
+    transform: translateY(570px);
 }
 
 .main-menu a {
@@ -308,12 +308,13 @@ body.view-sobre-mi .main-menu {
 
 #sobre-mi-section {
     width: 100vw;
-    padding: 4rem 0.7vw 6.3rem;
+    height: 750px;
     overflow-y: auto;
+    padding-top: 50px;
 }
 
 .sobre-mi-layout {
-    width: min(1820px, 99vw);
+    width: min(1870px, 99vw);
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
