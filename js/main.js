@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-
-
+ 
+ 
     // ── DATOS DE LA GALERÍA ──────────────────────────────────────────────────
     const galleries = {
         fotografia: [
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["Vinateros2_1.JPG", "Vinateros2_2.JPG", "Vinateros2_3.JPG", "Vinateros2_4.JPG", "Vinateros2_5.JPG", "Vinateros2_6.JPG", "Vinateros2_7.JPG", "Vinateros2_8.JPG", "Vinateros2_9.JPG", "Vinateros2_10.JPG", "Vinateros2_11.JPG", "Vinateros2_12.JPG", "Vinateros2_13.JPG", "Vinateros2_14.JPG"]
             }
         ],
-
+ 
         carteles: [
             {
                 carpeta: "nodo",
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["DON POLLO.jpg"]
             }
         ],
-
+ 
         ilustracion: [
             {
                 carpeta: "carta",
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["henar_scaner.jpg", "666.bikadimsum.666.ana (1).jpg", "PAVIABRAVO,Paula_lápiz de color1.jpg"]
             }
         ],
-
+ 
         ilustracion_tipografia: [
             {
                 carpeta: "galaktype",
@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["GALAKTYPE_Mesa de trabajo 1.jpg", "GALAKTYPE-02.jpg", "GALAKTYPE-03.jpg", "GALAKTYPE-04.jpg", "GALAKTYPE-05.jpg", "GALAKTYPE-06.jpg", "GALAKTYPE-07.jpg"]
             }
         ],
-
+ 
         "3D": [
             {
                 carpeta: "camara",
@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["3d (1).jpg", "3d (2).jpg", "3d (7).jpg", "3d (8).jpg", "3d (12).jpg", "3d (13).jpg"]
             }
         ],
-
+ 
         editorial: [
             {
                 carpeta: "fanzine1_LaMirada",
@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["editorial (8).jpg", "editorial (9).jpg"]
             }
         ],
-
+ 
         identidad_marca: [
             {
                 carpeta: "bit",
@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ]
             }
         ],
-
+ 
         ux_ui: [
             {
                 carpeta: "",
@@ -345,7 +345,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["ux_ui (1).jpg"]
             }
         ],
-
+ 
         edicion_imagen: [
             {
                 carpeta: "claudia",
@@ -396,7 +396,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ]
             }
         ],
-
+ 
         diseno_web: [
             {
                 carpeta: "",
@@ -407,7 +407,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["web (1).jpg"]
             }
         ],
-
+ 
         video: [
             {
                 carpeta: "",
@@ -435,15 +435,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         ]
     };
-
-
+ 
+ 
     // ── HELPERS ──────────────────────────────────────────────────────────────
     const VIDEO_EXTENSIONS = [".mp4", ".webm", ".ogg", ".mov", ".m4v"];
-
+ 
     function esVideo(archivo) {
         return VIDEO_EXTENSIONS.some(ext => String(archivo || "").toLowerCase().endsWith(ext));
     }
-
+ 
     function normalizarMedia(media) {
         if (typeof media === "string") {
             return { src: media, type: esVideo(media) ? "video" : "image" };
@@ -454,20 +454,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         return { src: "", type: "image" };
     }
-
+ 
     function optimizarImagen(img, prioridad = false) {
         img.decoding = "async";
         img.loading = prioridad ? "eager" : "lazy";
         img.fetchPriority = prioridad ? "high" : "low";
     }
-
+ 
     function basePath(categoria) {
         if (categoria === "carteles") return "assets/diseño grafico/";
-        if (categoria === "ilustracion_tipografia") return "assets/tipografia/galaktype/";
+        if (categoria === "ilustracion_tipografia") return "assets/tipografia/";
         return `assets/${categoria}/`;
     }
-
-
+ 
+ 
     // ── SWIPER ───────────────────────────────────────────────────────────────
     const swiper = new Swiper(".mySwiper", {
         slidesPerView: "auto",
@@ -476,8 +476,8 @@ document.addEventListener("DOMContentLoaded", function () {
         grabCursor: true,
         scrollbar: { el: ".swiper-scrollbar", draggable: true }
     });
-
-
+ 
+ 
     // ── VISOR DE IMAGEN (zoom desde popup) ───────────────────────────────────
     const imageZoomOverlay = document.createElement("div");
     imageZoomOverlay.className = "image-zoom-overlay";
@@ -488,34 +488,34 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
     `;
     document.body.appendChild(imageZoomOverlay);
-
+ 
     const zoomImg = imageZoomOverlay.querySelector(".image-zoom-img");
     const zoomCloseBtn = imageZoomOverlay.querySelector(".image-zoom-close");
-
+ 
     function abrirVisor(src, alt) {
         zoomImg.src = src;
         zoomImg.alt = alt || "";
         imageZoomOverlay.classList.add("open");
     }
-
+ 
     function cerrarVisor() {
         imageZoomOverlay.classList.remove("open");
         zoomImg.src = "";
     }
-
+ 
     zoomCloseBtn.addEventListener("click", cerrarVisor);
     imageZoomOverlay.addEventListener("click", e => { if (e.target === imageZoomOverlay) cerrarVisor(); });
-
-
+ 
+ 
     // ── POPUP ────────────────────────────────────────────────────────────────
     const overlay = document.getElementById("popup-overlay");
     const popupInner = document.getElementById("popup-inner");
     const closeBtn = document.getElementById("popup-close");
-
+ 
     function abrirPopup(proyecto, categoria) {
         const base = basePath(categoria);
         const subcarpeta = proyecto.carpeta ? `${proyecto.carpeta}/` : "";
-
+ 
         popupInner.innerHTML = `
             <h2 class="popup-title">${proyecto.titulo}</h2>
             <p class="popup-desc">${proyecto.descripcion}</p>
@@ -523,14 +523,14 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="popup-tools">${proyecto.herramientas.map(h => `<span class="popup-tag">${h}</span>`).join("")}</div>
             <div class="popup-images-grid"></div>
         `;
-
+ 
         const grid = popupInner.querySelector(".popup-images-grid");
-
+ 
         proyecto.imagenes.forEach(item => {
             const media = normalizarMedia(item);
             if (!media.src) return;
             const src = `${base}${subcarpeta}${media.src}`;
-
+ 
             if (media.type === "video") {
                 const v = document.createElement("video");
                 v.src = src;
@@ -549,15 +549,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 grid.appendChild(img);
             }
         });
-
+ 
         overlay.classList.add("open");
         popupInner.scrollTop = 0;
     }
-
+ 
     function cerrarPopup() {
         overlay.classList.remove("open");
     }
-
+ 
     closeBtn.addEventListener("click", cerrarPopup);
     overlay.addEventListener("click", e => { if (e.target === overlay) cerrarPopup(); });
     document.addEventListener("keydown", e => {
@@ -566,38 +566,38 @@ document.addEventListener("DOMContentLoaded", function () {
             else cerrarPopup();
         }
     });
-
-
+ 
+ 
     // ── GALERÍA ──────────────────────────────────────────────────────────────
     function cargarGaleria(categoria) {
         const galeria = document.getElementById("galeria");
         const sobreMiSection = document.getElementById("sobre-mi-section");
-
+ 
         if (categoria === "sobre_mi") {
             galeria.style.display = "none";
             sobreMiSection.style.display = "flex";
             document.body.classList.add("view-sobre-mi");
             return;
         }
-
+ 
         galeria.style.display = "block";
         sobreMiSection.style.display = "none";
         document.body.classList.remove("view-sobre-mi");
-
+ 
         const proyectos = galleries[categoria];
         if (!proyectos) return;
-
+ 
         const wrapper = document.querySelector(".swiper-wrapper");
         wrapper.innerHTML = "";
-
+ 
         proyectos.forEach((proyecto, index) => {
             const slide = document.createElement("div");
             slide.className = "swiper-slide";
-
+ 
             const portada = normalizarMedia(proyecto.portada);
             const subcarpeta = proyecto.carpeta ? `${proyecto.carpeta}/` : "";
             const src = `assets/${categoria}/${subcarpeta}${portada.src}`;
-
+ 
             let mediaEl;
             if (portada.type === "video") {
                 const v = document.createElement("video");
@@ -616,14 +616,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 optimizarImagen(img, index < 3);
                 mediaEl = img;
             }
-
+ 
             const label = document.createElement("div");
             label.className = "slide-label";
             label.textContent = proyecto.titulo;
-
+ 
             slide.appendChild(mediaEl);
             slide.appendChild(label);
-
+ 
             // Distinguir click real de arrastre
             let pointerDown = false, dragging = false, startX = 0, startY = 0;
             slide.addEventListener("pointerdown", e => {
@@ -644,25 +644,41 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!dragging) abrirPopup(proyecto, categoria);
             });
             slide.addEventListener("pointercancel", () => { pointerDown = false; });
-
+ 
             wrapper.appendChild(slide);
         });
-
+ 
         swiper.update();
     }
-
+ 
     
-
+ 
     document.querySelectorAll(".main-menu a").forEach(link => {
         link.addEventListener("click", e => {
             e.preventDefault();
             cargarGaleria(link.getAttribute("data-categoria"));
         });
     });
-
+ 
+    // Menú móvil (dentro del scope para acceder a cargarGaleria)
+    const mobileBtn   = document.getElementById("mobile-menu-btn");
+    const mobilePanel = document.getElementById("mobile-menu-panel");
+    if (mobileBtn && mobilePanel) {
+        mobileBtn.addEventListener("click", () => {
+            mobilePanel.style.display =
+                mobilePanel.style.display === "flex" ? "none" : "flex";
+        });
+        document.querySelectorAll("#mobile-menu-panel a").forEach(a => {
+            a.addEventListener("click", () => {
+                cargarGaleria(a.getAttribute("data-categoria"));
+                mobilePanel.style.display = "none";
+            });
+        });
+    }
+ 
     cargarGaleria("fotografia");
-
-
+ 
+ 
     // ── CONTACTO (popup desde Sobre Mí) ─────────────────────────────────────
     const btnContacto = document.getElementById("open-contacto");
     if (btnContacto) {
@@ -685,25 +701,27 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-
-
+ 
+ 
 // ── ANIMACIÓN DE INTRO ───────────────────────────────────────────────────────
-
+ 
 document.addEventListener("DOMContentLoaded", function () {
     const images = ["Ilustracion_1.png", "Ilustracion_2.png", "Ilustracion_3.png", "Ilustracion_4.png", "Ilustracion_5.png", "Ilustracion_6.png", "Ilustracion_7.png", "Ilustracion_8.png"];
     const text1 = ["Haz click en la pantalla", "otra vez", "otra vez!", "Ayúdame a bajar esto...", "Gracias...", "Gracias...", "Gracias...", ""];
     const text2 = ["", "", "Oyes...", "otra vez!!!!", "", "", "", ""];
-
+ 
     // Desktop: posiciones con `top` en vh
     const posicionesDesktop = { 0: "24vh", 1: "24vh", 2: "24vh", 3: "26vh", 4: "32vh", 5: "39vh", 6: "46vh", 7: "76vh" };
-
+ 
     // ── AJUSTA ESTOS VALORES PARA MÓVIL (píxeles desde arriba de pantalla) ──
-    const posicionesMobile = { 0: 364, 1: 364, 2: 364, 3: 375, 4: 420, 5: 470, 6: 500, 7: 700 };
+    // Posiciones bot-bar en móvil: bottom en px. Empieza oculta (-80) y sube hasta 0.
+    // Ajusta estos valores: números más altos = más arriba en pantalla.
+    const posicionesMobile = { 0:-80, 1:-80, 2:-60, 3:-40, 4:-20, 5:-10, 6:0, 7:0 };
     // ─────────────────────────────────────────────────────────────────────────
-
+ 
     let currentScene = 0;
     let autoChangeActive = false;
-
+ 
     const introEl = document.getElementById("intro-animation");
     const imgEl = document.getElementById("animation-img");
     const text1El = document.getElementById("instruction-text1");
@@ -711,38 +729,37 @@ document.addEventListener("DOMContentLoaded", function () {
     const menuEl = document.querySelector(".main-menu");
     const botBar = document.querySelector(".bot-bar");
     const whiteCover = document.getElementById("intro-white-cover");
-
+ 
     const esMobile = () => window.innerWidth <= 768;
-
+ 
     if (esMobile()) {
-        menuEl.style.position = "fixed";
-        menuEl.style.bottom = "auto";
-        menuEl.style.top = posicionesMobile[0] + "px";
-        menuEl.style.transition = "top 0.5s ease-in-out";
+        // En móvil el main-menu está oculto, animamos la bot-bar
         if (botBar) {
-            botBar.style.transform = "translateY(120px)";
-            botBar.style.transition = "transform 0.5s ease-in-out";
+            botBar.style.bottom   = "-80px";
+            botBar.style.position = "fixed";
+            botBar.style.transition = "bottom 0.5s ease-in-out";
         }
     }
-
+ 
     function moverMenu(scene) {
         if (esMobile()) {
-            menuEl.style.top = posicionesMobile[scene] + "px";
+            // Mover bot-bar: empieza oculta abajo (-80px) y sube hasta 0
+            if (botBar) botBar.style.bottom = posicionesMobile[scene] + "px";
         } else {
             menuEl.style.top = posicionesDesktop[scene];
         }
     }
-
+ 
     function finalizarAnimacion() {
         introEl.style.display = "none";
         if (whiteCover) whiteCover.style.display = "none";
-
+ 
         if (esMobile()) {
             // Animar el menú hasta su posición real (bottom: 44px expresado como top)
             const topFinal = window.innerHeight - menuEl.offsetHeight - 44;
             menuEl.style.transition = "top 0.4s ease-in-out";
             menuEl.style.top = topFinal + "px";
-
+ 
             // Al terminar la transición, quitar todo inline y dejar que el CSS tome el control
             menuEl.addEventListener("transitionend", function handler() {
                 menuEl.removeEventListener("transitionend", handler);
@@ -751,13 +768,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 menuEl.style.bottom = "";
                 menuEl.style.position = "";
             });
-
+ 
             if (botBar) botBar.style.transform = "";
         } else {
             menuEl.style.transform = "translateY(0)";
         }
     }
-
+ 
     function avanzarEscena() {
         if (currentScene >= images.length - 1) return;
         currentScene++;
@@ -765,16 +782,13 @@ document.addEventListener("DOMContentLoaded", function () {
         imgEl.src = `assets/ilustraciones/${images[currentScene]}`;
         text1El.innerText = text1[currentScene];
         text2El.innerText = text2[currentScene];
-
-        if (currentScene === 7) {
-            setTimeout(() => menuEl.classList.add("rebote"), 600);
-        }
+ 
         if (currentScene === 4 && !autoChangeActive) {
             autoChangeActive = true;
             iniciarAuto();
         }
     }
-
+ 
     function iniciarAuto() {
         const interval = setInterval(() => {
             if (currentScene < images.length - 1) {
@@ -785,28 +799,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }, 300);
     }
-
+ 
     introEl.addEventListener("click", avanzarEscena);
     introEl.addEventListener("touchend", function (e) {
         e.preventDefault();
         avanzarEscena();
     }, { passive: false });
 });
-
-// MENÚ MÓVIL DESPLEGABLE
-const mobileBtn = document.getElementById("mobile-menu-btn");
-const mobilePanel = document.getElementById("mobile-menu-panel");
-
-mobileBtn.addEventListener("click", () => {
-    mobilePanel.style.display =
-        mobilePanel.style.display === "flex" ? "none" : "flex";
-});
-
-// Enlaces del menú móvil → cargar galería
-document.querySelectorAll("#mobile-menu-panel a").forEach(a => {
-    a.addEventListener("click", () => {
-        const categoria = a.getAttribute("data-categoria");
-        cargarGaleria(categoria); // usa tu función original
-        mobilePanel.style.display = "none"; // cerrar menú
-    });
-});
+ 
+ 
