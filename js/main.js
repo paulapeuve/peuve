@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
         carteles: [
             {
                 carpeta: "nodo",
-                portada: "carteles (1).jpg",
+                portada: "Free_Poster_Mockup.png",
                 titulo: "NODO",
                 descripcion: "Proyecto basado en la idea de conexión, red o estructura. Explora cómo los elementos se relacionan entre sí para formar sistemas visuales.",
                 herramientas: ["Illustrator", "Photoshop"],
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 carpeta: "teatros_canal",
-                portada: "carteles (5).jpg",
+                portada: "carteles (9).jpg",
                 titulo: "Teatros Canal",
                 descripcion: "Cartelería para los Teatros Canal.",
                 herramientas: ["Illustrator", "InDesign"],
