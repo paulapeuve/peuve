@@ -676,7 +676,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
  
-    cargarGaleria("fotografia");
+    cargarGaleria("editorial");
  
  
     // ── CONTACTO (popup desde Sobre Mí) ─────────────────────────────────────
