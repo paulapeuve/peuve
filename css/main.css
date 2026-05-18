@@ -511,7 +511,7 @@ body.view-sobre-mi .main-menu {
 }
 
 .popup-inner {
-    padding: 30px 30px 3px;
+    padding: 30px 30px 30px;
     display: flex;
     flex-direction: column;
     gap: 0;
