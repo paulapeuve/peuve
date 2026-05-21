@@ -514,28 +514,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
         video: [
             {
-                carpeta: "",
+                carpeta: "BIT",
+                portada: "Ident_01_PaulaPavia_BIT.mp4",
+                titulo: "BIT - Publicidad",
+                descripcion: "Piezas audiovisuales creadas para la identidad de BIT.",
+                herramientas: ["After Effects", "Illustrator"],
+                imagenes: [
+                    "Ident_01_PaulaPavia_BIT.mp4",
+                    "Ident_02_PaulaPavia_BIT.mp4",
+                    "Ident_03_PaulaPavia_BIT.mp4"
+                ]
+            },
+            {
+                carpeta: "CANAL",
+                portada: "CANAL_Publi.mp4",
+                titulo: "CANAL - Publicidad",
+                descripcion: "Spot audiovisual para la identidad visual de Canal.",
+                herramientas: ["After Effects", "Illustrator"],
+                imagenes: ["CANAL_Publi.mp4"]
+            },
+                        {
+                carpeta: "RADIO3",
+                portada: "IDENTLargo_Radio3.mp4",
+                titulo: "Radio 3",
+                descripcion: "Identidad audiovisual y piezas de motion para Radio 3.",
+                herramientas: ["After Effects", "Premiere"],
+                imagenes: [
+                    "IDENTLargo_Radio3.mp4",
+                    "MOSCA_Radio3.mp4"
+                ]
+            },
+            {
+                carpeta: "MBFW Visuals",
+                portada: "GENDERLESS_visual.mp4",
+                titulo: "MBFW Visuals",
+                descripcion: "Piezas visuales y motion graphics para pasarela.",
+                herramientas: ["After Effects", "Premiere"],
+                imagenes: [
+                    "GENDERLESS_visual.mp4",
+                    "GENDERLESS_visual2.mp4",
+                    "VIDEOS_visual1.mp4",
+                    "VIDEOS_visual2.mp4",
+                    "VIDEOS_visual3.mp4",
+                    "VIDEOS_visual4.mp4",
+                    "VIDEOS_visual5.mp4",
+                    "VIDEOS_visual6.mp4"
+                ]
+            },
+              {
+                carpeta: "Bien",
                 portada: "Bien_publi.mp4",
                 titulo: "Bien Publicidad",
                 descripcion: "Pieza audiovisual realizada como proyecto independiente.",
                 herramientas: ["Premiere", "After Effects"],
                 imagenes: ["Bien_publi.mp4"]
-            },
-            {
-                carpeta: "bit",
-                portada: "Ident_01_PaulaPavia_BIT.mp4",
-                titulo: "BIT — Publicidad",
-                descripcion: "Pieza audiovisual creada para la identidad de BIT.",
-                herramientas: ["After Effects", "Illustrator"],
-                imagenes: ["Ident_01_PaulaPavia_BIT.mp4"]
-            },
-            {
-                carpeta: "canal",
-                portada: "CANAL_Publi.mp4",
-                titulo: "CANAL — Publicidad",
-                descripcion: "Spot audiovisual para la identidad visual de Canal.",
-                herramientas: ["After Effects", "Illustrator"],
-                imagenes: ["CANAL_Publi.mp4"]
             }
         ],
         tatuaje: [
