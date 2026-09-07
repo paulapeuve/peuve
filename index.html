@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PEUVE PORTFOLIO</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=General+Sans:wght@600&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -18,7 +18,7 @@
     <header>
         <div class="header-left">Paula Pavía</div>
         <div class="header-center">PEUVE</div>
-        <div class="header-right">Design Portfolio</div>
+        <div class="header-right" id="portfolio-label">Portfolio de diseño</div>
 
         <!-- Botón menú móvil -->
         <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
@@ -62,7 +62,7 @@
     <div id="intro-white-cover"></div>
 
     <div id="intro-animation">
-        <img id="animation-img" src="assets/ilustraciones/Ilustracion_1.webp">
+        <img id="animation-img" src="assets/ilustraciones/Ilustracion_1.webp" alt="">
         <div class="anima-text" id="instruction-text1">Haz click en la pantalla</div>
         <div class="anima-text2" id="instruction-text2">Ey tú!</div>
     </div>
@@ -80,35 +80,11 @@
         <section class="sobre-mi-layout sobre-mi-big">
 
             <div class="sobre-mi-foto-grande">
-                <img class="sobre-mi-img-grande" src="assets/sobre_mi/YP_1.webp">
+                <img class="sobre-mi-img-grande" src="assets/sobre_mi/gif_Portfolio.gif" alt="Peuve">
             </div>
 
-            <article class="sobre-card sobre-card--profile2">
-                <h2>Sobre Mí</h2>
-                <p class="sobre-mi-desc">
-                    Hola!!! Soy Paula Pavía, aunque se me conoce como Peuve. Estudio Diseño Gráfico en la
-                    Escuela Superior de Diseño de Madrid y me muevo entre la comunicación visual, identidad
-                    y edición. Básicamente, me obsesiona cómo una idea puede convertirse en algo visual
-                    capaz de transmitir.
-
-                    Trabajo con un perfil bastante variado — identidad de marca, cartelería, fotografía,
-                    ilustración, 3D... me cuesta quedarme en un solo sitio. Domino el universo Adobe, y
-                    también me muevo bien con C4D, Blender, Figma o Procreate. Me gusta entrar en los
-                    proyectos desde los dos lados a la vez, el conceptual y el técnico, porque creo que
-                    ahí es donde pasan las cosas interesantes.
-
-                    Soy creativa, algo nerviosa y bastante perfeccionista. Me importa mucho el detalle,
-                    pero también el porqué detrás de las cosas. Si el diseño no tiene algo que decir,
-                    ¿para qué existe?
-                </p>
-
-                <button id="open-contacto" class="contact-btn" style="margin-top:12px;">
-                    Contacto
-                </button>
-            </article>
-
             <article class="sobre-card sobre-card--programs">
-                <h3 class="sobre-card-title">Programas Controlados</h3>
+                <h3 class="sobre-card-title" id="programs-title">Programas Controlados</h3>
                 <ul class="sobre-pill-list">
                     <li>Adobe Illustrator</li>
                     <li>Adobe Photoshop</li>
@@ -121,18 +97,13 @@
                 </ul>
             </article>
 
-            <article class="sobre-card sobre-card--qualities-detail">
-                <h3 class="sobre-card-title">Cualidades</h3>
-                <ul class="sobre-pill-list">
-                    <li>Dirección de arte</li>
-                    <li>Pensamiento conceptual</li>
-                    <li>Narrativa visual</li>
-                    <li>Atención al detalle</li>
-                    <li>Adaptabilidad de estilo</li>
-                    <li>Trabajo en equipo</li>
-                    <li>Comunicación visual</li>
-                    <li>Organización de proyectos</li>
-                </ul>
+            <article class="sobre-card sobre-card--profile2">
+                <h2 id="sobre-mi-title">Sobre Mí</h2>
+                <p class="sobre-mi-desc" id="sobre-mi-desc"></p>
+
+                <button id="open-contacto" class="contact-btn" style="margin-top:12px;">
+                    Contacto
+                </button>
             </article>
 
         </section>
@@ -150,11 +121,21 @@
     <div class="bot-bar">
         <div class="bot-left">
             <a href="https://www.instagram.com/jpeuveg" target="_blank" rel="noopener noreferrer">@jpeuveg</a>
+            <div class="theme-swatches" role="group" aria-label="Color theme">
+                <button type="button" class="theme-swatch is-active" data-theme="light" aria-label="White and black" title="B&N"></button>
+                <button type="button" class="theme-swatch" data-theme="dark" aria-label="Dark inverted" title="Negativo"></button>
+                <button type="button" class="theme-swatch" data-theme="blue" aria-label="Blue and white" title="Azul"></button>
+            </div>
         </div>
-        <div class="bot-right">disfruta.</div>
+        <div class="bot-right">
+            <button type="button" id="lang-toggle" class="lang-toggle" aria-label="Cambiar a inglés">EN</button>
+            <span class="bot-divider" aria-hidden="true"></span>
+            <span id="bot-right-text">disfruta.</span>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/main.js"></script>
 
 </body>

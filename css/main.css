@@ -1,15 +1,46 @@
-/* ── FUENTES ─────────────────────────────────────────────────────────────── */
+/* ── THEMES ──────────────────────────────────────────────────────────────── */
 
-@font-face {
-    font-family: 'General Sans';
-    src: url('../assets/fonts/Fonts/WEB/fonts/GeneralSans-Regular.woff2') format('woff2');
-    font-weight: 400;
+:root,
+[data-theme="light"] {
+    --bg: #ffffff;
+    --fg: #222222;
+    --border: #000000;
+    --muted: #444444;
+    --soft: #888888;
+    --faint: #aaaaaa;
+    --overlay: rgba(0, 0, 0, 0.75);
+    --zoom-overlay: rgba(0, 0, 0, 0.88);
+    --scrollbar-track: #eeeeee;
+    --pill-hover-bg: #ffffff;
+    --swatch-light: #ffffff;
+    --swatch-dark: #1a1a1a;
+    --swatch-blue: #3233B8;
 }
 
-@font-face {
-    font-family: 'General Sans';
-    src: url('../assets/fonts/Fonts/WEB/fonts/GeneralSans-Semibold.woff2') format('woff2');
-    font-weight: 700;
+[data-theme="dark"] {
+    --bg: #1a1a1a;
+    --fg: #f2f2f2;
+    --border: #f2f2f2;
+    --muted: #d0d0d0;
+    --soft: #a8a8a8;
+    --faint: #888888;
+    --overlay: rgba(0, 0, 0, 0.8);
+    --zoom-overlay: rgba(0, 0, 0, 0.9);
+    --scrollbar-track: #1f1f1f;
+    --pill-hover-bg: #1a1a1a;
+}
+
+[data-theme="blue"] {
+    --bg: #3233B8;
+    --fg: #ffffff;
+    --border: #ffffff;
+    --muted: #e8e8ff;
+    --soft: #c8c8f0;
+    --faint: #a0a0d8;
+    --overlay: rgba(20, 20, 60, 0.8);
+    --zoom-overlay: rgba(15, 15, 50, 0.9);
+    --scrollbar-track: #2526a0;
+    --pill-hover-bg: #3233B8;
 }
 
 
@@ -19,7 +50,8 @@ html,
 body {
     margin: 0;
     overflow: hidden;
-    background: #fff;
+    background: var(--bg);
+    color: var(--fg);
     font-family: 'General Sans', Arial, sans-serif;
     font-weight: 400;
 }
@@ -46,8 +78,9 @@ header {
     height: auto;
     padding: 1.5vh 0;
     z-index: 100;
-    font-weight: 700;
-    background: #fff;
+    font-weight: 600;
+    background: var(--bg);
+    color: var(--fg);
 }
 
 .header-left,
@@ -86,14 +119,16 @@ header {
     width: 100vw;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: stretch;
     min-height: 64px;
     height: auto;
     padding: 1.5vh 0;
     z-index: 100;
-    font-weight: 700;
-    background: #fff;
-    border-top: 5px solid #000;
+    font-weight: 600;
+    background: var(--bg);
+    color: var(--fg);
+    border-top: 5px solid var(--border);
+    box-sizing: border-box;
 }
 
 .bot-left,
@@ -101,25 +136,92 @@ header {
     flex: 1;
     font-size: 4vh;
     letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
 }
 
 .bot-left {
-    text-align: left;
+    justify-content: flex-start;
+    gap: 14px;
     padding-left: 32px;
+    flex-wrap: wrap;
 }
 
 .bot-right {
-    text-align: right;
+    justify-content: flex-end;
+    gap: 0;
     padding-right: 32px;
 }
 
 .bot-left a {
     text-decoration: none;
-    color: #222;
+    color: var(--fg);
 }
 
 .bot-left a:hover {
     text-decoration: underline;
+}
+
+.theme-swatches {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-swatch {
+    width: 1.05em;
+    height: 1.05em;
+    min-width: 22px;
+    min-height: 22px;
+    border-radius: 50%;
+    border: 3px solid var(--border);
+    padding: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+    background: var(--swatch-light);
+}
+
+.theme-swatch[data-theme="dark"] {
+    background: var(--swatch-dark);
+}
+
+.theme-swatch[data-theme="blue"] {
+    background: var(--swatch-blue);
+}
+
+.theme-swatch.is-active {
+    outline: 2px solid var(--fg);
+    outline-offset: 2px;
+}
+
+.lang-toggle {
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 4vh;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    align-self: stretch;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.35em;
+    margin: -1.5vh 0;
+    border: none;
+    background: transparent;
+    color: var(--fg);
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.lang-toggle:hover {
+    text-decoration: underline;
+}
+
+.bot-divider {
+    align-self: stretch;
+    width: 5px;
+    margin: -1.5vh 0.35em;
+    background: var(--border);
 }
 
 
@@ -134,15 +236,15 @@ header {
     top: 24vh;
     left: 0;
     width: 100vw;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 4vh;
-    color: #222;
+    color: var(--fg);
     user-select: none;
     padding: 1%;
-    border-bottom: 5px solid #222;
+    border-bottom: 5px solid var(--border);
     z-index: 50;
     transition: transform 1s ease-in-out;
-    background: #fff;
+    background: var(--bg);
 }
 
 .main-menu.rebote {
@@ -150,10 +252,10 @@ header {
 }
 
 .main-menu a {
-    color: #222;
+    color: var(--fg);
     font-size: 4vh;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
     cursor: pointer;
 }
 
@@ -167,11 +269,10 @@ header {
     text-decoration: underline !important;
 }
 
-/* En Sobre Mí el menú se fija bajo el header */
+/* Sobre Mí: el menú se queda donde en el resto (bajo el contenido), no bajo el header */
 body.view-sobre-mi .main-menu {
-    position: fixed;
-    top: 64px;
     transform: none !important;
+    z-index: 60;
 }
 
 
@@ -180,7 +281,7 @@ body.view-sobre-mi .main-menu {
 #intro-white-cover {
     position: fixed;
     inset: 0;
-    background: #fff;
+    background: var(--bg);
     z-index: 40;
     pointer-events: none;
 }
@@ -208,8 +309,8 @@ body.view-sobre-mi .main-menu {
     bottom: 22vh;
     right: 15vw;
     font-size: 4vh;
-    font-weight: 700;
-    color: #222;
+    font-weight: 600;
+    color: var(--fg);
     padding: 10px;
 }
 
@@ -218,8 +319,8 @@ body.view-sobre-mi .main-menu {
     bottom: 32vh;
     right: 65vw;
     font-size: 5vh;
-    font-weight: 700;
-    color: #222;
+    font-weight: 600;
+    color: var(--fg);
     padding: 10px;
 }
 
@@ -227,7 +328,9 @@ body.view-sobre-mi .main-menu {
 /* ── GALERÍA (SWIPER) ────────────────────────────────────────────────────── */
 
 #galeria {
-    width: calc(100vw - 1.7vw);
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
     overflow: hidden;
     padding: 5vh 0 10vh 1.7vw;
 }
@@ -247,11 +350,11 @@ body.view-sobre-mi .main-menu {
     z-index: 50;
     height: var(--swiper-scrollbar-size, 4px);
     width: 100%;
-    background: rgba(0, 0, 0, 0.1);
+    background: color-mix(in srgb, var(--fg) 12%, transparent);
 }
 
 .swiper-scrollbar-drag {
-    background: #222;
+    background: var(--fg);
     height: 100%;
 }
 
@@ -276,7 +379,7 @@ body.view-sobre-mi .main-menu {
     width: auto;
     object-fit: cover;
     border-radius: 5px;
-    border: 3px solid #000;
+    border: 3px solid var(--border);
 }
 
 .swiper-slide .slide-video {
@@ -301,8 +404,8 @@ body.view-sobre-mi .main-menu {
 
 .slide-label {
     font-size: 1.6vh;
-    font-weight: 700;
-    color: #000;
+    font-weight: 600;
+    color: var(--fg);
     letter-spacing: 0.03em;
     pointer-events: none;
 }
@@ -310,82 +413,131 @@ body.view-sobre-mi .main-menu {
 
 /* ── SECCIÓN SOBRE MÍ ────────────────────────────────────────────────────── */
 
+body.view-sobre-mi {
+    overflow: hidden;
+}
+
+/* Franja entre header (top) y menú — mismo hueco que las imgs de galería */
+body.view-sobre-mi #sobre-mi-section {
+    --sobre-top: calc(64px + 0.6rem);
+    --sobre-bottom: calc(100vh - 76vh + 0.35rem);
+    position: fixed;
+    top: var(--sobre-top);
+    left: 0;
+    right: 0;
+    bottom: var(--sobre-bottom);
+    z-index: 45;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: flex !important;
+    flex-direction: column;
+    padding: 0 1.5vw;
+    background: var(--bg);
+    overflow: hidden;
+}
+
 #sobre-mi-section {
-    width: 100vw;
-    height: 520px;
-    padding: 3vh 3vh 0 1.7vw;
+    display: none;
 }
 
 .sobre-mi-layout {
-    width: min(1870px, 99vw);
+    box-sizing: border-box;
+    width: min(1680px, 100%);
+    max-width: 100%;
     height: 100%;
+    min-height: 0;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-template-rows: 1fr auto;
+    /* GIF más ancho; texto a la derecha; programas bajo el gif */
+    grid-template-columns: minmax(340px, 1.35fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
     gap: 0.75rem;
+    align-items: stretch;
 }
 
 .sobre-mi-big {
     grid-template-areas:
-        "foto foto foto foto profile profile profile profile profile profile profile profile"
-        "foto foto foto foto programs programs programs programs qualitiesDetail qualitiesDetail qualitiesDetail qualitiesDetail";
+        "foto profile"
+        "programs profile";
 }
 
 .sobre-card {
-    border: 3px solid #000;
+    box-sizing: border-box;
+    border: 3px solid var(--border);
     border-radius: 18px;
-    background: #fff;
-    padding: 0.85rem 1rem;
+    background: var(--bg);
+    padding: 0.95rem 1.15rem;
+    color: var(--fg);
+    min-width: 0;
+    max-width: 100%;
 }
 
 .sobre-mi-foto-grande {
     grid-area: foto;
-}
-
-.sobre-card--profile2 {
-    grid-area: profile;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    border: 3px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    background: #000;
 }
 
 .sobre-card--programs {
     grid-area: programs;
+    min-width: 0;
+    align-self: stretch;
+    padding: 0.65rem 0.85rem;
+    overflow: auto;
 }
 
-.sobre-card--qualities-detail {
-    grid-area: qualitiesDetail;
+.sobre-card--profile2 {
+    grid-area: profile;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .sobre-card--profile2 h2 {
-    font-weight: 700;
-}
-
-.sobre-mi-img-grande {
-    width: 100%;
-    height: 495px;
-    border: 3px solid #000;
-    border-radius: 18px;
-    object-fit: cover;
+    font-weight: 600;
+    margin: 0 0 0.65rem;
+    flex-shrink: 0;
 }
 
 .sobre-card-title {
-    font-weight: 700;
-    font-size: clamp(16px, 1.6vw, 26px);
-    color: #222;
-    margin: 0 0 0.5rem;
+    font-weight: 600;
+    font-size: clamp(14px, 1.25vw, 20px);
+    color: var(--fg);
+    margin: 0 0 0.45rem;
     letter-spacing: 0.01em;
 }
 
-.sobre-card--programs,
-.sobre-card--qualities-detail {
-    padding: 0.6rem 0.85rem;
-    overflow: hidden;
+.sobre-mi-img-grande {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
 }
 
 .sobre-mi-desc {
-    font-size: clamp(14px, 1vw, 19px);
-    color: #444;
-    line-height: 1.5;
-    margin-bottom: 1rem;
+    font-size: clamp(14px, 1.05vw, 18px);
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0 0 0.85rem;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
 }
 
 .sobre-pill-list {
@@ -398,12 +550,19 @@ body.view-sobre-mi .main-menu {
 }
 
 .sobre-pill-list li {
-    font-size: clamp(11px, 1vw, 14px);
-    font-weight: 700;
-    padding: 5px 11px;
-    border: 2px solid #222;
+    font-size: clamp(11px, 0.9vw, 13px);
+    font-weight: 600;
+    padding: 5px 10px;
+    border: 2px solid var(--border);
     border-radius: 100px;
-    color: #222;
+    color: var(--fg);
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.sobre-card--profile2 .contact-btn {
+    flex-shrink: 0;
+    margin-top: auto;
 }
 
 
@@ -418,10 +577,10 @@ body.view-sobre-mi .main-menu {
 
 .contact-input {
     font-size: clamp(13px, 1vw, 16px);
-    color: #222;
+    color: var(--fg);
     background: transparent;
     border: none;
-    border-bottom: 2px solid #222;
+    border-bottom: 2px solid var(--border);
     padding: 8px 0;
     outline: none;
     width: 100%;
@@ -429,12 +588,12 @@ body.view-sobre-mi .main-menu {
 }
 
 .contact-input::placeholder {
-    color: #aaa;
+    color: var(--faint);
 }
 
 .contact-textarea {
     min-height: 72px;
-    border: 2px solid #222;
+    border: 2px solid var(--border);
     padding: 8px;
     border-radius: 4px;
     margin-top: 4px;
@@ -442,11 +601,11 @@ body.view-sobre-mi .main-menu {
 
 .contact-btn {
     align-self: flex-start;
-    font-weight: 700;
+    font-weight: 600;
     font-size: clamp(13px, 1vw, 16px);
     padding: 10px 28px;
-    background: #222;
-    color: #fff;
+    background: var(--fg);
+    color: var(--bg);
     border: none;
     border-radius: 100px;
     cursor: pointer;
@@ -455,9 +614,9 @@ body.view-sobre-mi .main-menu {
 }
 
 .contact-btn:hover {
-    background: #fff;
-    color: #222;
-    border: 2px solid #222;
+    background: var(--pill-hover-bg);
+    color: var(--fg);
+    border: 2px solid var(--border);
 }
 
 
@@ -466,7 +625,7 @@ body.view-sobre-mi .main-menu {
 .popup-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
+    background: var(--overlay);
     z-index: 9000;
     display: flex;
     align-items: center;
@@ -483,7 +642,8 @@ body.view-sobre-mi .main-menu {
 }
 
 .popup-box {
-    background: #fff;
+    background: var(--bg);
+    color: var(--fg);
     border-radius: 10px;
     max-width: 1200px;
     width: 100%;
@@ -494,7 +654,7 @@ body.view-sobre-mi .main-menu {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-    scrollbar-color: #222 #eee;
+    scrollbar-color: var(--fg) var(--scrollbar-track);
 }
 
 .popup-box::-webkit-scrollbar {
@@ -502,11 +662,11 @@ body.view-sobre-mi .main-menu {
 }
 
 .popup-box::-webkit-scrollbar-track {
-    background: #eee;
+    background: var(--scrollbar-track);
 }
 
 .popup-box::-webkit-scrollbar-thumb {
-    background: #222;
+    background: var(--fg);
     border-radius: 4px;
 }
 
@@ -525,7 +685,7 @@ body.view-sobre-mi .main-menu {
     background: none;
     border: none;
     cursor: pointer;
-    color: #555;
+    color: var(--soft);
     line-height: 1;
     z-index: 1;
     margin-left: auto;
@@ -534,22 +694,22 @@ body.view-sobre-mi .main-menu {
 }
 
 .popup-title {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 3.5vh;
-    color: #222;
+    color: var(--fg);
     margin: 0 0 12px;
 }
 
 .popup-desc {
     font-size: 1.8vh;
-    color: #444;
+    color: var(--muted);
     line-height: 1.65;
     margin-bottom: 20px;
 }
 
 .popup-tools-label {
     font-size: 1.4vh;
-    color: #888;
+    color: var(--soft);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 10px;
@@ -564,11 +724,11 @@ body.view-sobre-mi .main-menu {
 
 .popup-tag {
     font-size: 1.5vh;
-    font-weight: 700;
+    font-weight: 600;
     padding: 5px 12px;
     border-radius: 100px;
-    border: 1.5px solid #222;
-    color: #222;
+    border: 1.5px solid var(--border);
+    color: var(--fg);
 }
 
 .popup-images-grid {
@@ -581,7 +741,7 @@ body.view-sobre-mi .main-menu {
     height: auto;
     display: block;
     border-radius: 5px;
-    border: 3px solid #000;
+    border: 3px solid var(--border);
     object-fit: contain;
     margin-bottom: 16px;
     break-inside: avoid;
@@ -599,7 +759,7 @@ body.view-sobre-mi .main-menu {
     height: auto;
     display: block;
     border-radius: 5px;
-    border: 3px solid #000;
+    border: 3px solid var(--border);
     margin-bottom: 16px;
     break-inside: avoid;
     background: #000;
@@ -611,7 +771,7 @@ body.view-sobre-mi .main-menu {
 .image-zoom-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.88);
+    background: var(--zoom-overlay);
     z-index: 9500;
     display: flex;
     align-items: center;
@@ -644,7 +804,7 @@ body.view-sobre-mi .main-menu {
     display: block;
     object-fit: contain;
     border-radius: 8px;
-    border: 3px solid #fff;
+    border: 3px solid var(--border);
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
 }
 
@@ -656,10 +816,10 @@ body.view-sobre-mi .main-menu {
     height: 36px;
     border-radius: 999px;
     border: none;
-    background: #fff;
-    color: #222;
+    background: var(--bg);
+    color: var(--fg);
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1;
     cursor: pointer;
 }
@@ -669,8 +829,22 @@ body.view-sobre-mi .main-menu {
 
 @media (max-width: 1125px) {
 
+    html,
+    body {
+        overflow: auto;
+    }
+
     header {
-        position: static;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: 56px;
+        padding: 0.8rem 16px;
+        border-bottom: 3px solid var(--border);
+        box-sizing: border-box;
+        z-index: 1000;
+        background: var(--bg);
     }
 
     .spacer {
@@ -682,50 +856,157 @@ body.view-sobre-mi .main-menu {
     .header-right,
     .bot-left,
     .bot-right {
-        font-size: clamp(18px, 3vw, 36px);
+        font-size: clamp(16px, 2.6vw, 28px);
+    }
+
+    .header-left {
+        padding-left: 0;
+    }
+
+    .header-right {
+        padding-right: 0;
     }
 
     .main-menu {
-        font-size: 2.5vh;
-        padding: 2%;
+        position: fixed;
+        top: 56px;
+        left: 0;
+        width: 100%;
+        font-size: clamp(14px, 2vw, 20px);
+        padding: 0.65rem 16px;
+        box-sizing: border-box;
+        z-index: 999;
+        white-space: normal;
+        line-height: 1.35;
     }
 
     .main-menu a {
-        font-size: 2.5vh;
+        font-size: inherit;
+    }
+
+    body.view-sobre-mi .main-menu {
+        /* en tablet el menú sigue bajo el header (layout apilado) */
+        top: 56px;
+    }
+
+    .bot-bar {
+        position: fixed;
+        min-height: 56px;
+        padding: 0.6rem 16px;
+        box-sizing: border-box;
+        align-items: center;
+    }
+
+    .bot-left {
+        padding-left: 0;
+    }
+
+    .bot-right {
+        padding-right: 0;
+    }
+
+    .lang-toggle,
+    .bot-divider {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    #galeria {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
+        padding: 7.5rem 16px 6rem;
+        overflow: hidden;
     }
 
     .swiper-slide:nth-child(3n+1) img,
     .swiper-slide:nth-child(3n+1) .slide-video {
-        --slide-h: 48vh;
+        --slide-h: 42vh;
     }
 
     .swiper-slide:nth-child(3n+2) img,
     .swiper-slide:nth-child(3n+2) .slide-video {
-        --slide-h: 36vh;
+        --slide-h: 34vh;
     }
 
     .swiper-slide:nth-child(3n+3) img,
     .swiper-slide:nth-child(3n+3) .slide-video {
-        --slide-h: 42vh;
+        --slide-h: 38vh;
     }
 
     #animation-img {
-        width: 150vw;
-        padding-top: 40vh;
+        width: min(90vw, 520px);
+        padding-top: 20vh;
+        max-height: 55vh;
+        object-fit: contain;
     }
 
-    #sobre-mi-section {
-        padding: 11rem 2vw 7.5rem;
+    body.view-sobre-mi {
+        overflow: auto;
+    }
+
+    body.view-sobre-mi #sobre-mi-section {
+        position: relative;
+        inset: auto;
+        z-index: 1;
+        display: block !important;
+        height: auto;
+        min-height: 0;
+        padding: 8.5rem 16px 6.5rem;
+        overflow: visible;
+        background: transparent;
     }
 
     .sobre-mi-layout,
     .sobre-mi-big {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0;
         grid-template-columns: 1fr;
+        grid-template-rows: auto;
         grid-template-areas:
             "foto"
-            "profile"
             "programs"
-            "qualitiesDetail";
+            "profile";
+        gap: 0.85rem;
+        align-items: stretch;
+    }
+
+    .sobre-mi-foto-grande {
+        height: auto;
+        border-width: 3px;
+        border-radius: 16px;
+        background: #000;
+    }
+
+    .sobre-mi-img-grande {
+        width: 100%;
+        height: auto;
+        min-height: 220px;
+        max-height: 42vh;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        object-position: center center;
+    }
+
+    .sobre-card--programs {
+        max-height: none;
+        overflow: visible;
+    }
+
+    .sobre-card--profile2 {
+        overflow: visible;
+        display: block;
+    }
+
+    .sobre-mi-desc {
+        overflow: visible;
+        flex: none;
+    }
+
+    .sobre-card {
+        overflow: visible;
     }
 
     .popup-images-grid {
@@ -740,27 +1021,28 @@ body.view-sobre-mi .main-menu {
 
     html,
     body {
-        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
-    /* Header fijo pequeño */
     header {
         position: fixed;
         top: 0;
         left: 0;
-        height: 46px;
-        min-height: 46px;
+        height: 48px;
+        min-height: 48px;
         padding: 0 10px;
-        border-bottom: 2px solid #222;
-        width: 100vw;
+        border-bottom: 2px solid var(--border);
+        width: 100%;
+        box-sizing: border-box;
         z-index: 1000;
-        background: #fff;
+        background: var(--bg);
     }
 
     .header-left,
     .header-center,
     .header-right {
-        font-size: clamp(14px, 3.6vw, 18px) !important;
+        font-size: clamp(13px, 3.4vw, 17px) !important;
         line-height: 1;
     }
 
@@ -780,91 +1062,138 @@ body.view-sobre-mi .main-menu {
         display: none;
     }
 
-    /* BOTÓN MENÚ MÓVIL */
     .mobile-menu-btn {
         display: block !important;
         background: none;
         border: none;
-        font-size: 24px;
-        font-weight: 700;
+        font-size: 22px;
+        font-weight: 600;
         cursor: pointer;
-        padding: 0 12px;
-        color: #222;
+        padding: 0 8px;
+        color: var(--fg);
         z-index: 2000;
     }
 
-    /* Panel desplegable */
     .mobile-menu-panel {
         position: fixed;
-        top: 46px;
+        top: 48px;
         left: 0;
-        width: 100vw;
-        background: #fff;
-        border-bottom: 2px solid #222;
+        width: 100%;
+        max-height: calc(100vh - 48px - 52px);
+        overflow-y: auto;
+        background: var(--bg);
+        border-bottom: 2px solid var(--border);
         display: none;
         flex-direction: column;
         z-index: 1500;
+        box-sizing: border-box;
     }
 
     .mobile-menu-panel a {
-        padding: 14px 18px;
-        font-size: 16px;
-        font-weight: 700;
-        border-bottom: 1px solid #eee;
-        color: #222;
+        padding: 14px 16px;
+        font-size: 15px;
+        font-weight: 600;
+        border-bottom: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
+        color: var(--fg);
     }
 
     .mobile-menu-panel a:last-child {
         border-bottom: none;
     }
 
-    /* OCULTAR SOLO EL MENÚ INFERIOR */
     .main-menu {
         display: none !important;
     }
 
-    /* La bot-bar sigue visible */
     .bot-bar {
         display: flex !important;
         position: fixed;
         bottom: 0;
         left: 0;
-        width: 100vw;
-        min-height: 44px;
-        padding: 0 10px 8px;
-        align-items: flex-end;
-        border-top: 2px solid #222;
-        background: #fff;
+        width: 100%;
+        min-height: 48px;
+        padding: 6px 10px;
+        align-items: center;
+        border-top: 2px solid var(--border);
+        background: var(--bg);
         z-index: 1000;
+        box-sizing: border-box;
+    }
+
+    .bot-left {
+        gap: 8px;
+        padding-left: 0;
+        flex: 1.35;
+        min-width: 0;
     }
 
     .bot-left,
     .bot-right {
-        font-size: clamp(14px, 4vw, 20px) !important;
+        font-size: clamp(13px, 3.8vw, 18px) !important;
         line-height: 1;
-        padding: 0;
+        padding-right: 0;
     }
 
-    /* Ajustes animación intro */
+    .bot-right {
+        flex: 0.9;
+        min-width: 0;
+        justify-content: flex-end;
+    }
+
+    .lang-toggle {
+        font-size: clamp(13px, 3.8vw, 18px);
+        margin: 0;
+        padding: 0 0.3em;
+        align-self: stretch;
+    }
+
+    .bot-divider {
+        width: 2px;
+        margin: 0 0.3em;
+    }
+
+    .theme-swatch {
+        border-width: 2px;
+        min-width: 16px;
+        min-height: 16px;
+        width: 0.95em;
+        height: 0.95em;
+    }
+
     .anima-text {
-        bottom: 70vh !important;
-        right: 50vw !important;
-        padding: 27px !important;
+        bottom: 68vh !important;
+        right: 8vw !important;
+        left: auto !important;
+        padding: 8px !important;
+        font-size: clamp(16px, 4.5vw, 22px);
+        max-width: 55vw;
     }
 
     .anima-text2 {
-        bottom: 60vh !important;
-        right: 5vw !important;
+        bottom: 58vh !important;
+        right: auto !important;
+        left: 8vw !important;
+        font-size: clamp(18px, 5vw, 26px);
     }
 
-    /* Galería en columnas (collage) */
+    #animation-img {
+        width: min(88vw, 360px);
+        padding-top: 18vh;
+        max-height: 50vh;
+        object-fit: contain;
+    }
+
     #galeria {
-        padding: 58px 10px 106px;
-        width: 100vw;
+        box-sizing: border-box;
+        padding: 60px 10px 72px;
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
     }
 
     .swiper.mySwiper {
         overflow: visible;
+        width: 100%;
     }
 
     .swiper-wrapper {
@@ -873,6 +1202,7 @@ body.view-sobre-mi .main-menu {
         transition: none !important;
         column-count: 2;
         column-gap: 10px;
+        width: 100%;
     }
 
     .swiper-slide {
@@ -881,13 +1211,16 @@ body.view-sobre-mi .main-menu {
         margin-bottom: 10px;
         break-inside: avoid;
         display: inline-block;
+        max-width: 100%;
     }
 
     .swiper-slide img,
     .swiper-slide .slide-video {
         width: 100%;
+        max-width: 100%;
         height: auto;
         --slide-h: auto;
+        box-sizing: border-box;
     }
 
     .swiper-scrollbar {
@@ -898,10 +1231,22 @@ body.view-sobre-mi .main-menu {
         font-size: 11px;
     }
 
-    /* Sobre Mí */
-    #sobre-mi-section {
-        padding: 58px 10px 106px;
-        width: 100vw !important;
+    body.view-sobre-mi {
+        overflow: auto;
+    }
+
+    body.view-sobre-mi #sobre-mi-section {
+        position: relative;
+        inset: auto;
+        z-index: 1;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0;
+        padding: 60px 12px 80px;
+        overflow: visible !important;
+        background: transparent;
     }
 
     .sobre-mi-layout,
@@ -910,57 +1255,91 @@ body.view-sobre-mi .main-menu {
         max-width: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
+        height: auto !important;
+        min-height: 0;
         display: grid;
         grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
         grid-template-areas:
             "foto"
-            "profile"
-            "qualitiesDetail"
-            "programs" !important;
-        gap: 0.75rem;
-        text-align: center;
+            "programs"
+            "profile" !important;
+        gap: 0.85rem;
+        text-align: left;
+        align-items: stretch;
     }
 
     .sobre-mi-foto-grande {
         width: 100%;
-        border: 3px solid #000;
-        border-radius: 18px;
+        max-width: 100%;
+        height: auto;
+        border: 2px solid var(--border);
+        border-radius: 14px;
         overflow: hidden;
-        margin-bottom: 1rem;
+        margin-bottom: 0;
+        background: #000;
     }
 
     .sobre-mi-img-grande {
         width: 100%;
+        max-width: 100%;
         height: auto;
+        min-height: 0;
+        max-height: none;
+        aspect-ratio: 16 / 10;
         object-fit: cover;
+        object-position: center center;
         border: none;
+        border-radius: 0;
+        box-sizing: border-box;
     }
 
     .sobre-card {
         border-width: 2px;
         border-radius: 14px;
-        padding: 0.7rem 0.75rem;
+        padding: 0.85rem 0.9rem;
+        overflow: visible !important;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
-    .sobre-pill-list {
-        justify-content: center;
-        gap: 6px;
+    .sobre-card--programs {
+        max-height: none;
+        overflow: visible !important;
+    }
+
+    .sobre-card--profile2 {
+        display: block;
+        overflow: visible;
+    }
+
+    .sobre-mi-desc {
+        overflow: visible;
+        flex: none;
+        font-size: clamp(13px, 3.6vw, 15px);
+        line-height: 1.55;
+    }
+
+    .sobre-card-title {
+        font-size: clamp(15px, 4vw, 18px);
     }
 
     .sobre-pill-list li {
-        font-size: 11px;
-        padding: 5px 9px;
+        font-size: 12px;
+        padding: 6px 10px;
         border-width: 1.5px;
     }
 
-    .sobre-card-title,
-    .sobre-mi-desc {
-        font-size: clamp(13px, 3.5vw, 16px);
+    .contact-btn {
+        width: auto;
+        max-width: 100%;
+        margin-top: 12px !important;
     }
 
-    /* Popup */
     .popup-box {
-        max-height: 92vh;
+        max-height: 88vh;
+        max-width: calc(100vw - 20px);
     }
 
     .popup-inner {
@@ -979,6 +1358,9 @@ body.view-sobre-mi .main-menu {
         font-size: 11px;
     }
 
+    .popup-images-grid {
+        columns: 1;
+    }
 }
 
 /* ── RESPONSIVE: MÓVIL MUY PEQUEÑO (≤ 450px) ────────────────────────────── */
@@ -992,8 +1374,21 @@ body.view-sobre-mi .main-menu {
         column-count: 1;
     }
 
+    .bot-left a {
+        font-size: clamp(12px, 3.5vw, 15px);
+    }
+
+    .theme-swatches {
+        gap: 5px;
+    }
+
     .sobre-mi-img-grande {
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 16 / 10;
         object-fit: cover;
+        object-position: center center;
+    }
+
+    #sobre-mi-section {
+        padding: 58px 10px 78px;
     }
 }
