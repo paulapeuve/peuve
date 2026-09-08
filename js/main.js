@@ -672,14 +672,24 @@ document.addEventListener("DOMContentLoaded", function () {
         return value[currentLang] || value.es || value.en || fallback || "";
     }
 
+    function projectMap(proyecto) {
+        const projects = window.PEUVE_PROJECTS || {};
+        const key = proyecto && proyecto.carpeta;
+        if (!key) return null;
+        if (projects[key]) return projects[key];
+        const lower = String(key).toLowerCase();
+        const found = Object.keys(projects).find(k => k.toLowerCase() === lower);
+        return found ? projects[found] : null;
+    }
+
     function projectTitle(proyecto) {
-        const map = window.PEUVE_PROJECTS && window.PEUVE_PROJECTS[proyecto.carpeta];
+        const map = projectMap(proyecto);
         if (map && map.titulo) return localizeField(map.titulo, proyecto.titulo);
         return localizeField(proyecto.titulo);
     }
 
     function projectDesc(proyecto) {
-        const map = window.PEUVE_PROJECTS && window.PEUVE_PROJECTS[proyecto.carpeta];
+        const map = projectMap(proyecto);
         if (map && map.descripcion) return localizeField(map.descripcion, proyecto.descripcion);
         return localizeField(proyecto.descripcion);
     }
@@ -1008,6 +1018,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const botRight = document.getElementById("bot-right-text");
         if (botRight) botRight.textContent = strings.botRight;
+
+        const themeGroup = document.querySelector(".theme-swatches");
+        if (themeGroup) themeGroup.setAttribute("aria-label", strings.themeGroupAria);
+        document.querySelectorAll(".theme-swatch").forEach(btn => {
+            const theme = btn.getAttribute("data-theme");
+            if (theme === "light") {
+                btn.setAttribute("aria-label", strings.themeLightAria);
+                btn.title = "B&N";
+            } else if (theme === "dark") {
+                btn.setAttribute("aria-label", strings.themeDarkAria);
+                btn.title = strings.themeDarkAria;
+            } else if (theme === "blue") {
+                btn.setAttribute("aria-label", strings.themeBlueAria);
+                btn.title = strings.themeBlueAria;
+            }
+        });
 
         const menu = document.querySelector(".main-menu");
         if (menu) menu.setAttribute("aria-label", strings.menuAria);
