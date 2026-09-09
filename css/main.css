@@ -15,6 +15,7 @@
     --swatch-light: #ffffff;
     --swatch-dark: #1a1a1a;
     --swatch-blue: #3233B8;
+    --sobre-card-bg: rgba(0, 0, 0, 0.18);
 }
 
 [data-theme="dark"] {
@@ -28,6 +29,7 @@
     --zoom-overlay: rgba(0, 0, 0, 0.9);
     --scrollbar-track: #1f1f1f;
     --pill-hover-bg: #1a1a1a;
+    --sobre-card-bg: rgba(255, 255, 255, 0.18);
 }
 
 [data-theme="blue"] {
@@ -41,6 +43,7 @@
     --zoom-overlay: rgba(15, 15, 50, 0.9);
     --scrollbar-track: #2526a0;
     --pill-hover-bg: #3233B8;
+    --sobre-card-bg: rgba(255, 255, 255, 0.18);
 }
 
 
@@ -240,7 +243,7 @@ header {
     font-size: 4vh;
     color: var(--fg);
     user-select: none;
-    padding: 1%;
+    padding: 1% 32px;
     border-bottom: 5px solid var(--border);
     z-index: 50;
     transition: transform 1s ease-in-out;
@@ -467,7 +470,7 @@ body.view-sobre-mi #sobre-mi-section {
     box-sizing: border-box;
     border: 3px solid var(--border);
     border-radius: 18px;
-    background: var(--bg);
+    background: var(--sobre-card-bg);
     padding: 0.95rem 1.15rem;
     color: var(--fg);
     min-width: 0;
