@@ -38,6 +38,7 @@
         <a data-categoria="ilustracion">Ilustración</a>
         <a data-categoria="3D">3D</a>
         <a data-categoria="tatuaje">Tatuaje</a>
+        <a data-categoria="huella">Deja tu huella</a>
     </div>
 
     <div class="spacer"></div>
@@ -56,6 +57,7 @@
         <a href="#" data-categoria="ilustracion">Ilustración</a>
         <a href="#" data-categoria="3D">3D</a>
         <a href="#" data-categoria="tatuaje">Tatuaje</a>
+        <a href="#" data-categoria="huella">Deja tu huella</a>
     </nav>
 
     <!-- INTRO -->
@@ -109,6 +111,73 @@
         </section>
     </div>
 
+    <!-- DEJA TU HUELLA -->
+    <div id="huella-section" style="display:none;" aria-label="Deja tu huella">
+        <div id="huella-firebase-banner" class="huella-banner" hidden>
+            <span id="huella-firebase-msg">Configura Firebase para activar el muro</span>
+        </div>
+
+        <div class="huella-layout">
+            <section class="huella-studio sobre-card">
+                <h2 id="huella-title" class="huella-heading">Deja tu huella</h2>
+                <p id="huella-intro" class="huella-intro"></p>
+
+                <div class="huella-canvas-wrap">
+                    <canvas id="huella-canvas" width="720" height="420" aria-label="Lienzo para dibujar"></canvas>
+                </div>
+
+                <div class="huella-toolbar" role="toolbar" aria-label="Herramientas">
+                    <button type="button" class="huella-tool is-active" data-tool="draw" id="huella-label-draw">Dibujar</button>
+                    <button type="button" class="huella-tool" data-tool="text" id="huella-label-text">Texto</button>
+                    <button type="button" class="huella-tool" id="huella-undo">Deshacer</button>
+                    <button type="button" class="huella-tool" id="huella-clear">Borrar</button>
+                </div>
+
+                <div class="huella-colors">
+                    <div id="huella-swatches" class="huella-swatches" role="group" aria-label="Colores"></div>
+                    <label class="huella-size-wrap">
+                        <span id="huella-size-label">Grosor</span>
+                        <input type="range" id="huella-size" min="2" max="28" value="4">
+                    </label>
+                </div>
+
+                <div class="huella-fields">
+                    <input type="text" id="huella-handle" class="contact-input huella-field" maxlength="60" placeholder="@usuario (opcional)" autocomplete="off">
+                    <input type="text" id="huella-note" class="contact-input huella-field" maxlength="160" placeholder="Nota corta (opcional)" autocomplete="off">
+                </div>
+
+                <div class="huella-publish-row">
+                    <button type="button" id="huella-publish" class="contact-btn">Publicar</button>
+                    <span id="huella-status" class="huella-status" role="status" aria-live="polite"></span>
+                </div>
+            </section>
+
+            <section class="huella-wall-panel sobre-card">
+                <h3 id="huella-wall-title" class="huella-wall-heading">Muro</h3>
+                <p id="huella-wall-empty" class="huella-wall-empty"></p>
+                <div id="huella-wall" class="huella-wall"></div>
+            </section>
+        </div>
+    </div>
+
+    <!-- HUELLA WALL VIEWER -->
+    <div id="huella-viewer" class="huella-viewer" hidden aria-hidden="true">
+        <div class="huella-viewer-panel" role="dialog" aria-modal="true" aria-labelledby="huella-viewer-label">
+            <p id="huella-viewer-label" class="huella-viewer-sr-only">Huella</p>
+            <button type="button" id="huella-viewer-close" class="huella-viewer-close" aria-label="Cerrar">✕</button>
+            <button type="button" id="huella-viewer-prev" class="huella-viewer-nav huella-viewer-prev" aria-label="Anterior">‹</button>
+            <div class="huella-viewer-stage">
+                <img id="huella-viewer-img" class="huella-viewer-img" alt="" decoding="async">
+            </div>
+            <button type="button" id="huella-viewer-next" class="huella-viewer-nav huella-viewer-next" aria-label="Siguiente">›</button>
+            <div class="huella-viewer-meta">
+                <span id="huella-viewer-handle" class="huella-viewer-handle" hidden></span>
+                <span id="huella-viewer-note" class="huella-viewer-note" hidden></span>
+                <span id="huella-viewer-count" class="huella-viewer-count" aria-live="polite"></span>
+            </div>
+        </div>
+    </div>
+
     <!-- POPUP -->
     <div class="popup-overlay" id="popup-overlay">
         <div class="popup-box">
@@ -135,8 +204,12 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
     <script src="js/i18n.js"></script>
+    <script src="js/firebase-config.js"></script>
     <script src="js/peuve-projects.js"></script>
+    <script src="js/huella.js"></script>
     <script src="js/main.js"></script>
 
 </body>

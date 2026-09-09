@@ -1,3 +1,18 @@
+/**
+ * Desktop (>1125px): place .main-menu so its bottom border overlaps .bot-bar's
+ * top border (same 5px line). Safe to call after intro and on resize / lang change.
+ */
+window.PEUVE_pinDesktopMenuToBot = function pinDesktopMenuToBot() {
+    if (window.innerWidth <= 1125) return false;
+    const menu = document.querySelector(".main-menu");
+    const bot = document.querySelector(".bot-bar");
+    if (!menu || !bot) return false;
+    const borderOverlap = 5;
+    const top = Math.round(window.innerHeight - bot.offsetHeight - menu.offsetHeight + borderOverlap);
+    menu.style.top = `${Math.max(0, top)}px`;
+    return true;
+};
+
 document.addEventListener("DOMContentLoaded", function () {
 
 
@@ -840,6 +855,24 @@ document.addEventListener("DOMContentLoaded", function () {
         currentCategoria = categoria;
         const galeria = document.getElementById("galeria");
         const sobreMiSection = document.getElementById("sobre-mi-section");
+        const huellaApi = window.PEUVE_HUELLA;
+
+        if (categoria === "huella" || categoria === "deja_tu_huella") {
+            if (sobreMiSection) {
+                sobreMiSection.style.display = "none";
+                if (sobreMiSection._layoutSobreMi) {
+                    window.removeEventListener("resize", sobreMiSection._layoutSobreMi);
+                    delete sobreMiSection._layoutSobreMi;
+                }
+                sobreMiSection.style.removeProperty("--sobre-top");
+                sobreMiSection.style.removeProperty("--sobre-bottom");
+            }
+            document.body.classList.remove("view-sobre-mi");
+            if (huellaApi) huellaApi.show();
+            return;
+        }
+
+        if (huellaApi) huellaApi.hide();
 
         if (categoria === "sobre_mi") {
             galeria.style.display = "none";
@@ -847,12 +880,12 @@ document.addEventListener("DOMContentLoaded", function () {
             document.body.classList.add("view-sobre-mi");
             const menu = document.querySelector(".main-menu");
             if (menu) {
-                // Misma posición que el resto de secciones (banda bajo las imgs)
+                // Misma posición que el resto de secciones (flush sobre el bot-bar)
                 if (window.innerWidth > 1125) {
                     const topVal = menu.style.top;
                     const topNum = parseFloat(topVal);
                     if (!topVal || (topVal.endsWith("vh") && topNum < 60) || (topVal.endsWith("px") && topNum < window.innerHeight * 0.55)) {
-                        menu.style.top = "76vh";
+                        window.PEUVE_pinDesktopMenuToBot();
                     }
                 }
                 menu.style.transform = "";
@@ -861,6 +894,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Encaja el bloque entre header y menú (no entre menú y bot)
             const layoutSobreMi = () => {
                 if (!document.body.classList.contains("view-sobre-mi")) return;
+                if (window.innerWidth > 1125) window.PEUVE_pinDesktopMenuToBot();
                 const header = document.querySelector("header");
                 const menuEl = document.querySelector(".main-menu");
                 const top = (header?.getBoundingClientRect().bottom || 64) + 8;
@@ -1043,6 +1077,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (key && strings.categories[key]) a.textContent = strings.categories[key];
         });
 
+        // Menu label length can change wrap height — re-pin when intro is done
+        if (document.body.classList.contains("intro-done")) {
+            requestAnimationFrame(() => window.PEUVE_pinDesktopMenuToBot());
+        }
+
         const zoomClose = document.querySelector(".image-zoom-close");
         if (zoomClose) zoomClose.setAttribute("aria-label", strings.closeZoom);
 
@@ -1124,8 +1163,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return pack;
     }
 
-    // Desktop: posiciones con `top` en vh
-    const posicionesDesktop = { 0: "24vh", 1: "24vh", 2: "24vh", 3: "26vh", 4: "32vh", 5: "39vh", 6: "46vh", 7: "76vh" };
+    // Desktop: posiciones con `top` en vh; scene 7 pins flush to bot-bar
+    const posicionesDesktop = { 0: "28vh", 1: "28vh", 2: "28vh", 3: "30vh", 4: "36vh", 5: "43vh", 6: "50vh", 7: null };
 
     // Animacion bot bar movil — valores en vh, 50 = mitad pantalla, 0 = posición final visible
     const posicionesMobile = { 0: "50vh", 1: "46vh", 2: "46vh", 3: "44vh", 4: "40vh", 5: "35vh", 6: "30vh", 7: "0vh" };
@@ -1155,6 +1194,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function moverMenu(scene) {
         if (esMobile()) {
             if (botBar) botBar.style.bottom = posicionesMobile[scene];
+        } else if (posicionesDesktop[scene] == null) {
+            if (!window.PEUVE_pinDesktopMenuToBot()) {
+                menuEl.style.top = "76vh";
+            }
         } else {
             menuEl.style.top = posicionesDesktop[scene];
         }
@@ -1163,6 +1206,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function finalizarAnimacion() {
         introEl.style.display = "none";
         if (whiteCover) whiteCover.style.display = "none";
+        document.body.classList.add("intro-done");
 
         if (esMobile()) {
             const topFinal = window.innerHeight - menuEl.offsetHeight - 44;
@@ -1179,12 +1223,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (botBar) botBar.style.transform = "";
         } else {
-            // Deja el menú bajo el contenido (misma banda que las imgs de galería)
-            menuEl.style.top = "76vh";
+            // Menú flush sobre el bot-bar (bordes inferior/superior coinciden)
+            if (!window.PEUVE_pinDesktopMenuToBot()) {
+                menuEl.style.top = "76vh";
+            }
             menuEl.style.transform = "";
             menuEl.style.transition = "";
         }
     }
+
+    window.addEventListener("resize", () => {
+        if (!document.body.classList.contains("intro-done") || esMobile()) return;
+        window.PEUVE_pinDesktopMenuToBot();
+        if (document.body.classList.contains("view-sobre-mi")) {
+            const layout = document.getElementById("sobre-mi-section")?._layoutSobreMi;
+            if (typeof layout === "function") layout();
+        }
+    });
 
     function setIntroTexts(scene) {
         const pack = introCopy();

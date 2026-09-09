@@ -236,18 +236,22 @@ header {
 
 .main-menu {
     position: absolute;
-    top: 24vh;
+    top: 28vh;
     left: 0;
     width: 100vw;
     font-weight: 600;
     font-size: 4vh;
     color: var(--fg);
     user-select: none;
-    padding: 1% 32px;
+    padding: 0.75% 20px;
+    /* Aligns with .bot-bar border-top after intro (JS pins bottoms flush / overlapping) */
     border-bottom: 5px solid var(--border);
+    box-sizing: border-box;
     z-index: 50;
     transition: transform 1s ease-in-out;
     background: var(--bg);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
 }
 
 .main-menu.rebote {
@@ -260,12 +264,14 @@ header {
     text-decoration: none;
     font-weight: 600;
     cursor: pointer;
+    letter-spacing: inherit;
 }
 
 .main-menu a:not(:last-child)::after {
     content: " ·";
-    margin-left: 1%;
-    margin-right: 1%;
+    margin-left: 0.28em;
+    margin-right: 0.28em;
+    letter-spacing: 0;
 }
 
 .main-menu a:hover {
@@ -566,6 +572,484 @@ body.view-sobre-mi #sobre-mi-section {
 .sobre-card--profile2 .contact-btn {
     flex-shrink: 0;
     margin-top: auto;
+}
+
+
+/* ── DEJA TU HUELLA ──────────────────────────────────────────────────────── */
+
+body.view-huella {
+    overflow: hidden;
+}
+
+body.view-huella .main-menu {
+    transform: none !important;
+    z-index: 60;
+}
+
+body.view-huella #huella-section {
+    --huella-top: calc(64px + 0.6rem);
+    --huella-bottom: calc(100vh - 76vh + 0.35rem);
+    position: fixed;
+    top: var(--huella-top);
+    left: 0;
+    right: 0;
+    bottom: var(--huella-bottom);
+    z-index: 45;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: flex !important;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 0 1.5vw;
+    background: var(--bg);
+    overflow: hidden;
+}
+
+#huella-section {
+    display: none;
+    position: relative;
+}
+
+.huella-banner {
+    flex-shrink: 0;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 0.45rem 0.85rem;
+    font-size: clamp(12px, 0.95vw, 14px);
+    color: var(--muted);
+    background: var(--sobre-card-bg);
+}
+
+.huella-layout {
+    box-sizing: border-box;
+    width: min(1680px, 100%);
+    max-width: 100%;
+    height: 100%;
+    min-height: 0;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(320px, 1.05fr) minmax(280px, 0.95fr);
+    gap: 0.75rem;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+.huella-studio {
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    overflow: auto;
+}
+
+.huella-heading {
+    font-weight: 600;
+    font-size: clamp(18px, 1.6vw, 26px);
+    margin: 0;
+    letter-spacing: 0.01em;
+}
+
+.huella-intro {
+    margin: 0;
+    font-size: clamp(13px, 1vw, 15px);
+    color: var(--muted);
+    line-height: 1.45;
+}
+
+.huella-canvas-wrap {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 180px;
+    /* Keep 720:420 even when max-height binds (avoids ultra-wide bitmaps) */
+    aspect-ratio: 720 / 420;
+    width: min(100%, calc(min(48vh, 460px) * 720 / 420));
+    max-height: min(48vh, 460px);
+    border: 3px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fff;
+}
+
+#huella-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    cursor: crosshair;
+    /* Backing store is synced in JS to CSS size × devicePixelRatio */
+}
+
+.huella-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.huella-tool {
+    font-weight: 600;
+    font-size: clamp(11px, 0.9vw, 13px);
+    padding: 6px 12px;
+    border: 2px solid var(--border);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--fg);
+    cursor: pointer;
+}
+
+.huella-tool.is-active,
+.huella-tool:hover {
+    background: var(--fg);
+    color: var(--bg);
+}
+
+.huella-colors {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+}
+
+.huella-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.huella-swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    padding: 0;
+}
+
+.huella-swatch.is-active {
+    outline: 2px solid var(--fg);
+    outline-offset: 2px;
+}
+
+.huella-size-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: clamp(11px, 0.9vw, 13px);
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.huella-size-wrap input[type="range"] {
+    width: 100px;
+    accent-color: var(--fg);
+}
+
+.huella-fields {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    gap: 0.65rem;
+    flex-shrink: 0;
+}
+
+.huella-fields .huella-field {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto; /* override .contact-input width:100% for side-by-side */
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.huella-publish-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.huella-status {
+    font-size: clamp(12px, 0.95vw, 14px);
+    color: var(--muted);
+}
+
+.huella-wall-panel {
+    box-sizing: border-box;
+    border: 3px solid var(--border);
+    border-radius: 18px;
+    background: var(--sobre-card-bg);
+    padding: 0.9rem 1rem;
+    color: var(--fg);
+    min-width: 0;
+    min-height: 0;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* framed panel; gallery scrolls inside */
+}
+
+.huella-wall-heading {
+    font-weight: 600;
+    font-size: clamp(14px, 1.2vw, 18px);
+    margin: 0 0 0.5rem;
+    flex-shrink: 0;
+}
+
+.huella-wall-empty {
+    margin: 0 0 0.5rem;
+    font-size: clamp(12px, 0.95vw, 14px);
+    color: var(--soft);
+    flex-shrink: 0;
+}
+
+.huella-wall {
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.65rem;
+    align-content: start;
+    padding-right: 2px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--fg) transparent;
+}
+
+.huella-wall::-webkit-scrollbar {
+    width: 4px;
+}
+
+.huella-wall::-webkit-scrollbar-thumb {
+    background: var(--fg);
+    border-radius: 4px;
+}
+
+.huella-card {
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg); /* contrast against framed --sobre-card-bg panel */
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.huella-card:hover,
+.huella-card:focus-visible {
+    border-color: var(--fg);
+    outline: none;
+    transform: translateY(-1px);
+}
+
+.huella-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 720 / 420; /* same landscape ratio as .huella-canvas-wrap */
+    object-fit: contain; /* full drawing — never crop sides */
+    object-position: center;
+    background: #fff; /* letterbox matches canvas surface */
+}
+
+.huella-card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0.45rem 0.55rem 0.55rem;
+}
+
+.huella-card-handle {
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--fg);
+}
+
+.huella-card-note {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.35;
+    word-break: break-word;
+}
+
+.huella-text-overlay {
+    position: absolute;
+    z-index: 50;
+    transform: translate(-4px, -50%);
+}
+
+.huella-text-input {
+    min-width: 140px;
+    max-width: 240px;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 4px 8px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    outline: none;
+}
+
+.huella-viewer-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.huella-viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 9600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: var(--zoom-overlay, var(--overlay));
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.huella-viewer.is-open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.huella-viewer[hidden] {
+    display: none !important;
+}
+
+.huella-viewer-panel {
+    position: relative;
+    box-sizing: border-box;
+    width: min(1100px, 94vw);
+    max-height: min(90vh, 920px);
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "prev stage next"
+        "meta meta meta";
+    align-items: center;
+    gap: 0.65rem 0.5rem;
+    padding: 1.1rem 0.75rem 0.9rem;
+    background: var(--bg);
+    color: var(--fg);
+    border: 3px solid var(--border);
+    border-radius: 14px;
+}
+
+.huella-viewer-close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 2px solid var(--border);
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.huella-viewer-close:hover,
+.huella-viewer-nav:hover {
+    background: var(--fg);
+    color: var(--bg);
+}
+
+.huella-viewer-nav {
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    border: 2px solid var(--border);
+    background: transparent;
+    color: var(--fg);
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.huella-viewer-prev {
+    grid-area: prev;
+}
+
+.huella-viewer-next {
+    grid-area: next;
+}
+
+.huella-viewer-stage {
+    grid-area: stage;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 720 / 420;
+    max-height: min(68vh, 620px);
+    width: 100%;
+}
+
+.huella-viewer-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    background: #fff;
+}
+
+.huella-viewer-meta {
+    grid-area: meta;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.85rem;
+    min-height: 1.2em;
+    padding: 0 0.35rem;
+}
+
+.huella-viewer-handle {
+    font-weight: 600;
+    font-size: clamp(13px, 1.1vw, 16px);
+    color: var(--fg);
+}
+
+.huella-viewer-note {
+    font-size: clamp(12px, 1vw, 15px);
+    color: var(--muted);
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.huella-viewer-count {
+    margin-left: auto;
+    font-size: clamp(11px, 0.95vw, 13px);
+    font-weight: 600;
+    color: var(--soft);
 }
 
 
@@ -890,6 +1374,59 @@ body.view-sobre-mi #sobre-mi-section {
     body.view-sobre-mi .main-menu {
         /* en tablet el menú sigue bajo el header (layout apilado) */
         top: 56px;
+    }
+
+    body.view-huella .main-menu {
+        top: 56px;
+    }
+
+    body.view-huella {
+        overflow: auto;
+    }
+
+    body.view-huella #huella-section {
+        position: relative;
+        inset: auto;
+        z-index: 1;
+        display: block !important;
+        height: auto;
+        min-height: 0;
+        padding: 8.5rem 16px 6.5rem;
+        overflow: visible;
+        background: transparent;
+    }
+
+    .huella-layout {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        grid-template-columns: 1fr;
+        overflow: visible;
+    }
+
+    .huella-studio,
+    .huella-wall-panel {
+        overflow: visible;
+    }
+
+    .huella-canvas-wrap {
+        max-height: 52vh;
+        min-height: 220px;
+        width: min(100%, calc(52vh * 720 / 420));
+    }
+
+    .huella-fields {
+        flex-wrap: wrap;
+    }
+
+    .huella-fields .huella-field {
+        flex: 1 1 calc(50% - 0.35rem);
+        min-width: 140px;
+    }
+
+    .huella-wall {
+        overflow: visible;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     }
 
     .bot-bar {
@@ -1250,6 +1787,106 @@ body.view-sobre-mi #sobre-mi-section {
         padding: 60px 12px 80px;
         overflow: visible !important;
         background: transparent;
+    }
+
+    body.view-huella {
+        overflow: auto;
+    }
+
+    body.view-huella #huella-section {
+        position: relative;
+        inset: auto;
+        z-index: 1;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0;
+        padding: 60px 12px 80px;
+        overflow: visible !important;
+        background: transparent;
+        gap: 0.75rem;
+    }
+
+    .huella-layout {
+        width: 100% !important;
+        margin: 0 !important;
+        grid-template-columns: 1fr !important;
+        gap: 0.85rem;
+    }
+
+    .huella-studio {
+        border-width: 2px;
+        border-radius: 14px;
+        padding: 0.85rem 0.9rem;
+    }
+
+    .huella-wall-panel {
+        border-width: 2px;
+        border-radius: 14px;
+        padding: 0.85rem 0.9rem;
+        overflow: visible;
+    }
+
+    .huella-canvas-wrap {
+        max-height: none;
+        min-height: 200px;
+        aspect-ratio: 720 / 420;
+        width: 100%;
+    }
+
+    .huella-fields {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 6px;
+    }
+
+    .huella-fields .huella-field {
+        flex: 1 1 auto;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .huella-wall {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.55rem;
+    }
+
+    .huella-card {
+        border-width: 1.5px;
+        border-radius: 12px;
+    }
+
+    .huella-viewer {
+        padding: 12px;
+    }
+
+    .huella-viewer-panel {
+        width: 100%;
+        max-height: 92vh;
+        padding: 1rem 0.45rem 0.75rem;
+        gap: 0.5rem 0.25rem;
+        border-width: 2px;
+        border-radius: 12px;
+    }
+
+    .huella-viewer-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 24px;
+    }
+
+    .huella-viewer-stage {
+        max-height: min(52vh, 420px);
+        border-radius: 10px;
+    }
+
+    .huella-viewer-close {
+        top: -10px;
+        right: -6px;
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
     }
 
     .sobre-mi-layout,
