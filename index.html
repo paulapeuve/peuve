@@ -21,7 +21,7 @@
         <div class="header-right" id="portfolio-label">Portfolio de diseño</div>
 
         <!-- Botón menú móvil -->
-        <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
+        <button id="mobile-menu-btn" class="mobile-menu-btn" type="button" aria-label="Menú" aria-controls="mobile-menu-panel" aria-expanded="false">☰</button>
     </header>
 
     <!-- PANEL MENÚ MÓVIL -->
@@ -131,8 +131,12 @@
                 <div class="huella-toolbar" role="toolbar" aria-label="Herramientas">
                     <button type="button" class="huella-tool is-active" data-tool="draw" id="huella-label-draw">Dibujar</button>
                     <button type="button" class="huella-tool" data-tool="text" id="huella-label-text">Texto</button>
+                    <button type="button" class="huella-tool" id="huella-label-image">Imagen</button>
+                    <button type="button" class="huella-tool" id="huella-label-photo">Foto</button>
                     <button type="button" class="huella-tool" id="huella-undo">Deshacer</button>
                     <button type="button" class="huella-tool" id="huella-clear">Borrar</button>
+                    <input type="file" id="huella-image-input" class="huella-file-input" accept="image/*" multiple hidden>
+                    <input type="file" id="huella-camera-input" class="huella-file-input" accept="image/*" capture="user" hidden>
                 </div>
 
                 <div class="huella-colors">

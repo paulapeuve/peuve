@@ -1,16 +1,47 @@
 /**
- * Desktop (>1125px): place .main-menu so its bottom border overlaps .bot-bar's
- * top border (same 5px line). Safe to call after intro and on resize / lang change.
+ * Desktop + tablet (>768px): place .main-menu so its bottom border overlaps
+ * .bot-bar's top border. Phones (≤768) use the hamburger panel instead.
+ * Safe to call after intro and on resize / lang change.
  */
 window.PEUVE_pinDesktopMenuToBot = function pinDesktopMenuToBot() {
-    if (window.innerWidth <= 1125) return false;
+    if (window.innerWidth <= 768) {
+        if (typeof window.PEUVE_syncStackPadding === "function") {
+            window.PEUVE_syncStackPadding();
+        }
+        return false;
+    }
     const menu = document.querySelector(".main-menu");
     const bot = document.querySelector(".bot-bar");
     if (!menu || !bot) return false;
     const borderOverlap = 5;
     const top = Math.round(window.innerHeight - bot.offsetHeight - menu.offsetHeight + borderOverlap);
+    menu.style.bottom = "";
     menu.style.top = `${Math.max(0, top)}px`;
+    if (typeof window.PEUVE_syncStackPadding === "function") {
+        window.PEUVE_syncStackPadding();
+    }
     return true;
+};
+
+/**
+ * Keep gallery / Sobre mí / Huella clear of the fixed bot bar (+ tablet menu).
+ */
+window.PEUVE_syncStackPadding = function syncStackPadding() {
+    const root = document.documentElement;
+    const bot = document.querySelector(".bot-bar");
+    if (!bot) return;
+    const botH = Math.max(bot.offsetHeight || 0, window.innerWidth <= 768 ? 48 : 56);
+    let stack = botH + 24;
+    if (window.innerWidth > 768 && window.innerWidth <= 1125) {
+        const menu = document.querySelector(".main-menu");
+        if (menu && getComputedStyle(menu).display !== "none") {
+            stack = botH + Math.max(menu.offsetHeight || 0, 48) + 24;
+        }
+    } else if (window.innerWidth > 1125) {
+        root.style.removeProperty("--peuve-stack-bottom");
+        return;
+    }
+    root.style.setProperty("--peuve-stack-bottom", `${Math.round(stack)}px`);
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -783,13 +814,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ── SWIPER ───────────────────────────────────────────────────────────────
+    // Desktop (>1125): horizontal freeMode carousel.
+    // Tablet/mobile (≤1125): CSS vertical stack — keep Swiper disabled so it
+    // does not fight page scroll with horizontal transforms.
+    const GALLERY_STACK_MAX = 1125;
     const swiper = new Swiper(".mySwiper", {
         slidesPerView: "auto",
         freeMode: true,
         spaceBetween: 12,
         grabCursor: true,
-        scrollbar: { el: ".swiper-scrollbar", draggable: true }
+        scrollbar: { el: ".swiper-scrollbar", draggable: true },
+        enabled: window.innerWidth > GALLERY_STACK_MAX
     });
+
+    function syncGallerySwiperMode() {
+        const stacked = window.innerWidth <= GALLERY_STACK_MAX;
+        if (stacked) {
+            if (swiper.enabled) swiper.disable();
+        } else if (!swiper.enabled) {
+            swiper.enable();
+            swiper.update();
+        }
+    }
+    window.addEventListener("resize", syncGallerySwiperMode);
 
 
     // ── VISOR DE IMAGEN (zoom desde popup) ───────────────────────────────────
@@ -861,6 +908,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 v.controls = true;
                 v.preload = "metadata";
                 v.playsInline = true;
+                v.setAttribute("playsinline", "");
+                v.setAttribute("webkit-playsinline", "");
                 grid.appendChild(v);
             } else {
                 const img = document.createElement("img");
@@ -924,7 +973,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const menu = document.querySelector(".main-menu");
             if (menu) {
                 // Misma posición que el resto de secciones (flush sobre el bot-bar)
-                if (window.innerWidth > 1125) {
+                if (window.innerWidth > 768) {
                     const topVal = menu.style.top;
                     const topNum = parseFloat(topVal);
                     if (!topVal || (topVal.endsWith("vh") && topNum < 60) || (topVal.endsWith("px") && topNum < window.innerHeight * 0.55)) {
@@ -937,7 +986,9 @@ document.addEventListener("DOMContentLoaded", function () {
             // Encaja el bloque entre header y menú (no entre menú y bot)
             const layoutSobreMi = () => {
                 if (!document.body.classList.contains("view-sobre-mi")) return;
-                if (window.innerWidth > 1125) window.PEUVE_pinDesktopMenuToBot();
+                if (window.innerWidth > 768) window.PEUVE_pinDesktopMenuToBot();
+                // On tablet/phone, CSS stacks the section — skip desktop height fitting
+                if (window.innerWidth <= 1125) return;
                 const header = document.querySelector("header");
                 const menuEl = document.querySelector(".main-menu");
                 const top = (header?.getBoundingClientRect().bottom || 64) + 8;
@@ -1002,11 +1053,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 v.src = src;
                 v.className = "slide-video";
                 v.muted = true;
+                v.defaultMuted = true;
                 v.loop = true;
                 v.autoplay = true;
                 v.playsInline = true;
+                v.setAttribute("playsinline", "");
+                v.setAttribute("webkit-playsinline", "");
                 v.preload = "metadata";
                 v.addEventListener("loadedmetadata", scheduleSwiperUpdate);
+                const tryPlay = () => { v.play().catch(() => {}); };
+                v.addEventListener("canplay", tryPlay, { once: true });
                 mediaEl = v;
             } else {
                 const img = document.createElement("img");
@@ -1053,7 +1109,8 @@ document.addEventListener("DOMContentLoaded", function () {
             wrapper.appendChild(slide);
         });
 
-        swiper.update();
+        syncGallerySwiperMode();
+        if (swiper.enabled) swiper.update();
     }
 
 
@@ -1069,19 +1126,52 @@ document.addEventListener("DOMContentLoaded", function () {
     const mobileBtn = document.getElementById("mobile-menu-btn");
     const mobilePanel = document.getElementById("mobile-menu-panel");
     if (mobileBtn && mobilePanel) {
-        mobileBtn.addEventListener("click", () => {
-            mobilePanel.style.display =
-                mobilePanel.style.display === "flex" ? "none" : "flex";
+        mobileBtn.setAttribute("aria-controls", "mobile-menu-panel");
+        mobileBtn.setAttribute("aria-expanded", "false");
+        if (!mobileBtn.getAttribute("aria-label")) {
+            mobileBtn.setAttribute("aria-label", "Menú");
+        }
+
+        const setMobileMenuOpen = (open) => {
+            mobilePanel.classList.toggle("is-open", open);
+            mobilePanel.style.display = open ? "flex" : "none";
+            mobileBtn.setAttribute("aria-expanded", open ? "true" : "false");
+            document.body.classList.toggle("mobile-menu-open", open);
+        };
+
+        mobileBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const open = !mobilePanel.classList.contains("is-open");
+            setMobileMenuOpen(open);
         });
         document.querySelectorAll("#mobile-menu-panel a").forEach(a => {
             a.addEventListener("click", () => {
                 cargarGaleria(a.getAttribute("data-categoria"));
-                mobilePanel.style.display = "none";
+                setMobileMenuOpen(false);
             });
         });
+        document.addEventListener("click", (e) => {
+            if (!mobilePanel.classList.contains("is-open")) return;
+            if (mobilePanel.contains(e.target) || mobileBtn.contains(e.target)) return;
+            setMobileMenuOpen(false);
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && mobilePanel.classList.contains("is-open")) {
+                setMobileMenuOpen(false);
+            }
+        });
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 768 && mobilePanel.classList.contains("is-open")) {
+                setMobileMenuOpen(false);
+            }
+            window.PEUVE_syncStackPadding();
+        });
+    } else {
+        window.addEventListener("resize", () => window.PEUVE_syncStackPadding());
     }
 
     cargarGaleria("protagonistas");
+    window.PEUVE_syncStackPadding();
 
     function applySobreMi() {
         const strings = ui();
@@ -1254,9 +1344,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (botBar) botBar.style.bottom = posicionesMobile[scene];
         } else if (posicionesDesktop[scene] == null) {
             if (!window.PEUVE_pinDesktopMenuToBot()) {
+                menuEl.style.bottom = "";
                 menuEl.style.top = "76vh";
             }
         } else {
+            menuEl.style.bottom = "";
             menuEl.style.top = posicionesDesktop[scene];
         }
     }
@@ -1267,31 +1359,41 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.classList.add("intro-done");
 
         if (esMobile()) {
-            const topFinal = window.innerHeight - menuEl.offsetHeight - 44;
-            menuEl.style.transition = "top 0.4s ease-in-out";
-            menuEl.style.top = topFinal + "px";
-
-            menuEl.addEventListener("transitionend", function handler() {
-                menuEl.removeEventListener("transitionend", handler);
+            if (menuEl) {
                 menuEl.style.transition = "";
                 menuEl.style.top = "";
                 menuEl.style.bottom = "";
                 menuEl.style.position = "";
-            });
+            }
 
-            if (botBar) botBar.style.transform = "";
+            if (botBar) {
+                botBar.style.bottom = "0";
+                botBar.style.transform = "";
+            }
         } else {
             // Menú flush sobre el bot-bar (bordes inferior/superior coinciden)
+            // Works for desktop (>1125) and tablet (769–1125)
             if (!window.PEUVE_pinDesktopMenuToBot()) {
+                menuEl.style.bottom = "";
                 menuEl.style.top = "76vh";
             }
             menuEl.style.transform = "";
             menuEl.style.transition = "";
         }
+
+        if (typeof window.PEUVE_syncStackPadding === "function") {
+            requestAnimationFrame(() => window.PEUVE_syncStackPadding());
+        }
     }
 
     window.addEventListener("resize", () => {
-        if (!document.body.classList.contains("intro-done") || esMobile()) return;
+        if (!document.body.classList.contains("intro-done")) return;
+        if (esMobile()) {
+            if (typeof window.PEUVE_syncStackPadding === "function") {
+                window.PEUVE_syncStackPadding();
+            }
+            return;
+        }
         window.PEUVE_pinDesktopMenuToBot();
         if (document.body.classList.contains("view-sobre-mi")) {
             const layout = document.getElementById("sobre-mi-section")?._layoutSobreMi;
@@ -1331,6 +1433,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     setIntroTexts(0);
+
+    // QA / screenshot helper: ?qa=1 skips the intro so layouts can be checked quickly
+    try {
+        if (new URLSearchParams(window.location.search).has("qa")) {
+            currentScene = images.length - 1;
+            window.PEUVE_INTRO_SCENE = currentScene;
+            finalizarAnimacion();
+            return;
+        }
+    } catch (_) { /* ignore */ }
 
     introEl.addEventListener("click", avanzarEscena);
     introEl.addEventListener("touchend", function (e) {

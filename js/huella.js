@@ -4,7 +4,8 @@
  *
  * Drawing model:
  * - Brush strokes live on an offscreen stroke layer (bitmap)
- * - Texts are vector-like objects redrawn each frame
+ * - Images and texts are objects redrawn each frame (images under text)
+ * - Publish flattens everything to one canvas data URL (no separate Storage uploads)
  * - Display canvas is synced to CSS size × devicePixelRatio (no stretch)
  */
 (function () {
@@ -16,6 +17,9 @@
     const MIN_TEXT = 12;
     const MAX_TEXT = 96;
     const DEFAULT_TEXT_SIZE = 24;
+    const MIN_IMG = 48;
+    const MAX_IMG_SOURCE = 1400;
+    const DEFAULT_IMG_FRAC = 0.42;
 
     const BRUSH_COLORS = [
         "#FFFFFF",
@@ -51,13 +55,18 @@
     let viewerIndex = -1;
     let viewerBound = false;
     let texts = [];
+    let images = [];
     let selectedId = null;
+    let selectedKind = null; // null | "text" | "image"
     let dragMode = null; // null | "move" | "resize"
     let dragOrigin = null;
     let suppressTextPlace = false;
     let resizeObserver = null;
     let syncQueued = false;
     let textSeq = 0;
+    let imgSeq = 0;
+    let cameraOverlay = null;
+    let cameraStream = null;
 
     function ui() {
         const lang = localStorage.getItem("peuve-lang") || "es";
@@ -138,8 +147,95 @@
         }));
     }
 
+    function cloneImages(list) {
+        return list.map((im) => ({
+            id: im.id,
+            src: im.src,
+            x: im.x,
+            y: im.y,
+            w: im.w,
+            h: im.h
+        }));
+    }
+
     function getTextById(id) {
         return texts.find((t) => t.id === id) || null;
+    }
+
+    function getImageById(id) {
+        return images.find((im) => im.id === id) || null;
+    }
+
+    function measureImage(im) {
+        return { x: im.x, y: im.y, w: im.w, h: im.h };
+    }
+
+    function selectionBounds() {
+        if (selectedKind === "text" && selectedId) {
+            const t = getTextById(selectedId);
+            return t ? measureText(t) : null;
+        }
+        if (selectedKind === "image" && selectedId) {
+            const im = getImageById(selectedId);
+            return im ? measureImage(im) : null;
+        }
+        return null;
+    }
+
+    function loadImageElement(src) {
+        return new Promise((resolve) => {
+            if (!src) {
+                resolve(null);
+                return;
+            }
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = () => resolve(null);
+            img.src = src;
+        });
+    }
+
+    function downscaleImageSrc(img) {
+        const nw = img.naturalWidth || img.width;
+        const nh = img.naturalHeight || img.height;
+        if (!nw || !nh) return null;
+        const maxSide = Math.max(nw, nh);
+        if (maxSide <= MAX_IMG_SOURCE) {
+            try {
+                const tmp = document.createElement("canvas");
+                tmp.width = nw;
+                tmp.height = nh;
+                const tctx = tmp.getContext("2d");
+                tctx.drawImage(img, 0, 0);
+                return tmp.toDataURL("image/jpeg", 0.88);
+            } catch (_) {
+                return img.src;
+            }
+        }
+        const scale = MAX_IMG_SOURCE / maxSide;
+        const tw = Math.max(1, Math.round(nw * scale));
+        const th = Math.max(1, Math.round(nh * scale));
+        const tmp = document.createElement("canvas");
+        tmp.width = tw;
+        tmp.height = th;
+        const tctx = tmp.getContext("2d");
+        tctx.drawImage(img, 0, 0, tw, th);
+        return tmp.toDataURL("image/jpeg", 0.85);
+    }
+
+    function defaultImagePlacement(nw, nh, offset) {
+        const off = offset || 0;
+        const maxW = Math.max(MIN_IMG, cssW * DEFAULT_IMG_FRAC);
+        const maxH = Math.max(MIN_IMG, cssH * DEFAULT_IMG_FRAC);
+        const scale = Math.min(maxW / nw, maxH / nh, 1);
+        const w = Math.max(MIN_IMG, nw * scale);
+        const h = Math.max(MIN_IMG, nh * scale);
+        return {
+            x: Math.max(8, (cssW - w) / 2 + off),
+            y: Math.max(8, (cssH - h) / 2 + off),
+            w,
+            h
+        };
     }
 
     function measureText(t) {
@@ -224,6 +320,12 @@
                 t.y *= scaleY;
                 t.size = Math.max(MIN_TEXT, Math.min(MAX_TEXT, t.size * avg));
             });
+            images.forEach((im) => {
+                im.x *= scaleX;
+                im.y *= scaleY;
+                im.w = Math.max(MIN_IMG, im.w * scaleX);
+                im.h = Math.max(MIN_IMG, im.h * scaleY);
+            });
         }
 
         redraw();
@@ -248,11 +350,19 @@
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(0, 0, cssW, cssH);
         if (strokeCanvas) ctx.drawImage(strokeCanvas, 0, 0);
+        images.forEach((im) => drawImageObject(im));
         texts.forEach((t) => drawTextObject(t));
         if (showSel && selectedId) {
-            const sel = getTextById(selectedId);
-            if (sel) drawSelection(sel);
+            const bounds = selectionBounds();
+            if (bounds) drawSelectionBox(bounds);
         }
+        ctx.restore();
+    }
+
+    function drawImageObject(im) {
+        if (!im || !im.bitmap) return;
+        ctx.save();
+        ctx.drawImage(im.bitmap, im.x, im.y, im.w, im.h);
         ctx.restore();
     }
 
@@ -266,8 +376,7 @@
         ctx.restore();
     }
 
-    function drawSelection(t) {
-        const b = measureText(t);
+    function drawSelectionBox(b) {
         ctx.save();
         ctx.strokeStyle = "#3233B8";
         ctx.lineWidth = 1.5;
@@ -318,7 +427,9 @@
                 ? strokeCanvas.toDataURL("image/png")
                 : null,
             texts: cloneTexts(texts),
-            selectedId
+            images: cloneImages(images),
+            selectedId,
+            selectedKind
         };
     }
 
@@ -350,12 +461,38 @@
         });
     }
 
+    async function restoreImagesFromClone(list) {
+        const next = [];
+        for (const raw of list || []) {
+            const bitmap = await loadImageElement(raw.src);
+            if (!bitmap) continue;
+            next.push({
+                id: raw.id,
+                src: raw.src,
+                bitmap,
+                x: raw.x,
+                y: raw.y,
+                w: raw.w,
+                h: raw.h
+            });
+        }
+        images = next;
+    }
+
     async function restoreState(state) {
         if (!state) return;
         texts = cloneTexts(state.texts || []);
-        selectedId = state.selectedId && texts.some((t) => t.id === state.selectedId)
-            ? state.selectedId
-            : null;
+        await restoreImagesFromClone(state.images || []);
+        if (state.selectedKind === "text" && state.selectedId && texts.some((t) => t.id === state.selectedId)) {
+            selectedId = state.selectedId;
+            selectedKind = "text";
+        } else if (state.selectedKind === "image" && state.selectedId && images.some((im) => im.id === state.selectedId)) {
+            selectedId = state.selectedId;
+            selectedKind = "image";
+        } else {
+            selectedId = null;
+            selectedKind = null;
+        }
         await restoreStrokeFromDataUrl(state.stroke);
         syncSizeSliderFromSelection();
         redraw();
@@ -370,7 +507,9 @@
         if (saveUndo) pushUndo();
         clearStroke();
         texts = [];
+        images = [];
         selectedId = null;
+        selectedKind = null;
         hideTextOverlay();
         syncSizeSliderFromSelection();
         redraw();
@@ -403,11 +542,26 @@
         return null;
     }
 
-    function hitResizeHandle(p, t) {
-        if (!t) return false;
-        const b = measureText(t);
-        const hx = b.x + b.w + 3;
-        const hy = b.y + b.h + 3;
+    function hitTestImage(p) {
+        for (let i = images.length - 1; i >= 0; i--) {
+            const b = measureImage(images[i]);
+            const pad = 4;
+            if (
+                p.x >= b.x - pad
+                && p.x <= b.x + b.w + pad
+                && p.y >= b.y - pad
+                && p.y <= b.y + b.h + pad
+            ) {
+                return images[i];
+            }
+        }
+        return null;
+    }
+
+    function hitResizeHandle(p, bounds) {
+        if (!bounds) return false;
+        const hx = bounds.x + bounds.w + 3;
+        const hy = bounds.y + bounds.h + 3;
         const dx = p.x - hx;
         const dy = p.y - hy;
         return dx * dx + dy * dy <= (HANDLE_R + 4) * (HANDLE_R + 4);
@@ -415,13 +569,23 @@
 
     function selectText(id) {
         selectedId = id;
+        selectedKind = "text";
         syncSizeSliderFromSelection();
         updateCursor();
         redraw();
     }
 
-    function deselectText() {
+    function selectImage(id) {
+        selectedId = id;
+        selectedKind = "image";
+        syncSizeSliderFromSelection();
+        updateCursor();
+        redraw();
+    }
+
+    function deselectAll() {
         selectedId = null;
+        selectedKind = null;
         dragMode = null;
         dragOrigin = null;
         syncSizeSliderFromSelection();
@@ -433,15 +597,32 @@
         const sizeInput = $("huella-size");
         const sizeLabel = $("huella-size-label");
         const strings = ui();
-        const sel = selectedId ? getTextById(selectedId) : null;
-        if (sel) {
-            if (sizeInput) {
-                sizeInput.min = String(MIN_TEXT);
-                sizeInput.max = String(MAX_TEXT);
-                sizeInput.value = String(Math.round(sel.size));
+        if (selectedKind === "text" && selectedId) {
+            const sel = getTextById(selectedId);
+            if (sel) {
+                if (sizeInput) {
+                    sizeInput.min = String(MIN_TEXT);
+                    sizeInput.max = String(MAX_TEXT);
+                    sizeInput.value = String(Math.round(sel.size));
+                }
+                if (sizeLabel) sizeLabel.textContent = strings.textSize || "Tamaño texto";
+                return;
             }
-            if (sizeLabel) sizeLabel.textContent = strings.textSize || "Tamaño texto";
-        } else if (tool === "text") {
+        }
+        if (selectedKind === "image" && selectedId) {
+            const sel = getImageById(selectedId);
+            if (sel) {
+                const maxDim = Math.max(cssW || 720, cssH || 420);
+                if (sizeInput) {
+                    sizeInput.min = String(MIN_IMG);
+                    sizeInput.max = String(Math.round(maxDim));
+                    sizeInput.value = String(Math.round(sel.w));
+                }
+                if (sizeLabel) sizeLabel.textContent = strings.imageSize || "Tamaño imagen";
+                return;
+            }
+        }
+        if (tool === "text") {
             if (sizeInput) {
                 sizeInput.min = String(MIN_TEXT);
                 sizeInput.max = String(MAX_TEXT);
@@ -518,6 +699,211 @@
         redraw();
     }
 
+    async function addImageFromSrc(src, offset) {
+        const strings = ui();
+        const status = $("huella-status");
+        const rawImg = await loadImageElement(src);
+        if (!rawImg) {
+            if (status) status.textContent = strings.imageLoadError || "No se pudo cargar la imagen";
+            return null;
+        }
+        const packed = downscaleImageSrc(rawImg);
+        const bitmap = packed ? await loadImageElement(packed) : rawImg;
+        if (!bitmap) {
+            if (status) status.textContent = strings.imageLoadError || "No se pudo cargar la imagen";
+            return null;
+        }
+        const nw = bitmap.naturalWidth || bitmap.width;
+        const nh = bitmap.naturalHeight || bitmap.height;
+        const place = defaultImagePlacement(nw, nh, offset || 0);
+        pushUndo();
+        imgSeq += 1;
+        const obj = {
+            id: `i_${Date.now()}_${imgSeq}`,
+            src: packed || src,
+            bitmap,
+            x: place.x,
+            y: place.y,
+            w: place.w,
+            h: place.h
+        };
+        images.push(obj);
+        selectImage(obj.id);
+        redraw();
+        return obj;
+    }
+
+    function readFileAsDataUrl(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = () => reject(reader.error || new Error("read failed"));
+            reader.readAsDataURL(file);
+        });
+    }
+
+    async function handleImageFiles(fileList) {
+        const files = Array.from(fileList || []).filter((f) => {
+            if (!f) return false;
+            if (/^image\//i.test(f.type || "")) return true;
+            return /\.(jpe?g|png|gif|webp|heic|bmp)$/i.test(f.name || "");
+        });
+        if (!files.length) return;
+        for (let i = 0; i < files.length; i++) {
+            try {
+                const dataUrl = await readFileAsDataUrl(files[i]);
+                await addImageFromSrc(dataUrl, i * 18);
+            } catch (_) {
+                const status = $("huella-status");
+                const strings = ui();
+                if (status) status.textContent = strings.imageLoadError || "No se pudo cargar la imagen";
+            }
+        }
+    }
+
+    function stopCameraStream() {
+        if (cameraStream) {
+            try {
+                cameraStream.getTracks().forEach((t) => t.stop());
+            } catch (_) { /* ignore */ }
+            cameraStream = null;
+        }
+    }
+
+    function closeCameraOverlay() {
+        stopCameraStream();
+        if (cameraOverlay && cameraOverlay.parentNode) {
+            cameraOverlay.parentNode.removeChild(cameraOverlay);
+        }
+        cameraOverlay = null;
+    }
+
+    function openCameraCaptureFallback() {
+        const input = $("huella-camera-input");
+        if (input) {
+            input.value = "";
+            input.click();
+        }
+    }
+
+    async function openCamera() {
+        const strings = ui();
+        const status = $("huella-status");
+        closeCameraOverlay();
+
+        const media = navigator.mediaDevices;
+        if (!media || typeof media.getUserMedia !== "function") {
+            openCameraCaptureFallback();
+            return;
+        }
+
+        try {
+            cameraStream = await media.getUserMedia({
+                video: { facingMode: { ideal: "user" } },
+                audio: false
+            });
+        } catch (_) {
+            if (status) status.textContent = strings.cameraDenied || "Sin acceso a la cámara. Puedes subir una imagen.";
+            openCameraCaptureFallback();
+            return;
+        }
+
+        const wrap = canvas?.parentElement || $("huella-section");
+        if (!wrap) {
+            stopCameraStream();
+            openCameraCaptureFallback();
+            return;
+        }
+
+        cameraOverlay = document.createElement("div");
+        cameraOverlay.className = "huella-camera-overlay";
+        cameraOverlay.setAttribute("role", "dialog");
+        cameraOverlay.setAttribute("aria-modal", "true");
+        cameraOverlay.setAttribute("aria-label", strings.cameraTitle || "Hazte una foto");
+
+        const title = document.createElement("p");
+        title.className = "huella-camera-title";
+        title.textContent = strings.cameraTitle || "Hazte una foto";
+
+        const video = document.createElement("video");
+        video.className = "huella-camera-video";
+        video.autoplay = true;
+        video.playsInline = true;
+        video.muted = true;
+        video.srcObject = cameraStream;
+
+        const actions = document.createElement("div");
+        actions.className = "huella-camera-actions";
+
+        const captureBtn = document.createElement("button");
+        captureBtn.type = "button";
+        captureBtn.className = "huella-tool is-active";
+        captureBtn.textContent = strings.cameraCapture || "Capturar";
+
+        const cancelBtn = document.createElement("button");
+        cancelBtn.type = "button";
+        cancelBtn.className = "huella-tool";
+        cancelBtn.textContent = strings.cameraCancel || "Cancelar";
+
+        actions.appendChild(captureBtn);
+        actions.appendChild(cancelBtn);
+        cameraOverlay.appendChild(title);
+        cameraOverlay.appendChild(video);
+        cameraOverlay.appendChild(actions);
+        wrap.appendChild(cameraOverlay);
+
+        cancelBtn.addEventListener("click", () => closeCameraOverlay());
+        captureBtn.addEventListener("click", async () => {
+            const vw = video.videoWidth || 640;
+            const vh = video.videoHeight || 480;
+            const snap = document.createElement("canvas");
+            snap.width = vw;
+            snap.height = vh;
+            const sctx = snap.getContext("2d");
+            // Mirror capture to match selfie preview
+            sctx.translate(vw, 0);
+            sctx.scale(-1, 1);
+            sctx.drawImage(video, 0, 0, vw, vh);
+            let dataUrl;
+            try {
+                dataUrl = snap.toDataURL("image/jpeg", 0.9);
+            } catch (_) {
+                closeCameraOverlay();
+                if (status) status.textContent = strings.imageLoadError || "No se pudo cargar la imagen";
+                return;
+            }
+            closeCameraOverlay();
+            await addImageFromSrc(dataUrl, 0);
+        });
+
+        try {
+            await video.play();
+        } catch (_) { /* autoplay policies — still show frame when ready */ }
+    }
+
+    function bindImageControls() {
+        const uploadBtn = $("huella-label-image");
+        const photoBtn = $("huella-label-photo");
+        const imageInput = $("huella-image-input");
+        const cameraInput = $("huella-camera-input");
+
+        uploadBtn?.addEventListener("click", () => {
+            if (!imageInput) return;
+            imageInput.value = "";
+            imageInput.click();
+        });
+        photoBtn?.addEventListener("click", () => openCamera());
+
+        imageInput?.addEventListener("change", () => {
+            handleImageFiles(imageInput.files);
+            imageInput.value = "";
+        });
+        cameraInput?.addEventListener("change", () => {
+            handleImageFiles(cameraInput.files);
+            cameraInput.value = "";
+        });
+    }
+
     function openTextOverlay(p) {
         const strings = ui();
         hideTextOverlay();
@@ -573,30 +959,57 @@
         const p = canvasPoint(e);
         suppressTextPlace = false;
 
-        const sel = selectedId ? getTextById(selectedId) : null;
-        if (sel && hitResizeHandle(p, sel)) {
+        const bounds = selectionBounds();
+        if (bounds && hitResizeHandle(p, bounds)) {
             e.preventDefault();
             dragMode = "resize";
-            dragOrigin = { x: p.x, y: p.y, size: sel.size, objX: sel.x, objY: sel.y, moved: false };
+            if (selectedKind === "text") {
+                const sel = getTextById(selectedId);
+                dragOrigin = { x: p.x, y: p.y, size: sel.size, objX: sel.x, objY: sel.y, moved: false };
+            } else if (selectedKind === "image") {
+                const sel = getImageById(selectedId);
+                dragOrigin = {
+                    x: p.x,
+                    y: p.y,
+                    w: sel.w,
+                    h: sel.h,
+                    aspect: sel.w / Math.max(1, sel.h),
+                    objX: sel.x,
+                    objY: sel.y,
+                    moved: false
+                };
+            }
             suppressTextPlace = true;
             try { canvas.setPointerCapture(e.pointerId); } catch (_) { /* ignore */ }
             return;
         }
 
-        const hit = hitTestText(p);
-        if (hit) {
+        const hitText = hitTestText(p);
+        if (hitText) {
             e.preventDefault();
-            if (selectedId !== hit.id) selectText(hit.id);
+            if (selectedId !== hitText.id || selectedKind !== "text") selectText(hitText.id);
             else redraw();
             dragMode = "move";
-            dragOrigin = { x: p.x, y: p.y, objX: hit.x, objY: hit.y, moved: false };
+            dragOrigin = { x: p.x, y: p.y, objX: hitText.x, objY: hitText.y, moved: false };
+            suppressTextPlace = true;
+            try { canvas.setPointerCapture(e.pointerId); } catch (_) { /* ignore */ }
+            return;
+        }
+
+        const hitImg = hitTestImage(p);
+        if (hitImg) {
+            e.preventDefault();
+            if (selectedId !== hitImg.id || selectedKind !== "image") selectImage(hitImg.id);
+            else redraw();
+            dragMode = "move";
+            dragOrigin = { x: p.x, y: p.y, objX: hitImg.x, objY: hitImg.y, moved: false };
             suppressTextPlace = true;
             try { canvas.setPointerCapture(e.pointerId); } catch (_) { /* ignore */ }
             return;
         }
 
         if (selectedId) {
-            deselectText();
+            deselectAll();
         }
 
         if (tool === "draw") {
@@ -613,33 +1026,62 @@
         if (dragMode === "move" && selectedId && dragOrigin) {
             e.preventDefault();
             const p = canvasPoint(e);
-            const t = getTextById(selectedId);
-            if (!t) return;
+            const t = selectedKind === "text" ? getTextById(selectedId) : null;
+            const im = selectedKind === "image" ? getImageById(selectedId) : null;
+            const obj = t || im;
+            if (!obj) return;
             if (!dragOrigin.moved) {
                 if (Math.hypot(p.x - dragOrigin.x, p.y - dragOrigin.y) < 2) return;
                 pushUndo();
                 dragOrigin.moved = true;
             }
-            t.x = dragOrigin.objX + (p.x - dragOrigin.x);
-            t.y = dragOrigin.objY + (p.y - dragOrigin.y);
+            obj.x = dragOrigin.objX + (p.x - dragOrigin.x);
+            obj.y = dragOrigin.objY + (p.y - dragOrigin.y);
             redraw();
             return;
         }
         if (dragMode === "resize" && selectedId && dragOrigin) {
             e.preventDefault();
             const p = canvasPoint(e);
-            const t = getTextById(selectedId);
-            if (!t) return;
-            if (!dragOrigin.moved) {
-                pushUndo();
-                dragOrigin.moved = true;
+            if (selectedKind === "text") {
+                const t = getTextById(selectedId);
+                if (!t) return;
+                if (!dragOrigin.moved) {
+                    pushUndo();
+                    dragOrigin.moved = true;
+                }
+                const delta = ((p.x - dragOrigin.x) + (p.y - dragOrigin.y)) * 0.5;
+                t.size = Math.max(MIN_TEXT, Math.min(MAX_TEXT, dragOrigin.size + delta));
+                textSize = t.size;
+                syncSizeSliderFromSelection();
+                redraw();
+                return;
             }
-            const delta = ((p.x - dragOrigin.x) + (p.y - dragOrigin.y)) * 0.5;
-            t.size = Math.max(MIN_TEXT, Math.min(MAX_TEXT, dragOrigin.size + delta));
-            textSize = t.size;
-            syncSizeSliderFromSelection();
-            redraw();
-            return;
+            if (selectedKind === "image") {
+                const im = getImageById(selectedId);
+                if (!im) return;
+                if (!dragOrigin.moved) {
+                    pushUndo();
+                    dragOrigin.moved = true;
+                }
+                const delta = ((p.x - dragOrigin.x) + (p.y - dragOrigin.y)) * 0.5;
+                const maxDim = Math.max(cssW, cssH);
+                let nextW = Math.max(MIN_IMG, Math.min(maxDim, dragOrigin.w + delta));
+                let nextH = nextW / Math.max(0.01, dragOrigin.aspect);
+                if (nextH < MIN_IMG) {
+                    nextH = MIN_IMG;
+                    nextW = nextH * dragOrigin.aspect;
+                }
+                if (nextH > maxDim) {
+                    nextH = maxDim;
+                    nextW = nextH * dragOrigin.aspect;
+                }
+                im.w = nextW;
+                im.h = nextH;
+                syncSizeSliderFromSelection();
+                redraw();
+                return;
+            }
         }
         if (dragMode === "place-pending" && dragOrigin) {
             const p = canvasPoint(e);
@@ -679,12 +1121,12 @@
     function updateHoverCursor(e) {
         if (drawing || dragMode === "move" || dragMode === "resize") return;
         const p = canvasPoint(e);
-        const sel = selectedId ? getTextById(selectedId) : null;
-        if (sel && hitResizeHandle(p, sel)) {
+        const bounds = selectionBounds();
+        if (bounds && hitResizeHandle(p, bounds)) {
             canvas.style.cursor = "nwse-resize";
             return;
         }
-        if (hitTestText(p)) {
+        if (hitTestText(p) || hitTestImage(p)) {
             canvas.style.cursor = "move";
             return;
         }
@@ -723,15 +1165,20 @@
         }
 
         if (!document.body.classList.contains("view-huella")) return;
-        if (textOverlay) return;
+        if (textOverlay || cameraOverlay) return;
         const tag = (e.target && e.target.tagName) || "";
         if (tag === "INPUT" || tag === "TEXTAREA") return;
 
         if ((e.key === "Delete" || e.key === "Backspace") && selectedId) {
             e.preventDefault();
             pushUndo();
-            texts = texts.filter((t) => t.id !== selectedId);
+            if (selectedKind === "text") {
+                texts = texts.filter((t) => t.id !== selectedId);
+            } else if (selectedKind === "image") {
+                images = images.filter((im) => im.id !== selectedId);
+            }
             selectedId = null;
+            selectedKind = null;
             syncSizeSliderFromSelection();
             redraw();
             return;
@@ -739,9 +1186,10 @@
         if (e.key === "Escape") {
             if (selectedId) {
                 e.preventDefault();
-                deselectText();
+                deselectAll();
             }
             hideTextOverlay();
+            closeCameraOverlay();
         }
     }
 
@@ -763,16 +1211,18 @@
         document.querySelectorAll(".huella-swatch").forEach((btn) => {
             btn.classList.toggle("is-active", btn.getAttribute("data-color") === c);
         });
-        const sel = selectedId ? getTextById(selectedId) : null;
-        if (sel) {
-            pushUndo();
-            sel.color = c;
-            redraw();
+        if (selectedKind === "text" && selectedId) {
+            const sel = getTextById(selectedId);
+            if (sel) {
+                pushUndo();
+                sel.color = c;
+                redraw();
+            }
         }
     }
 
     function canvasLooksEmpty() {
-        if (texts.length) return false;
+        if (texts.length || images.length) return false;
         if (!strokeCanvas || !strokeCtx) return true;
         try {
             const sample = strokeCtx.getImageData(0, 0, strokeCanvas.width, strokeCanvas.height).data;
@@ -1034,7 +1484,7 @@
         }
 
         hideTextOverlay();
-        deselectText();
+        deselectAll();
         const handleRaw = ($("huella-handle")?.value || "").trim();
         const noteRaw = ($("huella-note")?.value || "").trim();
         const handle = handleRaw ? handleRaw.replace(/^@/, "").slice(0, 60) : "";
@@ -1110,6 +1560,8 @@
             "huella-intro": strings.intro,
             "huella-label-draw": strings.draw,
             "huella-label-text": strings.text,
+            "huella-label-image": strings.image,
+            "huella-label-photo": strings.photo,
             "huella-clear": strings.clear,
             "huella-undo": strings.undo,
             "huella-publish": strings.publish,
@@ -1208,6 +1660,7 @@
         bindCanvas();
         buildSwatches();
         bindViewer();
+        bindImageControls();
 
         document.querySelectorAll(".huella-tool[data-tool]").forEach((btn) => {
             btn.addEventListener("click", () => setTool(btn.getAttribute("data-tool")));
@@ -1229,12 +1682,37 @@
             });
             size.addEventListener("input", () => {
                 const val = Number(size.value);
-                const sel = selectedId ? getTextById(selectedId) : null;
-                if (sel) {
-                    sel.size = Math.max(MIN_TEXT, Math.min(MAX_TEXT, val));
-                    textSize = sel.size;
-                    redraw();
-                } else if (tool === "text") {
+                if (selectedKind === "text" && selectedId) {
+                    const sel = getTextById(selectedId);
+                    if (sel) {
+                        sel.size = Math.max(MIN_TEXT, Math.min(MAX_TEXT, val));
+                        textSize = sel.size;
+                        redraw();
+                    }
+                    return;
+                }
+                if (selectedKind === "image" && selectedId) {
+                    const sel = getImageById(selectedId);
+                    if (sel) {
+                        const aspect = sel.w / Math.max(1, sel.h);
+                        const maxDim = Math.max(cssW || 720, cssH || 420);
+                        let nextW = Math.max(MIN_IMG, Math.min(maxDim, val));
+                        let nextH = nextW / Math.max(0.01, aspect);
+                        if (nextH > maxDim) {
+                            nextH = maxDim;
+                            nextW = nextH * aspect;
+                        }
+                        if (nextH < MIN_IMG) {
+                            nextH = MIN_IMG;
+                            nextW = nextH * aspect;
+                        }
+                        sel.w = nextW;
+                        sel.h = nextH;
+                        redraw();
+                    }
+                    return;
+                }
+                if (tool === "text") {
                     textSize = Math.max(MIN_TEXT, Math.min(MAX_TEXT, val));
                 } else {
                     brushSize = val || 4;
@@ -1259,7 +1737,8 @@
         document.body.classList.remove("view-sobre-mi");
 
         const menu = document.querySelector(".main-menu");
-        if (menu && window.innerWidth > 1125) {
+        // Tablet + desktop share bottom-pinned menu (phones use hamburger)
+        if (menu && window.innerWidth > 768) {
             const topVal = menu.style.top;
             const topNum = parseFloat(topVal);
             if (!topVal || (topVal.endsWith("vh") && topNum < 60) || (topVal.endsWith("px") && topNum < window.innerHeight * 0.55)) {
@@ -1301,6 +1780,7 @@
         }
         document.body.classList.remove("view-huella");
         hideTextOverlay();
+        closeCameraOverlay();
         closeViewer();
         dragMode = null;
         dragOrigin = null;

@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html><html><body><pre id="o">loading</pre>
+<script>
+(async () => {
+  const widths = [1125, 768, 390];
+  const results = [];
+  for (const w of widths) {
+    const iframe = document.createElement('iframe');
+    iframe.style.cssText = `width:${w}px;height:800px;border:1px solid #ccc;position:absolute;left:-9999px`;
+    iframe.src = 'http://127.0.0.1:8766/index.html';
+    document.body.appendChild(iframe);
+    await new Promise((res, rej) => { iframe.onload = res; iframe.onerror = rej; setTimeout(res, 4000); });
+    await new Promise(r => setTimeout(r, 1500));
+    try {
+      const doc = iframe.contentDocument;
+      const win = iframe.contentWindow;
+      // Skip intro quickly
+      for (let i=0;i<10;i++) doc.body.click();
+      await new Promise(r => setTimeout(r, 2500));
+      const menu = doc.querySelector('.main-menu');
+      const bot = doc.querySelector('.bot-bar');
+      const header = doc.querySelector('header');
+      const gal = doc.querySelector('#galeria');
+      const btn = doc.querySelector('#mobile-menu-btn');
+      const panel = doc.querySelector('#mobile-menu-panel');
+      const scrollW = Math.max(doc.documentElement.scrollWidth, doc.body.scrollWidth);
+      const clientW = doc.documentElement.clientWidth;
+      const slides = [...doc.querySelectorAll('.swiper-slide')];
+      const slideOverflow = slides.some(s => s.getBoundingClientRect().right > clientW + 2);
+      const menuRect = menu ? menu.getBoundingClientRect() : null;
+      const botRect = bot ? bot.getBoundingClientRect() : null;
+      const headerRect = header.getBoundingClientRect();
+      const btnStyle = win.getComputedStyle(btn);
+      const menuDisplay = menu ? win.getComputedStyle(menu).display : null;
+      results.push({
+        w,
+        scrollOverflowX: scrollW > clientW + 1,
+        scrollW, clientW,
+        headerH: Math.round(headerRect.height),
+        menuDisplay,
+        menuBottom: menuRect ? Math.round(menuRect.bottom) : null,
+        menuTop: menuRect ? Math.round(menuRect.top) : null,
+        menuH: menuRect ? Math.round(menuRect.height) : null,
+        botTop: botRect ? Math.round(botRect.top) : null,
+        botH: botRect ? Math.round(botRect.height) : null,
+        menuOverBot: menuRect && botRect ? menuRect.bottom > botRect.top + 2 : null,
+        galPadBottom: gal ? win.getComputedStyle(gal).paddingBottom : null,
+        mobileBtnDisplay: btnStyle.display,
+        mobileBtnW: Math.round(btn.getBoundingClientRect().width),
+        mobileBtnH: Math.round(btn.getBoundingClientRect().height),
+        slideCount: slides.length,
+        slideOverflow,
+        firstCats: [...doc.querySelectorAll('.main-menu a, #mobile-menu-panel a')].slice(0,3).map(a=>a.textContent),
+        lastCat: [...doc.querySelectorAll(w<=768?'#mobile-menu-panel a':'.main-menu a')].map(a=>a.textContent).pop()
+      });
+    } catch (e) {
+      results.push({ w, error: String(e) });
+    }
+    iframe.remove();
+  }
+  document.getElementById('o').textContent = JSON.stringify(results, null, 2);
+})();
+</script></body></html>

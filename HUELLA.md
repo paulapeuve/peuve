@@ -105,11 +105,15 @@ Sin web online, solo tú (o quien abra ese archivo) verá lo guardado en su prop
 1. Abre la web **publicada** (https://…), no el archivo local.
 2. Entra en **Deja tu huella**.
 3. El aviso amarillo/banner de “Firebase no configurado” **debe desaparecer**.
-4. Dibuja algo → **Publicar**.
+4. Dibuja algo (o añade imagen/foto) → **Publicar**.
 5. En Firebase Console → Firestore → colección `huellas` debería aparecer un documento nuevo.
 6. Abre la misma web en **otro navegador** o en el móvil: la huella debe verse en el muro.
 
 Si el banner sigue visible: revisa que no queden `TU_API_KEY` / `TU_PROYECTO` en `js/firebase-config.js` y recarga con caché limpia (Ctrl+F5).
+
+### Imágenes y fotos en la composición
+
+Puedes subir imágenes o hacerte una foto; se colocan en el lienzo (mover / redimensionar) junto al dibujo y el texto. Al publicar, **todo se aplana en una sola imagen** (`image` en el documento Firestore). No hace falta Firebase Storage ni subidas aparte: las fotos van ya “horneadas” en el PNG/JPEG del muro. Si la composición es muy pesada, la app comprime el export (JPEG / escala) como antes.
 
 ---
 
