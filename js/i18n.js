@@ -6,6 +6,7 @@ window.PEUVE_I18N = {
         langBtnAria: "Cambiar a inglés",
         categories: {
             sobre_mi: "Sobre Mí",
+            protagonistas: "Protagonistas",
             editorial: "Diseño Editorial",
             identidad_marca: "Identidad de Marca",
             carteles: "Cartelería",
@@ -97,6 +98,7 @@ window.PEUVE_I18N = {
         langBtnAria: "Switch to Spanish",
         categories: {
             sobre_mi: "About Me",
+            protagonistas: "Highlights",
             editorial: "Editorial Design",
             identidad_marca: "Brand Identity",
             carteles: "Posters",

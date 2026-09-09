@@ -240,10 +240,11 @@ header {
     left: 0;
     width: 100vw;
     font-weight: 600;
-    font-size: 4vh;
+    /* Slightly smaller to keep the desktop menu at exactly 2 text rows */
+    font-size: 3.75vh;
     color: var(--fg);
     user-select: none;
-    padding: 0.75% 20px;
+    padding: 0.75% 14px;
     /* Aligns with .bot-bar border-top after intro (JS pins bottoms flush / overlapping) */
     border-bottom: 5px solid var(--border);
     box-sizing: border-box;
@@ -260,17 +261,34 @@ header {
 
 .main-menu a {
     color: var(--fg);
-    font-size: 4vh;
+    font-size: 3.75vh;
     text-decoration: none;
     font-weight: 600;
     cursor: pointer;
     letter-spacing: inherit;
 }
 
+/* Active category label color swaps by theme for contrast */
+[data-theme="light"] .main-menu a.is-active,
+[data-theme="light"] #mobile-menu-panel a.is-active {
+    color: var(--swatch-blue);
+}
+
+[data-theme="dark"] .main-menu a.is-active,
+[data-theme="dark"] #mobile-menu-panel a.is-active {
+    color: var(--swatch-blue);
+}
+
+[data-theme="blue"] .main-menu a.is-active,
+[data-theme="blue"] #mobile-menu-panel a.is-active {
+    color: #1a1a1a;
+}
+
 .main-menu a:not(:last-child)::after {
     content: " ·";
-    margin-left: 0.28em;
-    margin-right: 0.28em;
+    /* Tighten separators to reduce horizontal wrapping */
+    margin-left: 0.22em;
+    margin-right: 0.22em;
     letter-spacing: 0;
 }
 
@@ -340,7 +358,8 @@ body.view-sobre-mi .main-menu {
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: visible; /* prevents adjacent tall slides from being clipped */
     padding: 5vh 0 10vh 1.7vw;
 }
 
@@ -1456,7 +1475,8 @@ body.view-huella #huella-section {
         width: 100%;
         max-width: 100%;
         padding: 7.5rem 16px 6rem;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: visible;
     }
 
     .swiper-slide:nth-child(3n+1) img,

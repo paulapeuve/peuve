@@ -559,11 +559,11 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 carpeta: "6Napse",
-                portada: "6Napse_Port.webp",
+                portada: "Pantalla_6Napse.mp4",
                 titulo: "6NAPSE — Juego ilustrado 8bit",
                 descripcion: "Videojuego narrativo y educativo sobre empatía, comunicación emocional y relaciones interpersonales, en estética pixel y modo historia con decisiones. El jugador conversa con seis personajes, cada uno con inseguridades y sensibilidades distintas, y debe elegir respuestas respetuosas para avanzar. La estética retro de terminal y el pixel art refuerzan la idea de 6NAPSE como conexión emocional entre sistemas. Juego: https://paulapeuve.github.io/6NAPSE/",
                 herramientas: ["Procreate", "HTML", "CSS", "JS"],
-                imagenes: ["6Napse_Port.webp", "6NapseBLACK.webp", "6NapseGREEN.webp", "alma (1).webp", "alma (2).webp", "axel (1).webp", "axel (2).webp", "Luna (1).webp", "Luna (2).webp", "Mateo (1).webp", "Mateo (2).webp", "Nico (1).webp", "Nico (2).webp", "Valeria (1).webp", "Valeria (2).webp"]
+                imagenes: ["Pantalla_6Napse.mp4", "6Napse_Port.webp", "6NapseBLACK.webp", "6NapseGREEN.webp", "alma (1).webp", "alma (2).webp", "axel (1).webp", "axel (2).webp", "Luna (1).webp", "Luna (2).webp", "Mateo (1).webp", "Mateo (2).webp", "Nico (1).webp", "Nico (2).webp", "Valeria (1).webp", "Valeria (2).webp"]
             }
         ],
 
@@ -670,11 +670,40 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
     };
 
+    // ── PROTAGONISTAS / HIGHLIGHTS ────────────────────────────────────────
+    // Construimos esta categoría reusando proyectos existentes (sin duplicar assets).
+    // Para que el render encuentre los medios en su carpeta original, cada proyecto
+    // lleva `baseCategoria` con el nombre de la categoría donde vive.
+    const pickProyecto = (categoriaBase, carpeta) => {
+        const arr = galleries[categoriaBase] || [];
+        return arr.find(p => p.carpeta === carpeta) || null;
+    };
+
+    const asProtagonista = (categoriaBase, proyecto) => {
+        if (!proyecto) return null;
+        if (proyecto.pendiente || !proyecto.portada) return null;
+        return { ...proyecto, baseCategoria: categoriaBase };
+    };
+
+    galleries.protagonistas = [
+        asProtagonista("editorial", pickProyecto("editorial", "fanzine2_LaPerdidaDeUnoMismo")), // La Pérdida de Uno Mismo
+        asProtagonista("identidad_marca", pickProyecto("identidad_marca", "bit")), // BIT
+        asProtagonista("identidad_marca", pickProyecto("identidad_marca", "canal")), // CANAL
+        asProtagonista("identidad_marca", pickProyecto("identidad_marca", "cesida")), // CESIDA
+        asProtagonista("ilustracion_tipografia", pickProyecto("ilustracion_tipografia", "galaktype")), // GALAKTYPE
+        asProtagonista("editorial", pickProyecto("editorial", "fanzine1_LaMirada")), // La Mirada
+        asProtagonista("carteles", pickProyecto("carteles", "cata la lata")), // Cata la Lata
+
+        // Diseño Web (últimos dos, en este orden) — no duplicar assets.
+        asProtagonista("diseno_web", pickProyecto("diseno_web", "nubi")), // Nubi
+        asProtagonista("diseno_web", pickProyecto("diseno_web", "6Napse")) // 6Napse
+    ].filter(Boolean);
+
     // ── HELPERS ──────────────────────────────────────────────────────────────
     const VIDEO_EXTENSIONS = [".mp4", ".webm", ".ogg", ".mov", ".m4v"];
     let currentLang = localStorage.getItem("peuve-lang") || "es";
     let currentTheme = localStorage.getItem("peuve-theme") || "light";
-    let currentCategoria = "editorial";
+    let currentCategoria = "protagonistas";
     let openProjectRef = null;
 
     function ui() {
@@ -740,6 +769,18 @@ document.addEventListener("DOMContentLoaded", function () {
         return `${base}${subcarpeta}${src}`;
     }
 
+    function syncActiveMenuLinks(categoria) {
+        const categoryAliases = {
+            huella: ["huella", "deja_tu_huella"],
+            deja_tu_huella: ["huella", "deja_tu_huella"]
+        };
+        const activeSet = new Set(categoryAliases[categoria] || [categoria]);
+        document.querySelectorAll(".main-menu a, #mobile-menu-panel a").forEach(link => {
+            const linkCategory = link.getAttribute("data-categoria");
+            link.classList.toggle("is-active", activeSet.has(linkCategory));
+        });
+    }
+
 
     // ── SWIPER ───────────────────────────────────────────────────────────────
     const swiper = new Swiper(".mySwiper", {
@@ -786,7 +827,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeBtn = document.getElementById("popup-close");
 
     function abrirPopup(proyecto, categoria) {
-        const base = basePath(categoria);
+        const baseCategoria = proyecto.baseCategoria || categoria;
+        const base = basePath(baseCategoria);
         const subcarpeta = proyecto.carpeta ? `${proyecto.carpeta}/` : "";
         openProjectRef = { proyecto, categoria };
         const strings = ui();
@@ -853,6 +895,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // ── GALERÍA ──────────────────────────────────────────────────────────────
     function cargarGaleria(categoria) {
         currentCategoria = categoria;
+        syncActiveMenuLinks(categoria);
         const galeria = document.getElementById("galeria");
         const sobreMiSection = document.getElementById("sobre-mi-section");
         const huellaApi = window.PEUVE_HUELLA;
@@ -926,6 +969,19 @@ document.addEventListener("DOMContentLoaded", function () {
         const wrapper = document.querySelector(".swiper-wrapper");
         wrapper.innerHTML = "";
 
+        // Swiper sometimes computes a too-small height until media metadata is ready
+        // (most noticeable on the protagonist video slide). Schedule a lightweight
+        // update when video dimensions become available.
+        let swiperUpdateScheduled = false;
+        const scheduleSwiperUpdate = () => {
+            if (swiperUpdateScheduled) return;
+            swiperUpdateScheduled = true;
+            requestAnimationFrame(() => {
+                swiperUpdateScheduled = false;
+                swiper.update();
+            });
+        };
+
         proyectos.forEach((proyecto, index) => {
             // Hide until images exist
             if (proyecto.pendiente || !proyecto.portada) return;
@@ -935,7 +991,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const portada = normalizarMedia(proyecto.portada);
             const subcarpeta = proyecto.carpeta ? `${proyecto.carpeta}/` : "";
-            const src = resolveMediaSrc(portada.src, basePath(categoria), subcarpeta);
+            const baseCategoria = proyecto.baseCategoria || categoria;
+            const src = resolveMediaSrc(portada.src, basePath(baseCategoria), subcarpeta);
             const title = projectTitle(proyecto);
             const esTatuaje = categoria === "tatuaje";
 
@@ -949,6 +1006,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 v.autoplay = true;
                 v.playsInline = true;
                 v.preload = "metadata";
+                v.addEventListener("loadedmetadata", scheduleSwiperUpdate);
                 mediaEl = v;
             } else {
                 const img = document.createElement("img");
@@ -1023,7 +1081,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    cargarGaleria("editorial");
+    cargarGaleria("protagonistas");
 
     function applySobreMi() {
         const strings = ui();
