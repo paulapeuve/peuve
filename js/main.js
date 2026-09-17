@@ -306,11 +306,20 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 carpeta: "libro",
-                portada: "ilustracion (3).webp",
-                titulo: "Libro",
-                descripcion: "Ilustración para una publicación editorial planteada como una ruta por algunos de los mejores restaurantes del mundo. El proyecto organiza el viaje gastronómico a través de España, Japón y Perú, combinando una voz visual más expresiva con una estructura editorial limpia.",
-                herramientas: ["Procreate"],
-                imagenes: ["ilustracion (3).webp"]
+                portada: "editorial (1).webp",
+                titulo: "Sentimiento y Sabor",
+                descripcion: "Best Restaurants is an illustrated editorial project where I created a fictional collection of gastronomy books. Each book focuses on a different country, and the idea was to highlight five standout restaurants through a mix of illustration, storytelling, and design. For now, I fully developed the Spain volume, and I planned two more — Japan and Peru — which remain as concepts. The book includes illustrations of each chef, their signature dishes, and their restaurants, along with short descriptions and one recipe from each place. I wanted the whole thing to feel cohesive and visually striking, so I built a system that mixes bold colors, expressive drawings, and a clean layout that ties everything together. For me, this project was a way to explore how illustration can elevate editorial design and make information feel more personal and engaging. Instead of just listing restaurants, I wanted to capture the personality behind each chef and the atmosphere of their cuisine. It’s a playful, colorful take on gastronomy — something between a guidebook, an art book, and a collection of stories.",
+                herramientas: ["InDesign", "Procreate"],
+                imagenes: [
+                    "editorial (1).webp",
+                    "editorial (2).webp",
+                    "editorial (3).webp",
+                    "editorial (4).webp",
+                    "editorial (5).webp",
+                    "editorial (6).webp",
+                    "editorial (7).webp",
+                    "ilustracion (3).webp"
+                ]
             },
             {
                 carpeta: "dibujo y otros",
@@ -338,7 +347,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         ],
 
-        ilustracion_tipografia: [
+        tipografia: [
             {
                 carpeta: "galaktype",
                 portada: "GALAKTYPE_Mesa de trabajo 1.webp",
@@ -349,13 +358,18 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 carpeta: "person4",
-                portada: "",
-                pendiente: true,
+                portada: "PERSON4_Anuncio_PORTADA.mp4",
                 link: "https://person4.framer.website",
                 titulo: "PERSON4",
                 descripcion: "Tipografía experimental ilustrada y variable basada en un sistema modular de caracteres no alfanuméricos. Con minúsculas, mayúsculas y números, cada tecla activa un elemento gráfico (ojos, bocas, narices, pelo, accesorios…) para crear caras y personajes al escribir. Es variable: pesos y ejes cambian emoción, forma o proporción. Cruza tipografía, ilustración y sistemas generativos. Pruébala: https://person4.framer.website",
                 herramientas: ["Illustrator", "FontLab", "Framer"],
-                imagenes: []
+                imagenes: [
+                    "PERSON4_Anuncio_PORTADA.mp4",
+                    "Cartel.webp",
+                    "Punli1.webp",
+                    "Punli2.webp",
+                    "PERSON4_Grabacion.mp4"
+                ]
             }
         ],
 
@@ -426,7 +440,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 titulo: "Sentimiento y Sabor",
                 descripcion: "Best Restaurants is an illustrated editorial project where I created a fictional collection of gastronomy books. Each book focuses on a different country, and the idea was to highlight five standout restaurants through a mix of illustration, storytelling, and design. For now, I fully developed the Spain volume, and I planned two more — Japan and Peru — which remain as concepts. The book includes illustrations of each chef, their signature dishes, and their restaurants, along with short descriptions and one recipe from each place. I wanted the whole thing to feel cohesive and visually striking, so I built a system that mixes bold colors, expressive drawings, and a clean layout that ties everything together. For me, this project was a way to explore how illustration can elevate editorial design and make information feel more personal and engaging. Instead of just listing restaurants, I wanted to capture the personality behind each chef and the atmosphere of their cuisine. It’s a playful, colorful take on gastronomy — something between a guidebook, an art book, and a collection of stories.",
                 herramientas: ["InDesign", "Procreate"],
-                imagenes: ["editorial (1).webp", "editorial (2).webp", "editorial (3).webp", "editorial (4).webp", "editorial (5).webp", "editorial (6).webp", "editorial (7).webp"]
+                imagenes: [
+                    "editorial (1).webp",
+                    "editorial (2).webp",
+                    "editorial (3).webp",
+                    "editorial (4).webp",
+                    "editorial (5).webp",
+                    "editorial (6).webp",
+                    "editorial (7).webp",
+                    "assets/ilustracion/libro/ilustracion (3).webp"
+                ]
             },
             {
                 carpeta: "maquetacion para clase",
@@ -665,39 +688,39 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         ],
         tatuaje: [
-            { portada: "Tatuaje (1).webp" },
-            { portada: "Tatuaje (2).webp" },
-            { portada: "Tatuaje (3).webp" },
-            { portada: "Tatuaje (4).webp" },
-            { portada: "Tatuaje (5).webp" },
-            { portada: "Tatuaje (6).webp" },
-            { portada: "Tatuaje (7).webp" },
-            { portada: "Tatuaje (8).webp" },
-            { portada: "Tatuaje (9).webp" },
-            { portada: "Tatuaje (10).webp" },
-            { portada: "Tatuaje (11).webp" },
-            { portada: "Tatuaje (12).webp" },
-            { portada: "Tatuaje (13).webp" },
-            { portada: "Tatuaje (14).webp" },
-            { portada: "Tatuaje (15).webp" },
-            { portada: "Tatuaje (16).webp" },
-            { portada: "Tatuaje (17).webp" },
-            { portada: "Tatuaje (18).webp" },
-            { portada: "Tatuaje (19).webp" },
-            { portada: "Tatuaje (20).webp" },
-            { portada: "Tatuaje (21).webp" },
-            { portada: "Tatuaje (22).webp" },
-            { portada: "Tatuaje (23).webp" },
-            { portada: "Tatuaje (24).webp" },
-            { portada: "Tatuaje (25).webp" },
-            { portada: "Tatuaje (26).webp" },
-            { portada: "Tatuaje (27).webp" },
-            { portada: "Tatuaje (28).webp" },
-            { portada: "Tatuaje (29).webp" },
-            { portada: "Tatuaje (30).webp" },
-            { portada: "Tatuaje (31).webp" },
-            { portada: "Tatuaje (34).webp" },
-            { portada: "Tatuaje (35).webp" },
+            { portada: "tatu (1).webp" },
+            { portada: "tatu (2).webp" },
+            { portada: "tatu2 (1).webp" },
+            { portada: "tatu2 (2).webp" },
+            { portada: "tatu2 (3).webp" },
+            { portada: "tatu2 (4).webp" },
+            { portada: "tatu3 (1).webp" },
+            { portada: "tatu3 (2).webp" },
+            { portada: "tatu3 (3).webp" },
+            { portada: "tatu3 (4).webp" },
+            { portada: "tatu3 (5).webp" },
+            { portada: "tatu3 (6).webp" },
+            { portada: "tatu3 (7).webp" },
+            { portada: "tatu3 (8).webp" },
+            { portada: "tatu3 (9).webp" },
+            { portada: "tatu3 (10).webp" },
+            { portada: "tatu3 (11).webp" },
+            { portada: "tatu3 (12).webp" },
+            { portada: "tatu3 (13).webp" },
+            { portada: "tatu3 (14).webp" },
+            { portada: "tatu4 (1).webp" },
+            { portada: "tatu4 (2).webp" },
+            { portada: "tatu4 (3).webp" },
+            { portada: "tatu4 (4).webp" },
+            { portada: "tatu5 (1).webp" },
+            { portada: "tatu5 (2).webp" },
+            { portada: "tatu5 (3).webp" },
+            { portada: "tatu5 (4).webp" },
+            { portada: "tatu5 (5).webp" },
+            { portada: "tatu5 (6).webp" },
+            { portada: "tatu5 (7).webp" },
+            { portada: "tatu5 (8).webp" },
+            { portada: "tatu5 (9).webp" },
         ],
     };
 
@@ -721,7 +744,7 @@ document.addEventListener("DOMContentLoaded", function () {
         asProtagonista("identidad_marca", pickProyecto("identidad_marca", "bit")), // BIT
         asProtagonista("identidad_marca", pickProyecto("identidad_marca", "canal")), // CANAL
         asProtagonista("identidad_marca", pickProyecto("identidad_marca", "cesida")), // CESIDA
-        asProtagonista("ilustracion_tipografia", pickProyecto("ilustracion_tipografia", "galaktype")), // GALAKTYPE
+        asProtagonista("tipografia", pickProyecto("tipografia", "galaktype")), // GALAKTYPE
         asProtagonista("editorial", pickProyecto("editorial", "fanzine1_LaMirada")), // La Mirada
         asProtagonista("carteles", pickProyecto("carteles", "cata la lata")), // Cata la Lata
 
