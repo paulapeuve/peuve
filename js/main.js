@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 herramientas: ["Photoshop", "Lightroom"],
                 imagenes: [
                     "PORTADA.webp", "Lola_2.2.webp", "Lola_3.webp", "Lola_4.webp", "Lola_5.webp",
-                    "Lola_pie.webp", "LolaPv2.webp", "LolaSara_1.webp", "Luci_1.webp", "Luci_2.2.webp",
+                    "Lola_pie.webp", "LolaPv2.webp", "LolaSara_1.webp", "Luci_2.2.webp",
                     "Luci_3.webp", "Luci_4.webp", "Luci_5.webp", "Luci_6.webp", "LuciaSarumi_1.webp",
                     "LuciMarco_1.webp", "MC_1.webp", "MC_2.webp", "Pv_1.webp", "PV_2.webp",
                     "Rumi_1.2.webp", "Rumi_Mc.webp", "SaraLola_1.webp"
@@ -621,7 +621,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 herramientas: ["Photoshop", "Lightroom"],
                 imagenes: [
                     "PORATDA.webp", "Lola_3.webp", "Lola_5.webp", "LolaSara_1.webp",
-                    "Luci_1.webp", "Luci_2.webp", "Luci_3.webp", "Luci_4.webp", "Luci_5.webp",
+                    "Luci_2.webp", "Luci_3.webp", "Luci_4.webp", "Luci_5.webp",
                     "LuciMarco_1.webp", "MC_1.webp", "MC_2.webp", "Rumi_Mc.webp", "SaraLola_1.webp"
                 ]
             },
@@ -836,11 +836,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     galleries.protagonistas = [
         asProtagonista("editorial", pickProyecto("editorial", "1_LaPerdidaDeUnoMismo")), // La Pérdida de Uno Mismo
+        asProtagonista("editorial", pickProyecto("editorial", "2_LaMirada")), // La Mirada
         asProtagonista("identidad_marca", pickProyecto("identidad_marca", "2bit")), // BIT
         asProtagonista("identidad_marca", pickProyecto("identidad_marca", "1canal")), // CANAL
         asProtagonista("identidad_marca", pickProyecto("identidad_marca", "3cesida")), // CESIDA
         asProtagonista("tipografia", pickProyecto("tipografia", "galaktype")), // GALAKTYPE
-        asProtagonista("editorial", pickProyecto("editorial", "2_LaMirada")), // La Mirada
         asProtagonista("carteles", pickProyecto("carteles", "2cata la lata")), // Cata la Lata
 
         // Diseño Web (últimos dos, en este orden) — no duplicar assets.
@@ -1154,7 +1154,9 @@ document.addEventListener("DOMContentLoaded", function () {
         sobreMiSection.style.removeProperty("--sobre-top");
         sobreMiSection.style.removeProperty("--sobre-bottom");
 
-        const proyectos = orderedProjects(galleries[categoria]);
+        const proyectos = categoria === "protagonistas"
+            ? (galleries[categoria] || [])
+            : orderedProjects(galleries[categoria]);
         if (!proyectos) return;
 
         const wrapper = document.querySelector(".swiper-wrapper");
