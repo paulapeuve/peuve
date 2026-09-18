@@ -1,5 +1,26 @@
 /* Bilingual project copy keyed by carpeta — used by language toggle */
 window.PEUVE_PROJECTS = {
+    "1AZUL": {
+        titulo: { es: "AZUL", en: "AZUL" },
+        descripcion: {
+            es: "Estas imágenes forman parte de un proyecto editorial en desarrollo que explora la juventud contemporánea como una generación definida por la expresión emocional, la construcción de la identidad y la comunicación a través de la estética, la música, los espacios y los estímulos sensoriales. El color azul actúa como eje conceptual y como mi lenguaje visual personal, convirtiéndose en un símbolo de emoción, vulnerabilidad y libertad. La serie combina flash diurno de luz dura, reflectores e identidades visualmente sobreexpuestas para construir retratos donde la vestimenta, el maquillaje y el gesto funcionan como herramientas de expresión. Las imágenes habitan un ambiente disociativo y crítico, situándose entre lo documental y lo escenificado para reflexionar sobre cómo una generación se representa, se expone y se busca a sí misma.",
+            en: "These images belong to an editorial project in progress that explores contemporary youth as a generation defined by emotional expression, identity-building, and communication through aesthetics, music, spaces, and sensory stimuli. Blue works as a conceptual axis and as my personal visual language, becoming a symbol of emotion, vulnerability, and freedom. The series combines harsh daytime flash, reflectors, and visually overexposed identities to build portraits where clothing, makeup, and gesture function as tools of expression. The images inhabit a dissociative, critical atmosphere, sitting between documentary and staged work to reflect on how a generation represents itself, exposes itself, and searches for itself."
+        }
+    },
+    "1.2AZUL": {
+        titulo: { es: "AZUL II", en: "AZUL II" },
+        descripcion: {
+            es: "Estas imágenes forman parte de un proyecto editorial en desarrollo que explora la juventud contemporánea como una generación definida por la expresión emocional, la construcción de la identidad y la comunicación a través de la estética, la música, los espacios y los estímulos sensoriales. El color azul actúa como eje conceptual y como mi lenguaje visual personal, convirtiéndose en un símbolo de emoción, vulnerabilidad y libertad. La serie combina flash diurno de luz dura, reflectores e identidades visualmente sobreexpuestas para construir retratos donde la vestimenta, el maquillaje y el gesto funcionan como herramientas de expresión. Las imágenes habitan un ambiente disociativo y crítico, situándose entre lo documental y lo escenificado para reflexionar sobre cómo una generación se representa, se expone y se busca a sí misma.",
+            en: "These images belong to an editorial project in progress that explores contemporary youth as a generation defined by emotional expression, identity-building, and communication through aesthetics, music, spaces, and sensory stimuli. Blue works as a conceptual axis and as my personal visual language, becoming a symbol of emotion, vulnerability, and freedom. The series combines harsh daytime flash, reflectors, and visually overexposed identities to build portraits where clothing, makeup, and gesture function as tools of expression. The images inhabit a dissociative, critical atmosphere, sitting between documentary and staged work to reflect on how a generation represents itself, exposes itself, and searches for itself."
+        }
+    },
+    AZUL: {
+        titulo: { es: "AZUL", en: "AZUL" },
+        descripcion: {
+            es: "Edición de imagen para el proyecto AZUL (fotografía para fanzine). Descripción próximamente.",
+            en: "Image editing for the AZUL project (photography for a fanzine). Description coming soon."
+        }
+    },
     nubi: {
         titulo: { es: "Nubi", en: "Nubi" },
         descripcion: {

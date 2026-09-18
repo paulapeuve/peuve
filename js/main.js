@@ -51,15 +51,34 @@ document.addEventListener("DOMContentLoaded", function () {
     const galleries = {
         fotografia: [
             {
-                carpeta: "conciertos",
-                portada: "foto (7).webp",
-                titulo: "Conciertos",
-                descripcion: "Fotografía de música en vivo.",
-                herramientas: ["Lightroom", "Photoshop"],
-                imagenes: ["foto (3).webp", "foto (6).webp", "foto (7).webp", "foto (8).webp", "foto (10).webp", "foto (11).webp", "foto (14).webp"]
+                carpeta: "1AZUL",
+                portada: "PORTADA.webp",
+                titulo: "AZUL",
+                descripcion: "Estas imágenes forman parte de un proyecto editorial en desarrollo que explora la juventud contemporánea como una generación definida por la expresión emocional, la construcción de la identidad y la comunicación a través de la estética, la música, los espacios y los estímulos sensoriales. El color azul actúa como eje conceptual y como mi lenguaje visual personal, convirtiéndose en un símbolo de emoción, vulnerabilidad y libertad. La serie combina flash diurno de luz dura, reflectores e identidades visualmente sobreexpuestas para construir retratos donde la vestimenta, el maquillaje y el gesto funcionan como herramientas de expresión. Las imágenes habitan un ambiente disociativo y crítico, situándose entre lo documental y lo escenificado para reflexionar sobre cómo una generación se representa, se expone y se busca a sí misma.",
+                herramientas: ["Photoshop", "Lightroom"],
+                imagenes: [
+                    "PORTADA.webp", "Lola_2.2.webp", "Lola_3.webp", "Lola_4.webp", "Lola_5.webp",
+                    "Lola_pie.webp", "LolaPv2.webp", "LolaSara_1.webp", "Luci_1.webp", "Luci_2.2.webp",
+                    "Luci_3.webp", "Luci_4.webp", "Luci_5.webp", "Luci_6.webp", "LuciaSarumi_1.webp",
+                    "LuciMarco_1.webp", "MC_1.webp", "MC_2.webp", "Pv_1.webp", "PV_2.webp",
+                    "Rumi_1.2.webp", "Rumi_Mc.webp", "SaraLola_1.webp"
+                ]
             },
             {
-                carpeta: "cianotipias",
+                carpeta: "1.2AZUL",
+                portada: "PORTADA.webp",
+                titulo: "AZUL II",
+                descripcion: "Estas imágenes forman parte de un proyecto editorial en desarrollo que explora la juventud contemporánea como una generación definida por la expresión emocional, la construcción de la identidad y la comunicación a través de la estética, la música, los espacios y los estímulos sensoriales. El color azul actúa como eje conceptual y como mi lenguaje visual personal, convirtiéndose en un símbolo de emoción, vulnerabilidad y libertad. La serie combina flash diurno de luz dura, reflectores e identidades visualmente sobreexpuestas para construir retratos donde la vestimenta, el maquillaje y el gesto funcionan como herramientas de expresión. Las imágenes habitan un ambiente disociativo y crítico, situándose entre lo documental y lo escenificado para reflexionar sobre cómo una generación se representa, se expone y se busca a sí misma.",
+                herramientas: ["Lightroom", "Photoshop"],
+                imagenes: [
+                    "PORTADA.webp", "P1160255.webp", "P1160260-2.webp", "P1160262.webp", "P1160298.webp",
+                    "P1160309.webp", "P1160310.webp", "P1160317.webp", "P1160322-3.webp", "P1160323.webp",
+                    "P1160324.webp", "P1160326.webp", "P1160334-2.webp", "P1160336.webp", "P1160338-2.webp",
+                    "P1160339-2.webp", "P1160340-2.webp", "P1160342-3.webp", "P1160345-2.webp"
+                ]
+            },
+            {
+                carpeta: "2cianotipias",
                 portada: "final1ciano.webp",
                 titulo: "Cianotipias",
                 descripcion: "Serie de retratos en cianotipia que reinterpreta la sensibilidad de Anna Atkins desde el rostro humano. Las copias funcionan como un pequeño herbario emocional, donde el azul de Prusia, el semitono y las variaciones del proceso químico intensifican gestos de felicidad, seriedad, tristeza y humor.",
@@ -67,7 +86,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["final1ciano.webp", "final2ciano.webp", "final3ciano.webp", "final4ciano.webp", "final5ciano.webp", "final6ciano.webp"]
             },
             {
-                carpeta: "gran via_clase",
+                carpeta: "3diego",
+                portada: "2026PabloESTUDIO_IMG_1728.webp",
+                titulo: "Diego",
+                descripcion: "Retrato en clave baja de Diego con una estética indie y rock alternativo, inspirada en portadas de discos de finales de los 90. La serie trabaja sombras dominantes, contraste fuerte y luz direccional para construir una atmósfera introspectiva, melancólica y emocional.",
+                herramientas: ["Lightroom", "Photoshop"],
+                imagenes: ["2026PabloESTUDIO_IMG_1720.webp", "2026PabloESTUDIO_IMG_1721.webp", "2026PabloESTUDIO_IMG_1728.webp", "2026PabloESTUDIO_IMG_9846.webp", "2026PabloESTUDIO_IMG_9848.webp", "2026PabloESTUDIO_IMG_9850.webp"]
+            },
+            {
+                carpeta: "4gran via_clase",
                 portada: "GRANVIA_PORTADA.webp",
                 titulo: "Gran Vía",
                 descripcion: "Proyecto fotográfico urbano sobre la Gran Vía.",
@@ -75,15 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["GRANVIA_PORTADA.webp", "GRANVIA_Edit_1.webp", "GRANVIA_Edit_13.webp", "GRANVIA_Edit_18.webp", "GRANVIA_Edit_21.webp", "GRANVIA_Edit_24.webp", "GRANVIA_Edit_27.webp", "GRANVIA_Edit_29.webp", "GRANVIA_Edit_30.webp", "GRANVIA_Edit_31.webp", "GRANVIA_Edit_38.webp", "GRANVIA_Edit_40.webp", "GRANVIA_Edit_42.webp"]
             },
             {
-                carpeta: "teatros canal",
-                portada: "TODOS_indexado_COLOR.webp",
-                titulo: "Teatros Canal",
-                descripcion: "Cobertura fotográfica en los Teatros Canal.",
-                herramientas: ["Lightroom", "Photoshop"],
-                imagenes: ["TODOS_indexado_COLOR.webp", "AZULEJA_color_llora.webp", "DESI_indexado_EJEJEJEJE.webp", "DRAMA_indexado_COLOR.webp", "FLAUTA_indexado_COLOR.webp", "gemelas_COLOR.webp", "HENAR_indexado_COLOR.webp", "PEUVE_indexado_COLOR.webp", "ROBERTA_indexado_COLOR.webp"]
-            },
-            {
-                carpeta: "Trade Dj",
+                carpeta: "5Trade Dj",
                 portada: "ESTUDIO_Edit_2_17.webp",
                 titulo: "Trade DJ",
                 descripcion: "Sesión fotográfica y edición para Trade DJ.",
@@ -97,28 +116,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 ]
             },
             {
-                carpeta: "dia a dia",
-                portada: "foto (2).webp",
+                carpeta: "6teatros canal",
+                portada: "TODOS_indexado_COLOR.webp",
+                titulo: "Teatros Canal",
+                descripcion: "Cobertura fotográfica en los Teatros Canal.",
+                herramientas: ["Lightroom", "Photoshop"],
+                imagenes: ["TODOS_indexado_COLOR.webp", "AZULEJA_color_llora.webp", "DESI_indexado_EJEJEJEJE.webp", "DRAMA_indexado_COLOR.webp", "FLAUTA_indexado_COLOR.webp", "gemelas_COLOR.webp", "HENAR_indexado_COLOR.webp", "PEUVE_indexado_COLOR.webp", "ROBERTA_indexado_COLOR.webp"]
+            },
+            {
+                carpeta: "7dia a dia",
+                portada: "PORATDA.webp",
                 titulo: "Día a Día",
                 descripcion: "Fotografía cotidiana y documental.",
                 herramientas: ["Lightroom"],
-                imagenes: ["foto (1).webp", "foto (2).webp", "foto (22).webp", "foto (23).webp", "foto (24).webp"]
-            },
-            {
-                carpeta: "diego",
-                portada: "2026PabloESTUDIO_IMG_1728.webp",
-                titulo: "Diego",
-                descripcion: "Retrato en clave baja de Diego con una estética indie y rock alternativo, inspirada en portadas de discos de finales de los 90. La serie trabaja sombras dominantes, contraste fuerte y luz direccional para construir una atmósfera introspectiva, melancólica y emocional.",
-                herramientas: ["Lightroom", "Photoshop"],
-                imagenes: ["2026PabloESTUDIO_IMG_1720.webp", "2026PabloESTUDIO_IMG_1721.webp", "2026PabloESTUDIO_IMG_1728.webp", "2026PabloESTUDIO_IMG_9846.webp", "2026PabloESTUDIO_IMG_9848.webp", "2026PabloESTUDIO_IMG_9850.webp"]
-            },
-            {
-                carpeta: "fiesta",
-                portada: "foto (9).webp",
-                titulo: "Fiesta",
-                descripcion: "Fotografía de ambiente y eventos.",
-                herramientas: ["Lightroom"],
-                imagenes: ["foto (9).webp", "foto (12).webp", "foto (13).webp", "foto (21).webp", "TARRIOEDIT.webp", "Bodegon_Edit_18.webp", "Bodegon_Edit_31.webp", "2026PabloESTUDIO_DSCN8180.webp", "CasaLuna_2026PabloESTUDIO_DSCN816501.webp"]
+                imagenes: [
+                    "PORATDA.webp",
+                    "foto (1).webp", "foto (2).webp", "foto (3).webp", "foto (6).webp", "foto (7).webp",
+                    "foto (8).webp", "foto (9).webp", "foto (10).webp", "foto (11).webp", "foto (12).webp",
+                    "foto (13).webp", "foto (14).webp", "foto (21).webp", "foto (23).webp", "foto (24).webp",
+                    "TARRIOEDIT.webp", "Bodegon_Edit_18.webp", "Bodegon_Edit_31.webp",
+                    "2026PabloESTUDIO_DSCN8180.webp", "CasaLuna_2026PabloESTUDIO_DSCN816501.webp",
+                    "TAURO_Edit_1.webp", "TAURO_Edit_3.webp", "TAURO_Edit_5.webp", "TAURO_Edit_15.webp",
+                    "TAURO_Edit_49.webp", "TAURO_Edit_65.webp", "TAURO_Edit_73.webp", "TAURO_Edit_75.webp",
+                    "TAURO_Edit_76.webp"
+                ]
             },
             {
                 carpeta: "retratos clase",
@@ -175,21 +196,61 @@ document.addEventListener("DOMContentLoaded", function () {
                 titulo: "Torneo Laura I",
                 descripcion: "Cobertura fotográfica deportiva.",
                 herramientas: ["Lightroom"],
-                imagenes: ["IMG_9485.webp", "IMG_9506.webp", "IMG_9520.webp", "IMG_9521.webp", "IMG_9537.webp", "IMG_9542.webp", "IMG_9545.webp", "IMG_9555.webp", "IMG_9560.webp", "IMG_9592.webp", "IMG_9597.webp", "IMG_9602.webp", "IMG_9605.webp", "IMG_9607.webp", "IMG_9620.webp", "IMG_9622.webp", "IMG_9627.webp", "IMG_9647.webp", "IMG_9670.webp", "IMG_9676.webp", "IMG_9680.webp", "IMG_9697.webp", "IMG_9698.webp", "IMG_9703.webp", "IMG_9716.webp", "IMG_9722.webp", "IMG_9725.webp", "IMG_9735.webp", "IMG_9736.webp", "IMG_9750.webp", "IMG_9757.webp", "IMG_9763.webp", "IMG_9771.webp", "IMG_9775.webp"]
+                imagenes: ["IMG_9506.webp", "IMG_9521.webp", "IMG_9555.webp", "IMG_9560.webp", "IMG_9592.webp", "IMG_9597.webp", "IMG_9602.webp", "IMG_9607.webp", "IMG_9627.webp", "IMG_9676.webp", "IMG_9680.webp", "IMG_9716.webp", "IMG_9771.webp", "IMG_9771_recortada.webp"]
             },
             {
-                carpeta: "TorneoLaura2",
+                carpeta: "8TorneoLaura2",
                 portada: "LauraTorneo_IMG_1167.webp",
                 titulo: "Torneo Laura II",
                 descripcion: "Cobertura fotográfica deportiva.",
                 herramientas: ["Lightroom"],
-                imagenes: ["LauraTorneo_IMG_1001.webp", "LauraTorneo_IMG_1004.webp", "LauraTorneo_IMG_1005.webp", "LauraTorneo_IMG_1007.webp", "LauraTorneo_IMG_1008.webp", "LauraTorneo_IMG_1009.webp", "LauraTorneo_IMG_1010.webp", "LauraTorneo_IMG_1011.webp", "LauraTorneo_IMG_1014.webp", "LauraTorneo_IMG_1020.webp", "LauraTorneo_IMG_1023.webp", "LauraTorneo_IMG_1024.webp", "LauraTorneo_IMG_1027.webp", "LauraTorneo_IMG_1028.webp", "LauraTorneo_IMG_1030.webp", "LauraTorneo_IMG_1034.webp", "LauraTorneo_IMG_1035.webp", "LauraTorneo_IMG_1036.webp", "LauraTorneo_IMG_1037.webp", "LauraTorneo_IMG_1043.webp", "LauraTorneo_IMG_1044.webp", "LauraTorneo_IMG_1045.webp", "LauraTorneo_IMG_1046.webp", "LauraTorneo_IMG_1047.webp", "LauraTorneo_IMG_1049.webp", "LauraTorneo_IMG_1051.webp", "LauraTorneo_IMG_1053.webp", "LauraTorneo_IMG_1054.webp", "LauraTorneo_IMG_1055.webp", "LauraTorneo_IMG_1058.webp", "LauraTorneo_IMG_1059.webp", "LauraTorneo_IMG_1060.webp", "LauraTorneo_IMG_1062.webp", "LauraTorneo_IMG_1066.webp", "LauraTorneo_IMG_1072.webp", "LauraTorneo_IMG_1073.webp", "LauraTorneo_IMG_1074.webp", "LauraTorneo_IMG_1077.webp", "LauraTorneo_IMG_1084.webp", "LauraTorneo_IMG_1091.webp", "LauraTorneo_IMG_1094.webp", "LauraTorneo_IMG_1098.webp", "LauraTorneo_IMG_1099.webp", "LauraTorneo_IMG_1100.webp", "LauraTorneo_IMG_1102.webp", "LauraTorneo_IMG_1103.webp", "LauraTorneo_IMG_1109.webp", "LauraTorneo_IMG_1111.webp", "LauraTorneo_IMG_1118.webp", "LauraTorneo_IMG_1122.webp", "LauraTorneo_IMG_1125.webp", "LauraTorneo_IMG_1131.webp", "LauraTorneo_IMG_1135.webp", "LauraTorneo_IMG_1138.webp", "LauraTorneo_IMG_1140.webp", "LauraTorneo_IMG_1141.webp", "LauraTorneo_IMG_1142.webp", "LauraTorneo_IMG_1150.webp", "LauraTorneo_IMG_1152.webp", "LauraTorneo_IMG_1155.webp", "LauraTorneo_IMG_1160.webp", "LauraTorneo_IMG_1162.webp", "LauraTorneo_IMG_1165.webp", "LauraTorneo_IMG_1167.webp", "LauraTorneo_IMG_1172.webp", "LauraTorneo_IMG_1178.webp", "LauraTorneo_IMG_1180.webp", "LauraTorneo_IMG_1183.webp", "LauraTorneo_IMG_1184.webp", "LauraTorneo_IMG_1187.webp", "LauraTorneo_IMG_1188.webp", "LauraTorneo_IMG_1192.webp", "LauraTorneo_IMG_1196.webp", "LauraTorneo_IMG_1197.webp", "LauraTorneo_IMG_1201.webp", "LauraTorneo_IMG_1202.webp", "LauraTorneo_IMG_1204.webp", "LauraTorneo_IMG_1205.webp", "LauraTorneo_IMG_1206.webp", "LauraTorneo_IMG_1212.webp", "LauraTorneo_IMG_1215.webp", "LauraTorneo_IMG_1218.webp", "LauraTorneo_IMG_1219.webp", "LauraTorneo_IMG_1220.webp", "LauraTorneo_IMG_1221.webp", "LauraTorneo_IMG_1224.webp", "LauraTorneo_IMG_1226.webp", "LauraTorneo_IMG_1227.webp", "LauraTorneo_IMG_1231.webp", "LauraTorneo_IMG_1234.webp", "LauraTorneo_IMG_1237.webp", "LauraTorneo_IMG_1241.webp", "LauraTorneo_IMG_1244.webp", "LauraTorneo_IMG_1257.webp", "LauraTorneo_IMG_1259.webp", "LauraTorneo_IMG_1263.webp", "LauraTorneo_IMG_1264.webp", "LauraTorneo_IMG_1265.webp", "LauraTorneo_IMG_1268.webp", "LauraTorneo_IMG_1271.webp", "LauraTorneo_IMG_1274.webp", "LauraTorneo_IMG_1275.webp", "LauraTorneo_IMG_1277.webp", "LauraTorneo_IMG_1281.webp", "LauraTorneo_IMG_1282.webp", "LauraTorneo_IMG_1283.webp", "LauraTorneo_IMG_1284.webp", "LauraTorneo_IMG_1285.webp", "LauraTorneo_IMG_1288.webp", "LauraTorneo_IMG_1292.webp", "LauraTorneo_IMG_1293.webp", "LauraTorneo_IMG_1295.webp", "LauraTorneo_IMG_1298.webp", "LauraTorneo_IMG_1301.webp", "LauraTorneo_IMG_1304.webp", "LauraTorneo_IMG_1307.webp", "LauraTorneo_IMG_1309.webp", "LauraTorneo_IMG_1311.webp", "LauraTorneo_IMG_1314.webp", "LauraTorneo_IMG_1317.webp", "LauraTorneo_IMG_1322.webp", "LauraTorneo_IMG_1326.webp", "LauraTorneo_IMG_1331.webp", "LauraTorneo_IMG_1333.webp", "LauraTorneo_IMG_1334.webp", "LauraTorneo_IMG_1336.webp", "LauraTorneo_IMG_1341.webp", "LauraTorneo_IMG_1342.webp", "LauraTorneo_IMG_1343.webp", "LauraTorneo_IMG_1345.webp", "LauraTorneo_IMG_1346.webp"]
+                imagenes: [
+                    "LauraTorneo_IMG_1167.webp",
+                    "LauraTorneo_IMG_1001.webp", "LauraTorneo_IMG_1008.webp", "LauraTorneo_IMG_1010.webp",
+                    "LauraTorneo_IMG_1014.webp", "LauraTorneo_IMG_1028.webp", "LauraTorneo_IMG_1030.webp",
+                    "LauraTorneo_IMG_1034.webp", "LauraTorneo_IMG_1035.webp", "LauraTorneo_IMG_1037.webp",
+                    "LauraTorneo_IMG_1043.webp", "LauraTorneo_IMG_1046.webp", "LauraTorneo_IMG_1049.webp",
+                    "LauraTorneo_IMG_1051.webp", "LauraTorneo_IMG_1053.webp", "LauraTorneo_IMG_1054.webp",
+                    "LauraTorneo_IMG_1055.webp", "LauraTorneo_IMG_1058.webp", "LauraTorneo_IMG_1059.webp",
+                    "LauraTorneo_IMG_1060.webp", "LauraTorneo_IMG_1062.webp", "LauraTorneo_IMG_1066.webp",
+                    "LauraTorneo_IMG_1072.webp", "LauraTorneo_IMG_1073.webp", "LauraTorneo_IMG_1074.webp",
+                    "LauraTorneo_IMG_1077.webp", "LauraTorneo_IMG_1084.webp", "LauraTorneo_IMG_1091.webp",
+                    "LauraTorneo_IMG_1094.webp", "LauraTorneo_IMG_1098.webp", "LauraTorneo_IMG_1099.webp",
+                    "LauraTorneo_IMG_1100.webp", "LauraTorneo_IMG_1102.webp", "LauraTorneo_IMG_1103.webp",
+                    "LauraTorneo_IMG_1109.webp", "LauraTorneo_IMG_1111.webp", "LauraTorneo_IMG_1118.webp",
+                    "LauraTorneo_IMG_1122.webp", "LauraTorneo_IMG_1125.webp", "LauraTorneo_IMG_1131.webp",
+                    "LauraTorneo_IMG_1135.webp", "LauraTorneo_IMG_1138.webp", "LauraTorneo_IMG_1140.webp",
+                    "LauraTorneo_IMG_1141.webp", "LauraTorneo_IMG_1142.webp", "LauraTorneo_IMG_1150.webp",
+                    "LauraTorneo_IMG_1152.webp", "LauraTorneo_IMG_1155.webp", "LauraTorneo_IMG_1160.webp",
+                    "LauraTorneo_IMG_1162.webp", "LauraTorneo_IMG_1165.webp",
+                    "LauraTorneo_IMG_1172.webp", "LauraTorneo_IMG_1172-2.webp",
+                    "LauraTorneo_IMG_1178.webp", "LauraTorneo_IMG_1178-2.webp",
+                    "LauraTorneo_IMG_1180.webp", "LauraTorneo_IMG_1180-2.webp",
+                    "LauraTorneo_IMG_1183.webp", "LauraTorneo_IMG_1184.webp", "LauraTorneo_IMG_1187.webp",
+                    "LauraTorneo_IMG_1188.webp", "LauraTorneo_IMG_1192.webp", "LauraTorneo_IMG_1196.webp",
+                    "LauraTorneo_IMG_1197.webp", "LauraTorneo_IMG_1201.webp", "LauraTorneo_IMG_1202.webp",
+                    "LauraTorneo_IMG_1204.webp", "LauraTorneo_IMG_1205.webp", "LauraTorneo_IMG_1206.webp",
+                    "LauraTorneo_IMG_1212.webp", "LauraTorneo_IMG_1215.webp", "LauraTorneo_IMG_1218.webp",
+                    "LauraTorneo_IMG_1219.webp", "LauraTorneo_IMG_1220.webp", "LauraTorneo_IMG_1221.webp",
+                    "LauraTorneo_IMG_1224.webp", "LauraTorneo_IMG_1226.webp", "LauraTorneo_IMG_1227.webp",
+                    "LauraTorneo_IMG_1231.webp", "LauraTorneo_IMG_1234.webp", "LauraTorneo_IMG_1237.webp",
+                    "LauraTorneo_IMG_1241.webp", "LauraTorneo_IMG_1244.webp", "LauraTorneo_IMG_1257.webp",
+                    "LauraTorneo_IMG_1259.webp", "LauraTorneo_IMG_1263.webp", "LauraTorneo_IMG_1264.webp",
+                    "LauraTorneo_IMG_1265.webp", "LauraTorneo_IMG_1268.webp", "LauraTorneo_IMG_1271.webp",
+                    "LauraTorneo_IMG_1275.webp", "LauraTorneo_IMG_1281.webp", "LauraTorneo_IMG_1282.webp",
+                    "LauraTorneo_IMG_1283.webp", "LauraTorneo_IMG_1284.webp", "LauraTorneo_IMG_1288.webp",
+                    "LauraTorneo_IMG_1292.webp", "LauraTorneo_IMG_1293.webp", "LauraTorneo_IMG_1301.webp",
+                    "LauraTorneo_IMG_1304.webp", "LauraTorneo_IMG_1309.webp", "LauraTorneo_IMG_1311.webp",
+                    "LauraTorneo_IMG_1314.webp", "LauraTorneo_IMG_1317.webp", "LauraTorneo_IMG_1322.webp",
+                    "LauraTorneo_IMG_1326.webp", "LauraTorneo_IMG_1331.webp", "LauraTorneo_IMG_1336.webp",
+                    "LauraTorneo_IMG_1341.webp", "LauraTorneo_IMG_1342.webp"
+                ]
             }
         ],
 
         carteles: [
             {
-                carpeta: "nodo",
+                carpeta: "3nodo",
                 portada: "Free_Poster_Mockup.webp",
                 titulo: "NODO",
                 descripcion: "Identidad para un colectivo anónimo y multidisciplinar que cruza música, tatuaje, graffiti, diseño y arte desde un tono crítico y activista. El sistema visual parte del nodo como punto de conexión invisible: eventos secretos, códigos, coordenadas y piezas gráficas que convierten la comunicación en exploración.",
@@ -197,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["carteles (1).webp", "carteles (2).webp", "carteles (3).webp", "carteles (4).webp", "Free_Poster_Mockup.webp", "Free_Poster_Mockup2.webp"]
             },
             {
-                carpeta: "teatros_canal",
+                carpeta: "1teatros_canal",
                 portada: "carteles (9).webp",
                 titulo: "Teatros Canal",
                 descripcion: "Cartelería para los Teatros Canal.",
@@ -205,7 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["carteles (5).webp", "carteles (6).webp", "carteles (7).webp", "carteles (8).webp", "carteles (9).webp", "carteles (10).webp"]
             },
             {
-                carpeta: "cata la lata",
+                carpeta: "2cata la lata",
                 portada: "TODO_1.webp",
                 titulo: "Cata la Lata",
                 descripcion: "Cata la Lata was my submission for the annual ANFACO seafood-can design competition. Instead of following the usual “serious food packaging” aesthetic, I wanted to do the complete opposite — something playful, colorful, and a bit childish in the best way possible. I created a visual identity that feels fun and energetic, using bright colors and simple illustrations to give the cans a personality of their own. My goal was to break away from the traditional, conservative look that most canned-food brands have, and show that packaging can be lighthearted and expressive without losing clarity. The whole project was about exploring how design can change the way we perceive everyday products. By giving the cans a cute, friendly vibe, I wanted to make them feel approachable and memorable — something you’d pick up not just for what’s inside, but because the outside makes you smile.",
@@ -213,7 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["TODO_1.webp", "mock_atun1.webp", "mock_mejillones1.webp", "mock_sardinillas1.webp"]
             },
             {
-                carpeta: "don pollo",
+                carpeta: "4don pollo",
                 portada: "DON POLLO.webp",
                 titulo: "Don Pollo",
                 descripcion: "Cartel para el documental Don Pollo, hecho por Kappah y estrenado en los Cines Callao.",
@@ -265,7 +326,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         ilustracion: [
             {
-                carpeta: "carta",
+                carpeta: "6carta",
                 portada: "ilustracion (8).webp",
                 titulo: "Carta Pokémon",
                 descripcion: "Ilustración inspirada en el universo Pokémon.",
@@ -273,12 +334,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["ilustracion (8).webp"]
             },
             {
-                carpeta: "nubi",
-                portada: "assets/diseno_web/nubi/NUBI.mp4",
+                carpeta: "1nubi",
+                portada: "NUBI.mp4",
                 titulo: "Nubi",
                 descripcion: "Nubi is a class project that came out of a collaboration between Illustration and Programming class. I wanted to create something small but charming, so I ended up designing a cute pixel-art world full of pastel colors and dreamy vibes. The story follows Nubi, the Dream Keeper, a little guardian who accidentally falls asleep on the job. Because of that, people start having nightmares, and everything in the dream world gets mixed up. Your mission as the player is to help her fix the mess by finding and matching the lost dreams in a memory-style game. I illustrated all the characters, icons, and environments in pixel art, focusing on soft palettes and cozy, magical atmospheres. The whole project was a way for me to explore how illustration can shape the mood of a game, even when the mechanics are super simple. It’s playful, sweet, and a bit nostalgic — exactly the kind of game I would’ve loved as a kid.",
                 herramientas: ["Procreate", "Illustrator", "Photoshop", "Visual Studio", "HTML", "CSS", "JS"],
-                imagenes: ["dibujos_nubi.webp", "dibujos_nubi2.webp", "assets/diseno_web/nubi/NUBI.mp4"]
+                imagenes: ["dibujos_nubi.webp", "dibujos_nubi2.webp", "NUBI.mp4"]
+            },
+            {
+                carpeta: "2_6Napse",
+                portada: "assets/diseno_web/6Napse/Pantalla_6Napse.mp4",
+                titulo: "6NAPSE — Juego ilustrado 8bit",
+                descripcion: "Videojuego narrativo y educativo sobre empatía, comunicación emocional y relaciones interpersonales, en estética pixel y modo historia con decisiones. El jugador conversa con seis personajes, cada uno con inseguridades y sensibilidades distintas, y debe elegir respuestas respetuosas para avanzar. La estética retro de terminal y el pixel art refuerzan la idea de 6NAPSE como conexión emocional entre sistemas. Juego: https://paulapeuve.github.io/6NAPSE/",
+                herramientas: ["Procreate", "HTML", "CSS", "JS"],
+                imagenes: [
+                    "assets/diseno_web/6Napse/Pantalla_6Napse.mp4",
+                    "assets/diseno_web/6Napse/6Napse_Port.webp",
+                    "assets/diseno_web/6Napse/6NapseBLACK.webp",
+                    "assets/diseno_web/6Napse/6NapseGREEN.webp"
+                ]
             },
             {
                 carpeta: "infografia",
@@ -375,7 +449,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         "3D": [
             {
-                carpeta: "camara",
+                carpeta: "3camara",
                 portada: "3d (3).webp",
                 titulo: "Cámara",
                 descripcion: "Modelado y render de cámara en Blender.",
@@ -383,7 +457,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["3d (3).webp", "3d (4).webp", "3d (6).webp"]
             },
             {
-                carpeta: "chupachups",
+                carpeta: "1chupachups",
                 portada: "3d (9).webp",
                 titulo: "Chupa Chups",
                 descripcion: "Modelado y render de producto Chupa Chups en Blender.",
@@ -391,7 +465,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["3d (9).webp", "3d (10).webp", "3d (11).webp"]
             },
             {
-                carpeta: "cartapokemon",
+                carpeta: "2cartapokemon",
                 portada: "3d (5).webp",
                 titulo: "Carta Pokémon",
                 descripcion: "Render 3D de carta Pokémon con materiales y iluminación.",
@@ -399,7 +473,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["3d (5).webp"]
             },
             {
-                carpeta: "trabajos de clase",
+                carpeta: "4trabajos de clase",
                 portada: "3d (1).webp",
                 titulo: "Trabajos de Clase",
                 descripcion: "Ejercicios y proyectos de 3D realizados en clase.",
@@ -410,7 +484,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         editorial: [
             {
-                carpeta: "fanzine1_LaMirada",
+                carpeta: "2_LaMirada",
                 portada: "editorial (10).webp",
                 titulo: "La Mirada",
                 descripcion: "Uno de los proyectos de los que más orgullosa estoy: mi fanzine para la asignatura de Sistemas de Reproducción. Trata uno de los temas que más me han obsesionado, la mirada. El librillo reúne imágenes propias editadas al detalle —con modelos y amigos— y reflexiones sobre la psicología y la simbología de cómo nos vemos a nosotros mismos y cómo nos ven los demás. Gracias especialmente a @_liraaa711 por protagonizar mi parte favorita del libro y por uno de los textos más bonitos que he recibido; a @saraavvs y @laestanqueradevnt por las fotos de portada, contraportada y packaging; y a todas las personas que han colaborado en este y otros proyectos.",
@@ -418,7 +492,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["editorial (10).webp", "editorial (11).webp", "editorial (12).webp", "editorial (13).webp", "editorial (14).webp", "editorial (15).webp"]
             },
             {
-                carpeta: "fanzine2_LaPerdidaDeUnoMismo",
+                carpeta: "1_LaPerdidaDeUnoMismo",
                 portada: "VIDEO_ZINEv1.mp4",
                 titulo: "La Pérdida de Uno Mismo",
                 descripcion: "This project was originally created for a production class, where the only strict requirement was to deliver a box with its fanzine and poster. I turned it into a full experimental piece about dissociation, identity, and the feeling of slowly losing your sense of self. I designed the box to look like a psychiatrist’s clinical briefcase, the kind that holds patient files, notes, and fragments of different identities. Inside, I included the main fanzine, a poster, a small clinical notebook, four ID cards, and twelve CDs with songs, films, and bands/singers that emotionally connect to the theme. Everything inside feels like evidence of someone trying to understand who they are. The fanzine mixes collage, photomontage, poetry, and short texts. I wanted it to feel intimate and a bit unsettling, like reading someone’s private thoughts or flipping through a mind that’s splitting into pieces. My goal wasn’t just to explain dissociation, but to make the viewer feel it: the fragmentation, the distance, the confusion, and the quiet ache of not recognizing yourself.",
@@ -435,7 +509,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ]
             },
             {
-                carpeta: "cocina",
+                carpeta: "4cocina",
                 portada: "editorial (1).webp",
                 titulo: "Sentimiento y Sabor",
                 descripcion: "Best Restaurants is an illustrated editorial project where I created a fictional collection of gastronomy books. Each book focuses on a different country, and the idea was to highlight five standout restaurants through a mix of illustration, storytelling, and design. For now, I fully developed the Spain volume, and I planned two more — Japan and Peru — which remain as concepts. The book includes illustrations of each chef, their signature dishes, and their restaurants, along with short descriptions and one recipe from each place. I wanted the whole thing to feel cohesive and visually striking, so I built a system that mixes bold colors, expressive drawings, and a clean layout that ties everything together. For me, this project was a way to explore how illustration can elevate editorial design and make information feel more personal and engaging. Instead of just listing restaurants, I wanted to capture the personality behind each chef and the atmosphere of their cuisine. It’s a playful, colorful take on gastronomy — something between a guidebook, an art book, and a collection of stories.",
@@ -452,7 +526,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ]
             },
             {
-                carpeta: "maquetacion para clase",
+                carpeta: "5maquetacion para clase",
                 portada: "editorial (8).webp",
                 titulo: "Maquetación para Clase",
                 descripcion: "Proyectos de diseño editorial realizados en clase.",
@@ -460,7 +534,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["editorial (8).webp", "editorial (9).webp"]
             },
             {
-                carpeta: "ciudades_invisibles",
+                carpeta: "3ciudades_invisibles",
                 portada: "",
                 pendiente: true,
                 titulo: "Ciudades invisibles",
@@ -472,8 +546,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         identidad_marca: [
             {
-                carpeta: "bit",
-                portada: "assets/video/BIT/Ident_01_PaulaPavia_BIT.mp4",
+                carpeta: "2bit",
+                portada: "Ident_01_PaulaPavia_BIT.mp4",
                 titulo: "BIT",
                 descripcion: "Identidad visual para un festival de competición de videojuegos retro, con cada edición centrada en un juego concreto. La edición parte de Street Fighter y combina estética maximalista, colores corporativos, tipografía contundente y tratamiento ASCII de imágenes para construir carteles, entradas, acreditaciones, pulseras, merch y aplicaciones de evento.",
                 herramientas: ["Illustrator", "InDesign"],
@@ -482,14 +556,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     "CAMISETAS_BIT.webp", "CANTIMPLORA_2025.webp", "ENTRADAS_SEPARADOS.webp",
                     "HORARIO.webp", "MOCK_3POSTER.webp", "Mupimetro_Jugadores.webp",
                     "MUPI_mock.webp", "PULSERAS_total.webp", "TOTE_BIT.webp", "streetfight.webp",
-                    "assets/video/BIT/Ident_01_PaulaPavia_BIT.mp4",
-                    "assets/video/BIT/Ident_02_PaulaPavia_BIT.mp4",
-                    "assets/video/BIT/Ident_03_PaulaPavia_BIT.mp4"
+                    "Ident_01_PaulaPavia_BIT.mp4",
+                    "Ident_02_PaulaPavia_BIT.mp4",
+                    "Ident_03_PaulaPavia_BIT.mp4"
                 ]
             },
             {
-                carpeta: "canal",
-                portada: "assets/video/CANAL/CANAL_Publi.mp4",
+                carpeta: "1canal",
+                portada: "CANAL_Publi.mp4",
                 titulo: "CANAL",
                 descripcion: "Rediseño de identidad para Teatros del Canal orientado a atraer a un público más joven. La propuesta parte del teatro como espacio de transformación, conexión y expresión colectiva, y construye una marca flexible y contemporánea —cercana, informal, juvenil y llamativa— alejándose de la estética elegante del teatro tradicional. El sistema combina color, expresiones y movimiento: un logotipo diagonal inspirado en el edificio, isotipos emocionales, paleta naranja y azul vinculada al metro Canal, retícula flexible e imágenes indexadas de alta expresividad. Todas las imágenes del proyecto fueron realizadas por mí, con la colaboración de modelos y amigos.",
                 herramientas: ["Illustrator", "InDesign", "After Effects"],
@@ -500,11 +574,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     "6_canal.webp", "7_canal.webp", "8_canal.webp", "9_canal.webp",
                     "Azuleja_CanalOBRA.webp", "gemelas_mupi_v3.webp", "LaPaz_Cartel.webp",
                     "Mesa de trabajo 4.webp", "metro2.webp", "metro3.webp", "Metro_ROBERTA.webp",
-                    "Ticket2.webp", "assets/video/CANAL/CANAL_Publi.mp4"
+                    "Ticket2.webp", "CANAL_Publi.mp4"
                 ]
             },
             {
-                carpeta: "cesida",
+                carpeta: "3cesida",
                 portada: "identidad (17).webp",
                 titulo: "CESIDA",
                 descripcion: "Rediseño de identidad para CESIDA orientado a construir una marca más empática, cercana y humana. La propuesta convierte la organización en una suma de caras, lazos y voces: un sistema visual basado en inclusión, foco y comunidad, con submarcas, paleta de pares cromáticos, cartelería, papelería, merch, web responsive y piezas audiovisuales para combatir el estigma y desmontar mitos sobre el VIH.",
@@ -528,7 +602,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ]
             },
             {
-                carpeta: "pv_pegas",
+                carpeta: "4pv_pegas",
                 portada: "",
                 pendiente: true,
                 titulo: "PV PEGAS",
@@ -539,6 +613,18 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
 
         edicion_imagen: [
+            {
+                carpeta: "AZUL",
+                portada: "PORATDA.webp",
+                titulo: "AZUL",
+                descripcion: "Edición de imagen para el proyecto AZUL (fotografía para fanzine).",
+                herramientas: ["Photoshop", "Lightroom"],
+                imagenes: [
+                    "PORATDA.webp", "Lola_3.webp", "Lola_5.webp", "LolaSara_1.webp",
+                    "Luci_1.webp", "Luci_2.webp", "Luci_3.webp", "Luci_4.webp", "Luci_5.webp",
+                    "LuciMarco_1.webp", "MC_1.webp", "MC_2.webp", "Rumi_Mc.webp", "SaraLola_1.webp"
+                ]
+            },
             {
                 carpeta: "claudia",
                 portada: "ClaudiaJon.webp",
@@ -588,6 +674,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 ]
             },
             {
+                carpeta: "FOTOS ENCARNA",
+                portada: "",
+                pendiente: true,
+                titulo: "Fotos Encarna",
+                descripcion: "Serie fotográfica hecha en el barrio de Vinateros: retratos de gente de la calle, desde una mirada cercana y documental al vecindario.",
+                herramientas: ["Photoshop", "Lightroom"],
+                imagenes: []
+            },
+            {
                 carpeta: "editadas (fotos de desi y henar)",
                 portada: "DSC_0452.webp",
                 titulo: "Desi y Henar",
@@ -623,7 +718,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         video: [
             {
-                carpeta: "BIT",
+                carpeta: "2bit",
                 portada: "Ident_01_PaulaPavia_BIT.mp4",
                 titulo: "BIT - Publicidad",
                 descripcion: "Piezas audiovisuales creadas para la identidad de BIT, un festival de competición de videojuegos retro. Las animaciones trasladan el sistema gráfico del proyecto a motion, manteniendo la energía arcade, el tratamiento ASCII y el universo visual de la edición centrada en Street Fighter.",
@@ -635,7 +730,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ]
             },
             {
-                carpeta: "CANAL",
+                carpeta: "3CANAL",
                 portada: "CANAL_Publi.mp4",
                 titulo: "CANAL - Publicidad",
                 descripcion: "Pieza audiovisual para la nueva identidad de Teatros del Canal. El motion traslada el tono juvenil, expresivo y directo de la marca a vídeo, usando color, ritmo e impacto visual para presentar el teatro como un espacio vivo, inclusivo y preparado para nuevas generaciones.",
@@ -651,7 +746,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagenes: ["lo-opuesto-portada.webp", "lo-opuesto-proceso.webp"]
             },
                         {
-                carpeta: "RADIO3",
+                carpeta: "4RADIO3",
                 portada: "IDENTLargo_Radio3.mp4",
                 titulo: "Radio 3",
                 descripcion: "Identidad audiovisual y piezas de motion para Radio 3.",
@@ -679,7 +774,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ]
             },
               {
-                carpeta: "Bien",
+                carpeta: "1Bien",
                 portada: "Bien_publi.mp4",
                 titulo: "Bien Publicidad",
                 descripcion: "Pieza audiovisual realizada como proyecto independiente.",
@@ -740,13 +835,13 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     galleries.protagonistas = [
-        asProtagonista("editorial", pickProyecto("editorial", "fanzine2_LaPerdidaDeUnoMismo")), // La Pérdida de Uno Mismo
-        asProtagonista("identidad_marca", pickProyecto("identidad_marca", "bit")), // BIT
-        asProtagonista("identidad_marca", pickProyecto("identidad_marca", "canal")), // CANAL
-        asProtagonista("identidad_marca", pickProyecto("identidad_marca", "cesida")), // CESIDA
+        asProtagonista("editorial", pickProyecto("editorial", "1_LaPerdidaDeUnoMismo")), // La Pérdida de Uno Mismo
+        asProtagonista("identidad_marca", pickProyecto("identidad_marca", "2bit")), // BIT
+        asProtagonista("identidad_marca", pickProyecto("identidad_marca", "1canal")), // CANAL
+        asProtagonista("identidad_marca", pickProyecto("identidad_marca", "3cesida")), // CESIDA
         asProtagonista("tipografia", pickProyecto("tipografia", "galaktype")), // GALAKTYPE
-        asProtagonista("editorial", pickProyecto("editorial", "fanzine1_LaMirada")), // La Mirada
-        asProtagonista("carteles", pickProyecto("carteles", "cata la lata")), // Cata la Lata
+        asProtagonista("editorial", pickProyecto("editorial", "2_LaMirada")), // La Mirada
+        asProtagonista("carteles", pickProyecto("carteles", "2cata la lata")), // Cata la Lata
 
         // Diseño Web (últimos dos, en este orden) — no duplicar assets.
         asProtagonista("diseno_web", pickProyecto("diseno_web", "nubi")), // Nubi
@@ -770,14 +865,36 @@ document.addEventListener("DOMContentLoaded", function () {
         return value[currentLang] || value.es || value.en || fallback || "";
     }
 
+    function carpetaSlug(carpeta) {
+        return String(carpeta || "").replace(/^(?:\d+\.)?\d+_?/, "");
+    }
+
+    function carpetaOrder(carpeta) {
+        const m = String(carpeta || "").match(/^(\d+(?:\.\d+)?)/);
+        return m ? parseFloat(m[1]) : 1000;
+    }
+
+    function orderedProjects(proyectos) {
+        return (proyectos || []).slice().sort((a, b) => carpetaOrder(a.carpeta) - carpetaOrder(b.carpeta));
+    }
+
     function projectMap(proyecto) {
         const projects = window.PEUVE_PROJECTS || {};
         const key = proyecto && proyecto.carpeta;
         if (!key) return null;
-        if (projects[key]) return projects[key];
-        const lower = String(key).toLowerCase();
-        const found = Object.keys(projects).find(k => k.toLowerCase() === lower);
-        return found ? projects[found] : null;
+        const aliases = {
+            "1_LaPerdidaDeUnoMismo": "fanzine2_LaPerdidaDeUnoMismo",
+            LaPerdidaDeUnoMismo: "fanzine2_LaPerdidaDeUnoMismo",
+            "2_LaMirada": "fanzine1_LaMirada",
+            LaMirada: "fanzine1_LaMirada"
+        };
+        const candidates = [key, aliases[key], carpetaSlug(key), aliases[carpetaSlug(key)]].filter(Boolean);
+        for (const candidate of candidates) {
+            if (projects[candidate]) return projects[candidate];
+            const found = Object.keys(projects).find(k => k.toLowerCase() === String(candidate).toLowerCase());
+            if (found) return projects[found];
+        }
+        return null;
     }
 
     function projectTitle(proyecto) {
@@ -1037,7 +1154,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sobreMiSection.style.removeProperty("--sobre-top");
         sobreMiSection.style.removeProperty("--sobre-bottom");
 
-        const proyectos = galleries[categoria];
+        const proyectos = orderedProjects(galleries[categoria]);
         if (!proyectos) return;
 
         const wrapper = document.querySelector(".swiper-wrapper");
