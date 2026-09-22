@@ -90,6 +90,10 @@ window.PEUVE_I18N = {
                     "Originalidad · Proactividad · Creatividad"
                 ]
             },
+            specialization: {
+                title: "Especialización e intereses",
+                body: "Le interesa el <strong>diseño experimental</strong>, la <strong>creación de fanzines</strong> y el <strong>diseño emocional</strong> que busque <strong>cambio en la gente</strong>."
+            },
             education: {
                 title: "Educación",
                 items: [
@@ -298,6 +302,10 @@ window.PEUVE_I18N = {
                     "Digital organization (Figma, Notion)",
                     "Originality · Proactivity · Creativity"
                 ]
+            },
+            specialization: {
+                title: "Specialization and interests",
+                body: "Drawn to <strong>experimental design</strong>, <strong>fanzine-making</strong> and <strong>emotional design</strong> that seeks to <strong>change people</strong>."
             },
             education: {
                 title: "Education",

@@ -1530,6 +1530,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         <ul class="cv-bullets">${listItems(cv.skills.items)}</ul>
                     </section>
                     <section class="cv-section">
+                        <h3 class="cv-section-title">${cv.specialization.title}</h3>
+                        <p class="cv-entry-detail">${cv.specialization.body}</p>
+                    </section>
+                    <section class="cv-section">
                         <h3 class="cv-section-title">${cv.education.title}</h3>
                         ${educationHtml}
                     </section>
