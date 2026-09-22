@@ -1398,9 +1398,14 @@ body.view-huella #huella-section {
 }
 
 
-/* ── RESPONSIVE: TABLET (≤ 1125px) ──────────────────────────────────────── */
+/* ── RESPONSIVE: TABLET ─────────────────────────────────────────────────────
+ * Always ≤1125px, OR ≤1366px with coarse pointer / no hover (real iPads,
+ * including Pro landscape 1194 / 1366). Keeps mouse desktops at 1280–1366
+ * on the desktop layout. Mobile (≤768) still overrides below.
+ */
 
-@media (max-width: 1125px) {
+@media (max-width: 1125px),
+(max-width: 1366px) and (hover: none) and (pointer: coarse) {
 
     html,
     body {
@@ -1451,7 +1456,8 @@ body.view-huella #huella-section {
         padding-right: 0;
     }
 
-    /* Menu sits above .bot-bar (JS pin sets top in px; bottom is CSS fallback) */
+    /* Menu sits above .bot-bar (JS sets bottom from bot.offsetHeight; CSS fallback).
+       After intro, force top:auto so leftover vh/px tops cannot float mid-screen. */
     .main-menu {
         position: fixed;
         top: auto;
@@ -1471,13 +1477,22 @@ body.view-huella #huella-section {
         -webkit-overflow-scrolling: touch;
     }
 
+    /* Intro still animates with top:vh — don't pin bottom until intro ends */
+    body:not(.intro-done) .main-menu {
+        bottom: auto;
+    }
+
+    body.intro-done .main-menu {
+        top: auto !important;
+    }
+
     .main-menu a {
         font-size: inherit;
     }
 
     body.view-sobre-mi .main-menu,
     body.view-huella .main-menu {
-        top: auto;
+        top: auto !important;
         bottom: 56px;
     }
 

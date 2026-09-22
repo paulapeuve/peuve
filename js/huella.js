@@ -1608,7 +1608,12 @@
     function layout() {
         const section = $("huella-section");
         if (!section || !document.body.classList.contains("view-huella")) return;
-        if (window.innerWidth <= 1125) {
+        const isDesktop = typeof window.PEUVE_isDesktopLayout === "function"
+            ? window.PEUVE_isDesktopLayout()
+            : window.innerWidth > 1125;
+        if (!isDesktop) {
+            section.style.removeProperty("--huella-top");
+            section.style.removeProperty("--huella-bottom");
             queueSync();
             return;
         }
@@ -1738,13 +1743,9 @@
 
         const menu = document.querySelector(".main-menu");
         // Tablet + desktop share bottom-pinned menu (phones use hamburger)
-        if (menu && window.innerWidth > 768) {
-            const topVal = menu.style.top;
-            const topNum = parseFloat(topVal);
-            if (!topVal || (topVal.endsWith("vh") && topNum < 60) || (topVal.endsWith("px") && topNum < window.innerHeight * 0.55)) {
-                if (typeof window.PEUVE_pinDesktopMenuToBot === "function") {
-                    window.PEUVE_pinDesktopMenuToBot();
-                }
+        if (menu && (typeof window.PEUVE_isMobileLayout !== "function" || !window.PEUVE_isMobileLayout())) {
+            if (typeof window.PEUVE_pinDesktopMenuToBot === "function") {
+                window.PEUVE_pinDesktopMenuToBot();
             }
             menu.style.transform = "";
             menu.style.transition = "";

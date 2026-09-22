@@ -1,10 +1,49 @@
 /**
- * Desktop + tablet (>768px): place .main-menu so its bottom border overlaps
- * .bot-bar's top border. Phones (≤768) use the hamburger panel instead.
+ * Layout modes
+ * ────────────
+ * Mobile  ≤768: hamburger panel.
+ * Tablet  769–1125 always, OR ≤1366 with (hover: none) + (pointer: coarse):
+ *   covers real iPads (incl. Pro landscape 1194 / 1366) without treating
+ *   typical Windows mouse desktops / hover-capable touch laptops as tablet.
+ * Desktop: everything else above 768 that is not tablet.
+ */
+window.PEUVE_isMobileLayout = function isMobileLayout() {
+    return window.innerWidth <= 768;
+};
+
+window.PEUVE_isTabletLayout = function isTabletLayout() {
+    const w = window.innerWidth;
+    if (w <= 768) return false;
+    if (w <= 1125) return true;
+    if (w <= 1366) {
+        try {
+            return window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+        } catch (_) {
+            return false;
+        }
+    }
+    return false;
+};
+
+window.PEUVE_isDesktopLayout = function isDesktopLayout() {
+    return window.innerWidth > 768 && !window.PEUVE_isTabletLayout();
+};
+
+/**
+ * Desktop: place .main-menu so its bottom border overlaps .bot-bar's top border
+ * (top in px from innerHeight).
+ * Tablet: anchor with bottom = bot height (avoids iOS innerHeight / 100vh gaps
+ * that looked like a useless empty strip under a “desktop-like” menu).
+ * Phones (≤768) use the hamburger panel instead.
  * Safe to call after intro and on resize / lang change.
  */
 window.PEUVE_pinDesktopMenuToBot = function pinDesktopMenuToBot() {
-    if (window.innerWidth <= 768) {
+    if (window.PEUVE_isMobileLayout()) {
+        const menu = document.querySelector(".main-menu");
+        if (menu) {
+            menu.style.top = "";
+            menu.style.bottom = "";
+        }
         if (typeof window.PEUVE_syncStackPadding === "function") {
             window.PEUVE_syncStackPadding();
         }
@@ -14,6 +53,17 @@ window.PEUVE_pinDesktopMenuToBot = function pinDesktopMenuToBot() {
     const bot = document.querySelector(".bot-bar");
     if (!menu || !bot) return false;
     const borderOverlap = 5;
+
+    if (window.PEUVE_isTabletLayout()) {
+        // CSS also sets bottom; inline keeps flush when bot-bar grows (safe-area / wrap).
+        menu.style.top = "auto";
+        menu.style.bottom = `${Math.max(0, Math.round(bot.offsetHeight - borderOverlap))}px`;
+        if (typeof window.PEUVE_syncStackPadding === "function") {
+            window.PEUVE_syncStackPadding();
+        }
+        return true;
+    }
+
     const top = Math.round(window.innerHeight - bot.offsetHeight - menu.offsetHeight + borderOverlap);
     menu.style.bottom = "";
     menu.style.top = `${Math.max(0, top)}px`;
@@ -30,16 +80,19 @@ window.PEUVE_syncStackPadding = function syncStackPadding() {
     const root = document.documentElement;
     const bot = document.querySelector(".bot-bar");
     if (!bot) return;
-    const botH = Math.max(bot.offsetHeight || 0, window.innerWidth <= 768 ? 48 : 56);
+
+    if (window.PEUVE_isDesktopLayout()) {
+        root.style.removeProperty("--peuve-stack-bottom");
+        return;
+    }
+
+    const botH = Math.max(bot.offsetHeight || 0, window.PEUVE_isMobileLayout() ? 48 : 56);
     let stack = botH + 24;
-    if (window.innerWidth > 768 && window.innerWidth <= 1125) {
+    if (window.PEUVE_isTabletLayout()) {
         const menu = document.querySelector(".main-menu");
         if (menu && getComputedStyle(menu).display !== "none") {
             stack = botH + Math.max(menu.offsetHeight || 0, 48) + 24;
         }
-    } else if (window.innerWidth > 1125) {
-        root.style.removeProperty("--peuve-stack-bottom");
-        return;
     }
     root.style.setProperty("--peuve-stack-bottom", `${Math.round(stack)}px`);
 };
@@ -954,29 +1007,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ── SWIPER ───────────────────────────────────────────────────────────────
-    // Desktop (>1125): horizontal freeMode carousel.
-    // Tablet/mobile (≤1125): CSS vertical stack — keep Swiper disabled so it
+    // Desktop: horizontal freeMode carousel.
+    // Tablet/mobile: CSS vertical stack — keep Swiper disabled so it
     // does not fight page scroll with horizontal transforms.
-    const GALLERY_STACK_MAX = 1125;
+    // Tablet includes iPad landscape via PEUVE_isTabletLayout (≤1366 + coarse).
     const swiper = new Swiper(".mySwiper", {
         slidesPerView: "auto",
         freeMode: true,
         spaceBetween: 12,
         grabCursor: true,
         scrollbar: { el: ".swiper-scrollbar", draggable: true },
-        enabled: window.innerWidth > GALLERY_STACK_MAX
+        enabled: window.PEUVE_isDesktopLayout()
     });
 
     function syncGallerySwiperMode() {
-        const stacked = window.innerWidth <= GALLERY_STACK_MAX;
+        const stacked = !window.PEUVE_isDesktopLayout();
         if (stacked) {
             if (swiper.enabled) swiper.disable();
+            // Clear leftover freeMode transforms so CSS column stack wins.
+            const wrapper = document.querySelector(".mySwiper .swiper-wrapper");
+            if (wrapper) {
+                wrapper.style.transform = "";
+                wrapper.style.transitionDuration = "";
+            }
         } else if (!swiper.enabled) {
             swiper.enable();
             swiper.update();
         }
     }
     window.addEventListener("resize", syncGallerySwiperMode);
+    window.PEUVE_syncGallerySwiperMode = syncGallerySwiperMode;
 
 
     // ── VISOR DE IMAGEN (zoom desde popup) ───────────────────────────────────
@@ -1113,12 +1173,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const menu = document.querySelector(".main-menu");
             if (menu) {
                 // Misma posición que el resto de secciones (flush sobre el bot-bar)
-                if (window.innerWidth > 768) {
-                    const topVal = menu.style.top;
-                    const topNum = parseFloat(topVal);
-                    if (!topVal || (topVal.endsWith("vh") && topNum < 60) || (topVal.endsWith("px") && topNum < window.innerHeight * 0.55)) {
-                        window.PEUVE_pinDesktopMenuToBot();
-                    }
+                if (!window.PEUVE_isMobileLayout()) {
+                    window.PEUVE_pinDesktopMenuToBot();
                 }
                 menu.style.transform = "";
                 menu.style.transition = "";
@@ -1126,9 +1182,13 @@ document.addEventListener("DOMContentLoaded", function () {
             // Encaja el bloque entre header y menú (no entre menú y bot)
             const layoutSobreMi = () => {
                 if (!document.body.classList.contains("view-sobre-mi")) return;
-                if (window.innerWidth > 768) window.PEUVE_pinDesktopMenuToBot();
+                if (!window.PEUVE_isMobileLayout()) window.PEUVE_pinDesktopMenuToBot();
                 // On tablet/phone, CSS stacks the section — skip desktop height fitting
-                if (window.innerWidth <= 1125) return;
+                if (!window.PEUVE_isDesktopLayout()) {
+                    sobreMiSection.style.removeProperty("--sobre-top");
+                    sobreMiSection.style.removeProperty("--sobre-bottom");
+                    return;
+                }
                 const header = document.querySelector("header");
                 const menuEl = document.querySelector(".main-menu");
                 const top = (header?.getBoundingClientRect().bottom || 64) + 8;
@@ -1471,7 +1531,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const botBar = document.querySelector(".bot-bar");
     const whiteCover = document.getElementById("intro-white-cover");
 
-    const esMobile = () => window.innerWidth <= 768;
+    const esMobile = () => window.PEUVE_isMobileLayout();
 
     if (esMobile()) {
         if (botBar) {
@@ -1513,8 +1573,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 botBar.style.transform = "";
             }
         } else {
-            // Menú flush sobre el bot-bar (bordes inferior/superior coinciden)
-            // Works for desktop (>1125) and tablet (769–1125)
+            // Menú flush sobre el bot-bar (desktop top-pin / tablet bottom-pin)
             if (!window.PEUVE_pinDesktopMenuToBot()) {
                 menuEl.style.bottom = "";
                 menuEl.style.top = "76vh";
@@ -1523,6 +1582,9 @@ document.addEventListener("DOMContentLoaded", function () {
             menuEl.style.transition = "";
         }
 
+        if (typeof window.PEUVE_syncGallerySwiperMode === "function") {
+            window.PEUVE_syncGallerySwiperMode();
+        }
         if (typeof window.PEUVE_syncStackPadding === "function") {
             requestAnimationFrame(() => window.PEUVE_syncStackPadding());
         }
@@ -1530,7 +1592,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.addEventListener("resize", () => {
         if (!document.body.classList.contains("intro-done")) return;
+        if (typeof window.PEUVE_syncGallerySwiperMode === "function") {
+            window.PEUVE_syncGallerySwiperMode();
+        }
         if (esMobile()) {
+            if (menuEl) {
+                menuEl.style.top = "";
+                menuEl.style.bottom = "";
+            }
             if (typeof window.PEUVE_syncStackPadding === "function") {
                 window.PEUVE_syncStackPadding();
             }
