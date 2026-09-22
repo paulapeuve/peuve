@@ -1610,7 +1610,7 @@
         if (!section || !document.body.classList.contains("view-huella")) return;
         const isDesktop = typeof window.PEUVE_isDesktopLayout === "function"
             ? window.PEUVE_isDesktopLayout()
-            : window.innerWidth > 1125;
+            : window.innerWidth > 1366;
         if (!isDesktop) {
             section.style.removeProperty("--huella-top");
             section.style.removeProperty("--huella-bottom");
@@ -1742,7 +1742,7 @@
         document.body.classList.remove("view-sobre-mi");
 
         const menu = document.querySelector(".main-menu");
-        // Tablet + desktop share bottom-pinned menu (phones use hamburger)
+        // Desktop pins text menu; compact uses hamburger (main-menu hidden)
         if (menu && (typeof window.PEUVE_isMobileLayout !== "function" || !window.PEUVE_isMobileLayout())) {
             if (typeof window.PEUVE_pinDesktopMenuToBot === "function") {
                 window.PEUVE_pinDesktopMenuToBot();

@@ -593,9 +593,103 @@ body.view-sobre-mi #sobre-mi-section {
     box-sizing: border-box;
 }
 
-.sobre-card--profile2 .contact-btn {
+.sobre-mi-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
     flex-shrink: 0;
     margin-top: auto;
+    padding-top: 4px;
+}
+
+.sobre-card--profile2 .contact-btn {
+    flex-shrink: 0;
+    margin-top: 0;
+}
+
+.contact-btn--ghost {
+    background: transparent;
+    color: var(--fg);
+    border: 2px solid var(--border);
+}
+
+.contact-btn--ghost:hover {
+    background: var(--pill-hover-bg);
+    color: var(--fg);
+    border: 2px solid var(--border);
+}
+
+.cv-doc {
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+    max-width: 42rem;
+}
+
+.cv-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.cv-section-title {
+    margin: 0;
+    font-weight: 600;
+    font-size: clamp(15px, 1.15vw, 18px);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--fg);
+    padding-bottom: 0.35rem;
+    border-bottom: 1.5px solid var(--border);
+}
+
+.cv-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 0.35rem;
+}
+
+.cv-entry + .cv-entry {
+    margin-top: 0.75rem;
+}
+
+.cv-entry-title {
+    margin: 0;
+    font-weight: 600;
+    font-size: clamp(14px, 1.05vw, 16px);
+    color: var(--fg);
+    line-height: 1.35;
+}
+
+.cv-entry-meta {
+    margin: 0;
+    font-size: clamp(12px, 0.95vw, 14px);
+    color: var(--muted);
+    line-height: 1.4;
+}
+
+.cv-entry-detail {
+    margin: 0.15rem 0 0;
+    font-size: clamp(13px, 1vw, 15px);
+    color: var(--fg);
+    line-height: 1.55;
+    opacity: 0.92;
+}
+
+.cv-bullets {
+    margin: 0.15rem 0 0;
+    padding: 0 0 0 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+}
+
+.cv-bullets li {
+    font-size: clamp(13px, 1vw, 15px);
+    color: var(--fg);
+    line-height: 1.5;
 }
 
 
@@ -1398,321 +1492,16 @@ body.view-huella #huella-section {
 }
 
 
-/* ── RESPONSIVE: TABLET ─────────────────────────────────────────────────────
- * Always ≤1125px, OR ≤1366px with coarse pointer / no hover (real iPads,
- * including Pro landscape 1194 / 1366). Keeps mouse desktops at 1280–1366
- * on the desktop layout. Mobile (≤768) still overrides below.
+/* ── RESPONSIVE: COMPACT (phone + tablet + medium) ─────────────────────────
+ * Hamburger + 2-col masonry. Matches PEUVE_isMobileLayout() / !isDesktopLayout():
+ *   — always ≤1125px
+ *   — also ≤1366px if hover:none OR pointer:coarse (iPad / touch-first)
+ * Desktop (horizontal Swiper + text category menu) is everything else.
  */
 
 @media (max-width: 1125px),
-(max-width: 1366px) and (hover: none) and (pointer: coarse) {
-
-    html,
-    body {
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        max-width: 100%;
-        min-height: 56px;
-        padding: 0.8rem 16px;
-        border-bottom: 3px solid var(--border);
-        box-sizing: border-box;
-        z-index: 1000;
-        background: var(--bg);
-    }
-
-    .spacer {
-        display: none;
-    }
-
-    .header-left,
-    .header-center,
-    .header-right,
-    .bot-left,
-    .bot-right {
-        font-size: clamp(16px, 2.6vw, 28px);
-    }
-
-    .header-left,
-    .header-center,
-    .header-right {
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .header-left {
-        padding-left: 0;
-    }
-
-    .header-right {
-        padding-right: 0;
-    }
-
-    /* Menu sits above .bot-bar (JS sets bottom from bot.offsetHeight; CSS fallback).
-       After intro, force top:auto so leftover vh/px tops cannot float mid-screen. */
-    .main-menu {
-        position: fixed;
-        top: auto;
-        bottom: 56px;
-        left: 0;
-        width: 100%;
-        max-width: 100%;
-        font-size: clamp(14px, 2vw, 20px);
-        padding: 0.65rem 16px;
-        box-sizing: border-box;
-        z-index: 999;
-        white-space: normal;
-        line-height: 1.35;
-        max-height: calc(100vh - 56px - 56px);
-        overflow-x: hidden;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    /* Intro still animates with top:vh — don't pin bottom until intro ends */
-    body:not(.intro-done) .main-menu {
-        bottom: auto;
-    }
-
-    body.intro-done .main-menu {
-        top: auto !important;
-    }
-
-    .main-menu a {
-        font-size: inherit;
-    }
-
-    body.view-sobre-mi .main-menu,
-    body.view-huella .main-menu {
-        top: auto !important;
-        bottom: 56px;
-    }
-
-    body.view-huella {
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-
-    body.view-huella #huella-section {
-        position: relative;
-        inset: auto;
-        z-index: 1;
-        display: block !important;
-        height: auto;
-        min-height: 0;
-        padding: 5rem 16px var(--peuve-stack-bottom, 9.5rem);
-        overflow: visible;
-        background: transparent;
-    }
-
-    .huella-layout {
-        width: 100% !important;
-        max-width: 100% !important;
-        height: auto !important;
-        grid-template-columns: 1fr;
-        overflow: visible;
-    }
-
-    .huella-studio,
-    .huella-wall-panel {
-        overflow: visible;
-    }
-
-    .huella-canvas-wrap {
-        max-height: 52vh;
-        min-height: 220px;
-        width: min(100%, calc(52vh * 720 / 420));
-    }
-
-    .huella-fields {
-        flex-wrap: wrap;
-    }
-
-    .huella-fields .huella-field {
-        flex: 1 1 calc(50% - 0.35rem);
-        min-width: 140px;
-    }
-
-    .huella-wall {
-        overflow: visible;
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    }
-
-    .bot-bar {
-        position: fixed;
-        left: 0;
-        width: 100%;
-        max-width: 100%;
-        min-height: 56px;
-        padding: 0.6rem 16px;
-        padding-bottom: max(0.6rem, env(safe-area-inset-bottom, 0px));
-        box-sizing: border-box;
-        align-items: center;
-    }
-
-    .bot-left {
-        padding-left: 0;
-    }
-
-    .bot-right {
-        padding-right: 0;
-    }
-
-    .lang-toggle,
-    .bot-divider {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-
-    /* Gallery: vertical stack (full-width cards), not horizontal swiper */
-    #galeria {
-        box-sizing: border-box;
-        width: 100%;
-        max-width: 100%;
-        padding: 5rem 16px var(--peuve-stack-bottom, 9.5rem);
-        overflow-x: hidden;
-        overflow-y: visible;
-    }
-
-    .swiper.mySwiper {
-        overflow: visible;
-        width: 100%;
-    }
-
-    .swiper-wrapper {
-        display: flex !important;
-        flex-direction: column !important;
-        transform: none !important;
-        transition: none !important;
-        width: 100%;
-        height: auto !important;
-    }
-
-    .swiper-slide {
-        width: 100% !important;
-        max-width: 100%;
-        margin-right: 0 !important;
-        margin-bottom: 1.25rem;
-        height: auto;
-    }
-
-    .swiper-slide img,
-    .swiper-slide .slide-video {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        --slide-h: auto;
-        box-sizing: border-box;
-    }
-
-    .swiper-slide .slide-video {
-        aspect-ratio: 16 / 9;
-        object-fit: cover;
-        background: #000;
-    }
-
-    .swiper-scrollbar {
-        display: none !important;
-    }
-
-    .slide-label {
-        font-size: clamp(12px, 1.6vw, 15px);
-        padding: 0.35rem 0 0;
-    }
-
-    #animation-img {
-        width: min(90vw, 520px);
-        padding-top: 20vh;
-        max-height: 55vh;
-        object-fit: contain;
-    }
-
-    body.view-sobre-mi {
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-
-    body.view-sobre-mi #sobre-mi-section {
-        position: relative;
-        inset: auto;
-        z-index: 1;
-        display: block !important;
-        height: auto;
-        min-height: 0;
-        padding: 5rem 16px var(--peuve-stack-bottom, 9.5rem);
-        overflow: visible;
-        background: transparent;
-    }
-
-    .sobre-mi-layout,
-    .sobre-mi-big {
-        width: 100% !important;
-        max-width: 100% !important;
-        height: auto !important;
-        min-height: 0;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        grid-template-areas:
-            "foto"
-            "programs"
-            "profile";
-        gap: 0.85rem;
-        align-items: stretch;
-    }
-
-    .sobre-mi-foto-grande {
-        height: auto;
-        border-width: 3px;
-        border-radius: 16px;
-        background: #000;
-    }
-
-    .sobre-mi-img-grande {
-        width: 100%;
-        height: auto;
-        min-height: 220px;
-        max-height: 42vh;
-        aspect-ratio: 16 / 10;
-        object-fit: cover;
-        object-position: center center;
-    }
-
-    .sobre-card--programs {
-        max-height: none;
-        overflow: visible;
-    }
-
-    .sobre-card--profile2 {
-        overflow: visible;
-        display: block;
-    }
-
-    .sobre-mi-desc {
-        overflow: visible;
-        flex: none;
-    }
-
-    .sobre-card {
-        overflow: visible;
-    }
-
-    .popup-images-grid {
-        columns: 2;
-    }
-}
-
-
-/* ── RESPONSIVE: MÓVIL (≤ 768px) ────────────────────────────────────────── */
-
-@media (max-width: 768px) {
+(max-width: 1366px) and (hover: none),
+(max-width: 1366px) and (pointer: coarse) {
 
     html,
     body {
@@ -2199,6 +1988,29 @@ body.view-huella #huella-section {
         border-width: 1.5px;
     }
 
+    .sobre-mi-actions {
+        margin-top: 12px;
+    }
+
+    .cv-doc {
+        max-width: 100%;
+        gap: 1.15rem;
+    }
+
+    .cv-section-title {
+        font-size: clamp(13px, 3.5vw, 15px);
+    }
+
+    .cv-entry-title {
+        font-size: clamp(13px, 3.4vw, 15px);
+    }
+
+    .cv-entry-meta,
+    .cv-entry-detail,
+    .cv-bullets li {
+        font-size: clamp(12px, 3.2vw, 14px);
+    }
+
     .contact-btn {
         width: auto;
         max-width: 100%;
@@ -2228,6 +2040,56 @@ body.view-huella #huella-section {
 
     .popup-images-grid {
         columns: 1;
+    }
+}
+
+/* Compact tablet / medium: a bit more air than phone (still hamburger + 2-col) */
+@media (min-width: 600px) and (max-width: 1125px),
+(min-width: 600px) and (max-width: 1366px) and (hover: none),
+(min-width: 600px) and (max-width: 1366px) and (pointer: coarse) {
+    header {
+        height: 56px;
+        min-height: 56px;
+        padding: 0 56px 0 16px;
+    }
+
+    .header-left,
+    .header-center,
+    .header-right {
+        font-size: clamp(15px, 2.2vw, 20px) !important;
+    }
+
+    .mobile-menu-btn {
+        font-size: 26px;
+        right: 6px;
+    }
+
+    .mobile-menu-panel {
+        top: calc(56px + env(safe-area-inset-top, 0px));
+        max-height: calc(100vh - 56px - 56px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    }
+
+    #galeria {
+        padding: 72px 16px var(--peuve-stack-bottom, 80px);
+    }
+
+    .swiper-wrapper {
+        column-gap: 14px;
+    }
+
+    .slide-label {
+        font-size: 13px;
+    }
+
+    .bot-bar {
+        min-height: 56px;
+        padding: 0.55rem 16px;
+        padding-bottom: max(0.55rem, env(safe-area-inset-bottom, 0px));
+    }
+
+    .bot-left,
+    .bot-right {
+        font-size: clamp(15px, 2.2vw, 20px) !important;
     }
 }
 

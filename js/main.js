@@ -1,45 +1,50 @@
 /**
  * Layout modes
  * ────────────
- * Mobile  ≤768: hamburger panel.
- * Tablet  769–1125 always, OR ≤1366 with (hover: none) + (pointer: coarse):
- *   covers real iPads (incl. Pro landscape 1194 / 1366) without treating
- *   typical Windows mouse desktops / hover-capable touch laptops as tablet.
- * Desktop: everything else above 768 that is not tablet.
+ * Compact (phone + tablet + medium): hamburger + 2-col masonry.
+ *   — always when width ≤ 1125
+ *   — also when width ≤ 1366 with touch-first input (iPad Pro landscape, etc.)
+ * Desktop (Swiper horizontal + text category menu): clearly large + mouse.
+ *   — width > 1366, or 1126–1366 without (hover: none / pointer: coarse)
+ *
+ * There is no hybrid “tablet” mode (text menu + single stack + empty strip).
  */
-window.PEUVE_isMobileLayout = function isMobileLayout() {
-    return window.innerWidth <= 768;
-};
-
-window.PEUVE_isTabletLayout = function isTabletLayout() {
+window.PEUVE_isDesktopLayout = function isDesktopLayout() {
     const w = window.innerWidth;
-    if (w <= 768) return false;
-    if (w <= 1125) return true;
-    if (w <= 1366) {
-        try {
-            return window.matchMedia("(hover: none) and (pointer: coarse)").matches;
-        } catch (_) {
+    if (w <= 1125) return false;
+    if (w > 1366) return true;
+    // 1126–1366: mouse desktop only. No-hover / coarse primary → compact (iPad).
+    try {
+        if (window.matchMedia("(hover: none), (pointer: coarse)").matches) {
             return false;
         }
+        return true;
+    } catch (_) {
+        return false;
     }
-    return false;
 };
 
-window.PEUVE_isDesktopLayout = function isDesktopLayout() {
-    return window.innerWidth > 768 && !window.PEUVE_isTabletLayout();
+/** Compact layout: hamburger + masonry (everything that is not true desktop). */
+window.PEUVE_isMobileLayout = function isMobileLayout() {
+    return !window.PEUVE_isDesktopLayout();
 };
 
 /**
- * Desktop: place .main-menu so its bottom border overlaps .bot-bar's top border
- * (top in px from innerHeight).
- * Tablet: anchor with bottom = bot height (avoids iOS innerHeight / 100vh gaps
- * that looked like a useless empty strip under a “desktop-like” menu).
- * Phones (≤768) use the hamburger panel instead.
+ * @deprecated Hybrid tablet layout removed. Always false; kept so older
+ * callers do not throw. Compact viewports use PEUVE_isMobileLayout().
+ */
+window.PEUVE_isTabletLayout = function isTabletLayout() {
+    return false;
+};
+
+/**
+ * Desktop only: place .main-menu so its bottom border overlaps .bot-bar's top.
+ * Compact (hamburger) clears any leftover top/bottom from intro / resize.
  * Safe to call after intro and on resize / lang change.
  */
 window.PEUVE_pinDesktopMenuToBot = function pinDesktopMenuToBot() {
-    if (window.PEUVE_isMobileLayout()) {
-        const menu = document.querySelector(".main-menu");
+    const menu = document.querySelector(".main-menu");
+    if (!window.PEUVE_isDesktopLayout()) {
         if (menu) {
             menu.style.top = "";
             menu.style.bottom = "";
@@ -49,21 +54,9 @@ window.PEUVE_pinDesktopMenuToBot = function pinDesktopMenuToBot() {
         }
         return false;
     }
-    const menu = document.querySelector(".main-menu");
     const bot = document.querySelector(".bot-bar");
     if (!menu || !bot) return false;
     const borderOverlap = 5;
-
-    if (window.PEUVE_isTabletLayout()) {
-        // CSS also sets bottom; inline keeps flush when bot-bar grows (safe-area / wrap).
-        menu.style.top = "auto";
-        menu.style.bottom = `${Math.max(0, Math.round(bot.offsetHeight - borderOverlap))}px`;
-        if (typeof window.PEUVE_syncStackPadding === "function") {
-            window.PEUVE_syncStackPadding();
-        }
-        return true;
-    }
-
     const top = Math.round(window.innerHeight - bot.offsetHeight - menu.offsetHeight + borderOverlap);
     menu.style.bottom = "";
     menu.style.top = `${Math.max(0, top)}px`;
@@ -74,7 +67,7 @@ window.PEUVE_pinDesktopMenuToBot = function pinDesktopMenuToBot() {
 };
 
 /**
- * Keep gallery / Sobre mí / Huella clear of the fixed bot bar (+ tablet menu).
+ * Keep gallery / Sobre mí / Huella clear of the fixed bot bar (compact only).
  */
 window.PEUVE_syncStackPadding = function syncStackPadding() {
     const root = document.documentElement;
@@ -86,15 +79,8 @@ window.PEUVE_syncStackPadding = function syncStackPadding() {
         return;
     }
 
-    const botH = Math.max(bot.offsetHeight || 0, window.PEUVE_isMobileLayout() ? 48 : 56);
-    let stack = botH + 24;
-    if (window.PEUVE_isTabletLayout()) {
-        const menu = document.querySelector(".main-menu");
-        if (menu && getComputedStyle(menu).display !== "none") {
-            stack = botH + Math.max(menu.offsetHeight || 0, 48) + 24;
-        }
-    }
-    root.style.setProperty("--peuve-stack-bottom", `${Math.round(stack)}px`);
+    const botH = Math.max(bot.offsetHeight || 0, 48);
+    root.style.setProperty("--peuve-stack-bottom", `${Math.round(botH + 24)}px`);
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -792,11 +778,11 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 carpeta: "lo-opuesto",
-                portada: "lo-opuesto-portada.webp",
+                portada: "lo-opuesto-portada.mp4",
                 titulo: "Lo Opuesto",
-                descripcion: "Animación abstracta sobre dos estados opuestos: la euforia y felicidad asociadas al consumo, y el bajón físico y emocional posterior. La pieza trabaja el contraste entre un ojo sobrio en blanco, gris y negro, una fase central saturada y rítmica marcada por filtros HSL y movimiento al beat, y una vuelta final más lenta, cansada y cerrada.",
+                descripcion: "Mi primer proyecto de vídeo propiamente dicho en After Effects — y del que estoy muy orgullosa. Animación abstracta sobre dos estados opuestos: la euforia y la felicidad asociadas al consumo, y el bajón físico y emocional que llega después. Contrasta un ojo sobrio en blanco, gris y negro con una fase central saturada y rítmica (filtros HSL y movimiento al beat), y una vuelta final más lenta, cansada y cerrada. El montaje sigue una estructura casi musical: subida, clímax y resaca.",
                 herramientas: ["After Effects"],
-                imagenes: ["lo-opuesto-portada.webp", "lo-opuesto-proceso.webp"]
+                imagenes: ["lo-opuesto-portada.mp4", "lo-opuesto-proceso.webp"]
             },
                         {
                 carpeta: "4RADIO3",
@@ -806,7 +792,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 herramientas: ["After Effects", "Premiere"],
                 imagenes: [
                     "IDENTLargo_Radio3.mp4",
-                    "MOSCA_Radio3.mp4"
+                    "ANUNCIO_Radio3.mp4",
+                    "Lineup_Radio3.mp4",
+                    "MOSCA_Radio3.mp4",
+                    "MOSCA_Radio3_V2.mp4",
+                    "Presentacion_RADIO3.mp4",
+                    "Programacion_Radio3.mp4",
+                    "Programacion2_Radio3.mp4"
                 ]
             },
             {
@@ -1008,9 +1000,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ── SWIPER ───────────────────────────────────────────────────────────────
     // Desktop: horizontal freeMode carousel.
-    // Tablet/mobile: CSS vertical stack — keep Swiper disabled so it
+    // Compact (phone/tablet/medium): CSS 2-col masonry — Swiper disabled so it
     // does not fight page scroll with horizontal transforms.
-    // Tablet includes iPad landscape via PEUVE_isTabletLayout (≤1366 + coarse).
     const swiper = new Swiper(".mySwiper", {
         slidesPerView: "auto",
         freeMode: true,
@@ -1363,7 +1354,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
         window.addEventListener("resize", () => {
-            if (window.innerWidth > 768 && mobilePanel.classList.contains("is-open")) {
+            if (window.PEUVE_isDesktopLayout() && mobilePanel.classList.contains("is-open")) {
                 setMobileMenuOpen(false);
             }
             window.PEUVE_syncStackPadding();
@@ -1381,10 +1372,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const descEl = document.getElementById("sobre-mi-desc");
         const programsEl = document.getElementById("programs-title");
         const contactBtn = document.getElementById("open-contacto");
+        const cvBtn = document.getElementById("open-cv");
         if (titleEl) titleEl.textContent = strings.sobreMiTitle;
         if (descEl) descEl.textContent = strings.sobreMiBody;
         if (programsEl) programsEl.textContent = strings.programsTitle;
         if (contactBtn) contactBtn.textContent = strings.contactBtn;
+        if (cvBtn) cvBtn.textContent = strings.cvBtn;
     }
 
     function applyLangUI() {
@@ -1475,7 +1468,7 @@ document.addEventListener("DOMContentLoaded", function () {
     applyLangUI();
 
 
-    // ── CONTACTO (popup desde Sobre Mí) ─────────────────────────────────────
+    // ── CONTACTO / CV (popups desde Sobre Mí) ───────────────────────────────
     const btnContacto = document.getElementById("open-contacto");
     if (btnContacto) {
         btnContacto.addEventListener("click", () => {
@@ -1493,6 +1486,66 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p class="popup-desc" style="margin-top:20px;">
                     Instagram: <a href="https://www.instagram.com/jpeuveg" target="_blank" rel="noopener noreferrer">@jpeuveg</a>
                 </p>
+            `;
+            overlay.classList.add("open");
+            popupInner.scrollTop = 0;
+        });
+    }
+
+    const btnCv = document.getElementById("open-cv");
+    if (btnCv) {
+        btnCv.addEventListener("click", () => {
+            const strings = ui();
+            const cv = strings.cv;
+            openProjectRef = null;
+
+            const listItems = (items) =>
+                (items || []).map((item) => `<li>${item}</li>`).join("");
+
+            const educationHtml = (cv.education.items || []).map((ed) => `
+                <article class="cv-entry">
+                    <h4 class="cv-entry-title">${ed.title}</h4>
+                    <p class="cv-entry-meta">${[ed.place, ed.years].filter(Boolean).join(" — ")}</p>
+                    ${ed.detail ? `<p class="cv-entry-detail">${ed.detail}</p>` : ""}
+                </article>
+            `).join("");
+
+            const experienceHtml = (cv.experience.jobs || []).map((job) => {
+                const heading = [job.role, job.place].filter(Boolean).join(" — ");
+                const meta = [job.location, job.period].filter(Boolean).join(" — ");
+                return `
+                    <article class="cv-entry">
+                        <h4 class="cv-entry-title">${heading}</h4>
+                        <p class="cv-entry-meta">${meta}</p>
+                        <ul class="cv-bullets">${listItems(job.bullets)}</ul>
+                    </article>
+                `;
+            }).join("");
+
+            popupInner.innerHTML = `
+                <h2 class="popup-title">${strings.cvTitle}</h2>
+                <div class="cv-doc">
+                    <section class="cv-section">
+                        <h3 class="cv-section-title">${cv.skills.title}</h3>
+                        <ul class="cv-bullets">${listItems(cv.skills.items)}</ul>
+                    </section>
+                    <section class="cv-section">
+                        <h3 class="cv-section-title">${cv.education.title}</h3>
+                        ${educationHtml}
+                    </section>
+                    <section class="cv-section">
+                        <h3 class="cv-section-title">${cv.additional.title}</h3>
+                        <ul class="cv-bullets">${listItems(cv.additional.items)}</ul>
+                    </section>
+                    <section class="cv-section">
+                        <h3 class="cv-section-title">${cv.experience.title}</h3>
+                        ${experienceHtml}
+                    </section>
+                    <section class="cv-section">
+                        <h3 class="cv-section-title">${cv.languages.title}</h3>
+                        <ul class="cv-bullets">${listItems(cv.languages.items)}</ul>
+                    </section>
+                </div>
             `;
             overlay.classList.add("open");
             popupInner.scrollTop = 0;
@@ -1573,7 +1626,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 botBar.style.transform = "";
             }
         } else {
-            // Menú flush sobre el bot-bar (desktop top-pin / tablet bottom-pin)
+            // Menú flush sobre el bot-bar (solo desktop)
             if (!window.PEUVE_pinDesktopMenuToBot()) {
                 menuEl.style.bottom = "";
                 menuEl.style.top = "76vh";

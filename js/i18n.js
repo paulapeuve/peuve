@@ -75,6 +75,115 @@ window.PEUVE_I18N = {
         contactEmail: "Tu email",
         contactMessage: "Tu mensaje",
         contactSend: "Enviar",
+        cvBtn: "CV",
+        cvTitle: "Currículum",
+        cv: {
+            skills: {
+                title: "Habilidades",
+                items: [
+                    "Adobe Photoshop e Illustrator (avanzado)",
+                    "Modelado, texturizado y render 3D (Blender, Cinema 4D)",
+                    "SketchUp (nivel académico)",
+                    "Diseño de marca e identidad visual",
+                    "Presentaciones visuales y comunicación",
+                    "Organización digital (Figma, Notion)",
+                    "Originalidad · Proactividad · Creatividad"
+                ]
+            },
+            education: {
+                title: "Educación",
+                items: [
+                    {
+                        title: "Grado en Diseño Gráfico",
+                        place: "Escuela Superior de Diseño de Madrid",
+                        years: "2022—2026",
+                        detail: "Formación en identidad visual, diseño digital, programación, fotografía y modelado 3D."
+                    },
+                    {
+                        title: "Bachillerato de Artes",
+                        place: "IES Lope de Vega",
+                        years: "2020-2022"
+                    },
+                    {
+                        title: "ESO",
+                        place: "IES Joaquín Turina",
+                        years: "2016-2020",
+                        detail: "Participación en equipo de debate y Modelo de Naciones Unidas (finalista)."
+                    },
+                    {
+                        title: "Educación primaria",
+                        place: "La Salle San Rafael",
+                        years: "2007-2016"
+                    }
+                ]
+            },
+            additional: {
+                title: "Información adicional",
+                items: [
+                    "Nacionalidad española",
+                    "Lugar de nacimiento: Madrid",
+                    "Disponibilidad: mañanas, fines de semana y teletrabajo",
+                    "Movilidad: excelente conexión en transporte público"
+                ]
+            },
+            experience: {
+                title: "Experiencia laboral",
+                jobs: [
+                    {
+                        role: "Barra",
+                        place: "OGHAM Fuencarral",
+                        location: "Madrid",
+                        period: "junio a principios de septiembre 2026",
+                        bullets: [
+                            "Creación de bebidas",
+                            "Tira de cervezas",
+                            "Limpieza del local",
+                            "Creación de pizarras semanales llamativas para aprovechar su gusto gráfico en el trabajo"
+                        ]
+                    },
+                    {
+                        role: "Ayudante de cocina y sala",
+                        place: "Don Panko Chamberí (alta cocina japonesa)",
+                        location: "Madrid",
+                        period: "2025",
+                        bullets: [
+                            "Apoyo en cocina durante servicio Omakase: preparación, mise en place y aprendizaje de técnicas japonesas",
+                            "Asistencia en emplatados y coordinación con el chef",
+                            "Servicio en sala como camarera: atención al cliente y gestión del ritmo de servicio",
+                            "Limpieza, organización y apoyo general en un entorno de alta exigencia"
+                        ]
+                    },
+                    {
+                        role: "Catering",
+                        place: "Grupo Ucalsa",
+                        location: "Madrid",
+                        period: "2023",
+                        bullets: [
+                            "Apoyo en eventos y servicios de catering",
+                            "Montaje, preparación y recogida de espacios",
+                            "Atención al cliente en entornos dinámicos"
+                        ]
+                    },
+                    {
+                        role: "Cuidado de menores",
+                        place: "",
+                        location: "Madrid",
+                        period: "2020-2025",
+                        bullets: [
+                            "Cuidado ocasional de niños y apoyo en tareas domésticas",
+                            "Desarrollo de habilidades de responsabilidad, comunicación y organización"
+                        ]
+                    }
+                ]
+            },
+            languages: {
+                title: "Idiomas",
+                items: [
+                    "Español: nativo",
+                    "Inglés: avanzado"
+                ]
+            }
+        },
         programsTitle: "Programas Controlados",
         qualitiesTitle: "Cualidades",
         sobreMiTitle: "Sobre Mí",
@@ -175,6 +284,115 @@ window.PEUVE_I18N = {
         contactEmail: "Your email",
         contactMessage: "Your message",
         contactSend: "Send",
+        cvBtn: "CV",
+        cvTitle: "Résumé / CV",
+        cv: {
+            skills: {
+                title: "Skills",
+                items: [
+                    "Adobe Photoshop and Illustrator (advanced)",
+                    "3D modeling, texturing and rendering (Blender, Cinema 4D)",
+                    "SketchUp (academic level)",
+                    "Brand design and visual identity",
+                    "Visual presentations and communication",
+                    "Digital organization (Figma, Notion)",
+                    "Originality · Proactivity · Creativity"
+                ]
+            },
+            education: {
+                title: "Education",
+                items: [
+                    {
+                        title: "Bachelor's Degree in Graphic Design",
+                        place: "Escuela Superior de Diseño de Madrid",
+                        years: "2022—2026",
+                        detail: "Training in visual identity, digital design, programming, photography and 3D modeling."
+                    },
+                    {
+                        title: "Arts Baccalaureate",
+                        place: "IES Lope de Vega",
+                        years: "2020-2022"
+                    },
+                    {
+                        title: "Secondary Education (ESO)",
+                        place: "IES Joaquín Turina",
+                        years: "2016-2020",
+                        detail: "Debate team and Model United Nations (finalist)."
+                    },
+                    {
+                        title: "Primary Education",
+                        place: "La Salle San Rafael",
+                        years: "2007-2016"
+                    }
+                ]
+            },
+            additional: {
+                title: "Additional information",
+                items: [
+                    "Spanish nationality",
+                    "Place of birth: Madrid",
+                    "Availability: mornings, weekends and remote work",
+                    "Mobility: excellent public transport connections"
+                ]
+            },
+            experience: {
+                title: "Work experience",
+                jobs: [
+                    {
+                        role: "Bar staff",
+                        place: "OGHAM Fuencarral",
+                        location: "Madrid",
+                        period: "June to early September 2026",
+                        bullets: [
+                            "Beverage preparation",
+                            "Beer taps",
+                            "Venue cleaning",
+                            "Creating eye-catching weekly chalkboard menus, bringing her graphic sensibility into the job"
+                        ]
+                    },
+                    {
+                        role: "Kitchen and front-of-house assistant",
+                        place: "Don Panko Chamberí (fine Japanese cuisine)",
+                        location: "Madrid",
+                        period: "2025",
+                        bullets: [
+                            "Kitchen support during Omakase service: prep, mise en place and learning Japanese techniques",
+                            "Assistance with plating and coordination with the chef",
+                            "Front-of-house service as a waitress: customer care and managing service pace",
+                            "Cleaning, organization and general support in a high-demand environment"
+                        ]
+                    },
+                    {
+                        role: "Catering",
+                        place: "Grupo Ucalsa",
+                        location: "Madrid",
+                        period: "2023",
+                        bullets: [
+                            "Support at events and catering services",
+                            "Setup, preparation and clear-down of spaces",
+                            "Customer service in fast-paced environments"
+                        ]
+                    },
+                    {
+                        role: "Childcare",
+                        place: "",
+                        location: "Madrid",
+                        period: "2020-2025",
+                        bullets: [
+                            "Occasional childcare and help with household tasks",
+                            "Building responsibility, communication and organizational skills"
+                        ]
+                    }
+                ]
+            },
+            languages: {
+                title: "Languages",
+                items: [
+                    "Spanish: native",
+                    "English: advanced"
+                ]
+            }
+        },
         programsTitle: "Software",
         qualitiesTitle: "Strengths",
         sobreMiTitle: "About Me",

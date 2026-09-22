@@ -413,11 +413,12 @@ window.PEUVE_PROJECTS = {
             en: "Photo editing from a session with Desi and Henar. Portraits and scenes edited with attention to color, skin and series coherence, seeking a clean finish that respects both subjects' personality."
         }
     },
+    // lo-opuesto: ES/EN derived from Memoria_LoOpuesto (+ nota personal de Paula); revisar/corregir después
     "lo-opuesto": {
         titulo: { es: "Lo Opuesto", en: "The Opposite" },
         descripcion: {
-            es: "Animación abstracta sobre dos estados opuestos: la euforia y felicidad asociadas al consumo, y el bajón físico y emocional posterior. La pieza trabaja el contraste entre un ojo sobrio en blanco, gris y negro, una fase central saturada y rítmica marcada por filtros HSL y movimiento al beat, y una vuelta final más lenta, cansada y cerrada. El montaje sigue una estructura casi musical: subida, clímax y resaca.",
-            en: "Abstract animation about two opposite states: the euphoria linked to consumption, and the physical/emotional comedown after. It contrasts a sober black-and-white eye, a saturated rhythmic mid section with HSL filters and beat-driven motion, and a slower, tired closing return. The edit follows an almost musical structure: rise, climax and hangover."
+            es: "Mi primer proyecto de vídeo propiamente dicho en After Effects — y del que estoy muy orgullosa. Animación abstracta sobre dos estados opuestos: la euforia y la felicidad asociadas al consumo, y el bajón físico y emocional que llega después. Contrasta un ojo sobrio en blanco, gris y negro con una fase central saturada y rítmica (filtros HSL y movimiento al beat), y una vuelta final más lenta, cansada y cerrada. El montaje sigue una estructura casi musical: subida, clímax y resaca.",
+            en: "My first proper video project in After Effects — and one I'm really proud of. Abstract animation about two opposite states: the euphoria and happiness linked to consumption, and the physical and emotional comedown that follows. It contrasts a sober black-and-white eye with a saturated, rhythmic mid section (HSL filters and beat-driven motion), then a slower, tired closing return. The edit follows an almost musical structure: rise, climax and hangover."
         }
     },
     RADIO3: {
